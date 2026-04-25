@@ -35,6 +35,12 @@ export const Route = createRootRoute({
       { name: "author", content: "SOI Threading Salon" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "SOI Threading Salon | Threading, Waxing, Facials & Beauty Care in Wayne, NJ" },
+      { name: "twitter:title", content: "SOI Threading Salon | Threading, Waxing, Facials & Beauty Care in Wayne, NJ" },
+      { property: "og:description", content: "Visit SOI Threading Salon in Wayne, NJ for expert threading, facials, waxing, hair care, henna, and premium beauty services. Call 551-301-3894 to book your appointment." },
+      { name: "twitter:description", content: "Visit SOI Threading Salon in Wayne, NJ for expert threading, facials, waxing, hair care, henna, and premium beauty services. Call 551-301-3894 to book your appointment." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/10eaf844-a35b-4b2e-827d-801a0f2c4cbc" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/10eaf844-a35b-4b2e-827d-801a0f2c4cbc" },
     ],
     links: [
       {
