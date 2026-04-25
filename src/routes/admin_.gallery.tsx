@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/_admin/gallery")({ component: AdminGallery });
+export const Route = createFileRoute("/admin_/gallery")({ component: AdminGallery });
 
 type Row = { id: string; category: string; caption: string | null; image_url: string; sort_order: number };
 

@@ -4,7 +4,7 @@ import { Trash2, Mail, MailOpen } from "lucide-react";
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/_admin/inquiries")({ component: AdminInquiries });
+export const Route = createFileRoute("/admin_/inquiries")({ component: AdminInquiries });
 
 type Row = { id: string; name: string; phone: string | null; email: string | null; service_interest: string | null; preferred_date: string | null; preferred_time: string | null; message: string | null; read: boolean; notes: string | null; created_at: string };
 

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/_admin/appointments")({ component: AdminAppointments });
+export const Route = createFileRoute("/admin_/appointments")({ component: AdminAppointments });
 
 type Row = { id: string; full_name: string; phone: string; email: string | null; service_category: string | null; service: string | null; preferred_date: string | null; preferred_time: string | null; notes: string | null; status: string; internal_notes: string | null; created_at: string };
 const STATUSES = ["new","contacted","confirmed","completed","cancelled"];

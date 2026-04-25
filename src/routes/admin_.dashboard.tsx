@@ -4,7 +4,7 @@ import { Calendar, MessageSquare, Tag, Scissors, Image as ImageIcon, CheckCircle
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/_admin/dashboard")({ component: Dashboard });
+export const Route = createFileRoute("/admin_/dashboard")({ component: Dashboard });
 
 function Dashboard() {
   const [stats, setStats] = useState({ appts: 0, inquiries: 0, offers: 0, services: 0, gallery: 0 });
