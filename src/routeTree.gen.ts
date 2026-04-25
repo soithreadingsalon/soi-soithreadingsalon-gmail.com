@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as PublicIndexRouteImport } from './routes/_public.index'
-import { Route as AdminDashboardRouteImport } from './routes/admin_.dashboard'
 import { Route as PublicServicesRouteImport } from './routes/_public.services'
 import { Route as PublicOffersRouteImport } from './routes/_public.offers'
 import { Route as PublicGalleryRouteImport } from './routes/_public.gallery'
@@ -33,11 +32,6 @@ const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => PublicRoute,
-} as any)
-const AdminDashboardRoute = AdminDashboardRouteImport.update({
-  id: '/admin_/dashboard',
-  path: '/admin/dashboard',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const PublicServicesRoute = PublicServicesRouteImport.update({
   id: '/services',
@@ -79,7 +73,6 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof PublicGalleryRoute
   '/offers': typeof PublicOffersRoute
   '/services': typeof PublicServicesRoute
-  '/admin/dashboard': typeof AdminDashboardRoute
 }
 export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
@@ -89,7 +82,6 @@ export interface FileRoutesByTo {
   '/gallery': typeof PublicGalleryRoute
   '/offers': typeof PublicOffersRoute
   '/services': typeof PublicServicesRoute
-  '/admin/dashboard': typeof AdminDashboardRoute
   '/': typeof PublicIndexRoute
 }
 export interface FileRoutesById {
@@ -102,7 +94,6 @@ export interface FileRoutesById {
   '/_public/gallery': typeof PublicGalleryRoute
   '/_public/offers': typeof PublicOffersRoute
   '/_public/services': typeof PublicServicesRoute
-  '/admin_/dashboard': typeof AdminDashboardRoute
   '/_public/': typeof PublicIndexRoute
 }
 export interface FileRouteTypes {
@@ -116,7 +107,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/offers'
     | '/services'
-    | '/admin/dashboard'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/admin'
@@ -126,7 +116,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/offers'
     | '/services'
-    | '/admin/dashboard'
     | '/'
   id:
     | '__root__'
@@ -138,14 +127,12 @@ export interface FileRouteTypes {
     | '/_public/gallery'
     | '/_public/offers'
     | '/_public/services'
-    | '/admin_/dashboard'
     | '/_public/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   PublicRoute: typeof PublicRouteWithChildren
   AdminRoute: typeof AdminRoute
-  AdminDashboardRoute: typeof AdminDashboardRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -170,13 +157,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof PublicIndexRouteImport
       parentRoute: typeof PublicRoute
-    }
-    '/admin_/dashboard': {
-      id: '/admin_/dashboard'
-      path: '/admin/dashboard'
-      fullPath: '/admin/dashboard'
-      preLoaderRoute: typeof AdminDashboardRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/_public/services': {
       id: '/_public/services'
@@ -249,7 +229,6 @@ const PublicRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   PublicRoute: PublicRouteWithChildren,
   AdminRoute: AdminRoute,
-  AdminDashboardRoute: AdminDashboardRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
