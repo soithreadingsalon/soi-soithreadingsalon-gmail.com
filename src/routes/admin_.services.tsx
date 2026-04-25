@@ -18,6 +18,10 @@ function AdminServices() {
 
   async function save() {
     if (!editing) return;
+    if (!editing.category || !editing.name || !editing.price) {
+      toast.error("Category, name and price are required");
+      return;
+    }
     const payload = { category: editing.category, name: editing.name, price: editing.price, description: editing.description || null, featured: !!editing.featured, sort_order: editing.sort_order ?? 0 };
     const res = editing.id ? await supabase.from("services").update(payload).eq("id", editing.id) : await supabase.from("services").insert(payload);
     if (res.error) toast.error(res.error.message); else { toast.success("Saved"); setEditing(null); load(); }
