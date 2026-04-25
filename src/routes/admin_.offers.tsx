@@ -18,6 +18,10 @@ function AdminOffers() {
 
   async function save() {
     if (!editing) return;
+    if (!editing.title || !editing.discount) {
+      toast.error("Title and discount are required");
+      return;
+    }
     const payload = { title: editing.title, description: editing.description || null, discount: editing.discount, expires_on: editing.expires_on || null, terms: editing.terms || null, image_url: editing.image_url || null, active: !!editing.active, sort_order: editing.sort_order ?? 0 };
     const res = editing.id ? await supabase.from("offers").update(payload).eq("id", editing.id) : await supabase.from("offers").insert(payload);
     if (res.error) toast.error(res.error.message); else { toast.success("Saved"); setEditing(null); load(); }
