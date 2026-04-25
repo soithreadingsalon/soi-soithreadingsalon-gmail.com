@@ -14,7 +14,258 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          internal_notes: string | null
+          notes: string | null
+          phone: string
+          preferred_date: string | null
+          preferred_time: string | null
+          service: string | null
+          service_category: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          internal_notes?: string | null
+          notes?: string | null
+          phone: string
+          preferred_date?: string | null
+          preferred_time?: string | null
+          service?: string | null
+          service_category?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          internal_notes?: string | null
+          notes?: string | null
+          phone?: string
+          preferred_date?: string | null
+          preferred_time?: string | null
+          service?: string | null
+          service_category?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
+      gallery: {
+        Row: {
+          caption: string | null
+          category: string
+          created_at: string
+          id: string
+          image_url: string
+          sort_order: number
+        }
+        Insert: {
+          caption?: string | null
+          category: string
+          created_at?: string
+          id?: string
+          image_url: string
+          sort_order?: number
+        }
+        Update: {
+          caption?: string | null
+          category?: string
+          created_at?: string
+          id?: string
+          image_url?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      inquiries: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          message: string | null
+          name: string
+          notes: string | null
+          phone: string | null
+          preferred_date: string | null
+          preferred_time: string | null
+          read: boolean
+          service_interest: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          notes?: string | null
+          phone?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          read?: boolean
+          service_interest?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          read?: boolean
+          service_interest?: string | null
+        }
+        Relationships: []
+      }
+      offers: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          discount: string
+          expires_on: string | null
+          id: string
+          image_url: string | null
+          sort_order: number
+          terms: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          discount: string
+          expires_on?: string | null
+          id?: string
+          image_url?: string | null
+          sort_order?: number
+          terms?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          discount?: string
+          expires_on?: string | null
+          id?: string
+          image_url?: string | null
+          sort_order?: number
+          terms?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          featured: boolean
+          id: string
+          name: string
+          price: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          id?: string
+          name: string
+          price: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          featured?: boolean
+          id?: string
+          name?: string
+          price?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          about_text: string
+          address: string
+          email: string
+          google_qr_url: string | null
+          hero_headline: string
+          hero_subheadline: string
+          hours_saturday: string
+          hours_sunday: string
+          hours_weekday: string
+          id: number
+          instagram: string
+          instagram_qr_url: string | null
+          maps_url: string
+          phone: string
+          salon_name: string
+          tagline: string
+          website: string
+        }
+        Insert: {
+          about_text?: string
+          address?: string
+          email?: string
+          google_qr_url?: string | null
+          hero_headline?: string
+          hero_subheadline?: string
+          hours_saturday?: string
+          hours_sunday?: string
+          hours_weekday?: string
+          id?: number
+          instagram?: string
+          instagram_qr_url?: string | null
+          maps_url?: string
+          phone?: string
+          salon_name?: string
+          tagline?: string
+          website?: string
+        }
+        Update: {
+          about_text?: string
+          address?: string
+          email?: string
+          google_qr_url?: string | null
+          hero_headline?: string
+          hero_subheadline?: string
+          hours_saturday?: string
+          hours_sunday?: string
+          hours_weekday?: string
+          id?: number
+          instagram?: string
+          instagram_qr_url?: string | null
+          maps_url?: string
+          phone?: string
+          salon_name?: string
+          tagline?: string
+          website?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
