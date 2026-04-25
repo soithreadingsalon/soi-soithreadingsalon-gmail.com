@@ -5,7 +5,7 @@ export function Logo({ className = "h-12 w-auto", invert = false }: { className?
     <img
       src={logoImg}
       alt="SOI Threading Salon"
-      className={className}
+      className={`${className} object-contain`}
       style={invert ? { filter: "invert(1) brightness(2)" } : undefined}
     />
   );
