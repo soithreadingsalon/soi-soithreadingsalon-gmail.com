@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Phone, MapPin, Clock, Sparkles, Flower2, Leaf, ShieldCheck, Star, ArrowRight, Instagram } from "lucide-react";
-import offerFlyer from "@/assets/offer-flyer.png";
 import heroImg from "@/assets/hero-salon.jpg";
 import threadingImg from "@/assets/service-threading.jpg";
 import facialImg from "@/assets/service-facial.jpg";
@@ -10,6 +9,7 @@ import haircareImg from "@/assets/service-haircare.jpg";
 import hennaImg from "@/assets/service-henna.jpg";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
+import { OfferCarousel } from "@/components/OfferCarousel";
 
 export const Route = createFileRoute("/_public/")({
   head: () => ({
@@ -167,8 +167,8 @@ function HomePage() {
       {offers.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
           <SectionHeading eyebrow="Limited Time" title="Current Offers" subtitle="Indulge in a little more luxury with our exclusive promotions." />
-          <div className="mb-6 rounded-2xl overflow-hidden gold-border shadow-card">
-            <img src={offerFlyer} alt="SOI current promotional offers" className="w-full h-auto" loading="lazy" />
+          <div className="mb-6">
+            <OfferCarousel />
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {offers.map((o, i) => (

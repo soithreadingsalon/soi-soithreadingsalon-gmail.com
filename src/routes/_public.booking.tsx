@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { CheckCircle2, Phone } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
+import { TimeSlotPicker } from "@/components/TimeSlotPicker";
 
 export const Route = createFileRoute("/_public/booking")({
   head: () => ({
@@ -94,7 +95,14 @@ function BookingPage() {
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
           <Field label="Preferred Date"><input type="date" value={form.preferred_date} onChange={handle("preferred_date")} className="input" /></Field>
-          <Field label="Preferred Time"><input value={form.preferred_time} onChange={handle("preferred_time")} className="input" placeholder="e.g. 2:00 PM" /></Field>
+          <Field label="Preferred Time">
+            <TimeSlotPicker
+              date={form.preferred_date}
+              value={form.preferred_time}
+              onChange={(v) => setForm({ ...form, preferred_time: v })}
+              className="input"
+            />
+          </Field>
         </div>
         <Field label="Notes"><textarea rows={4} value={form.notes} onChange={handle("notes")} className="input" placeholder="Anything we should know?" /></Field>
         <button type="submit" disabled={submitting} className="w-full px-6 py-3.5 rounded-full text-sm font-semibold btn-gold disabled:opacity-60">
