@@ -1,83 +1,93 @@
+# Complete Admin Panel + CMS + Analytics Build
 
-## Goal
+## 1. Admin login
 
-Make the SOI Threading Salon site fully reflect the uploaded brand assets (menu PDF, offer flyer, visiting card, QR codes), fix branding, tighten spacing, and verify mobile layout end-to-end.
+- Update credentials to **`soi` / `Soi@wayne2026`** (replace current `test123/test123` in `src/lib/admin-auth.ts`).
+- Keep the existing localStorage-based gate for now (matches your "simple" preference). All admin routes already redirect to `/admin` if unauthenticated.
 
-## 1. Branding cleanup
+## 2. Homepage offer carousel (replaces the static "lady face" flyer)
 
-- Remove the "Premium Threading & Beauty Care" / "Premium Beauty Care" tagline that appears beneath "Style of India" (logo lockup area on home + footer).
-- Keep the lockup as: SOI THREADING SALON  →  *Style of India*  (italic gold), nothing else.
-- Replace the placeholder hero subheadline with the official line from the menu: *"Experience expert care and timeless beauty with our premium threading, waxing, facials, hair care, henna and more."*
-- Add a small chip under the logo: `THREADING • WAXING • FACIALS • HAIR CARE • HENNA` (from menu cover).
+- Add a new `hero_slides` table OR — per your answer — auto-build slides from **active offers that have an `image_url`**. We'll go with the latter: zero extra admin work.
+- Build `<OfferCarousel />` on the homepage where the flyer currently sits: auto-rotates every 5s, swipe on mobile, dots + arrows, each slide links to `/offers`.
+- In **Admin → Offers**, add an image uploader (Supabase Storage bucket `offer-images`, public). Any active offer with an image automatically appears in the homepage carousel.
+- Fallback: if no offers have images, show the current single flyer.
 
-## 2. Seed services from menu PDF (replace existing prices)
+## 3. Time picker on Booking & Contact forms
 
-Wipe `services` table and re-seed with the exact menu, organized by the existing 6 categories. Prices below are taken verbatim from the PDF.
+- Replace the free-text "preferred time" with a **dropdown of 30-min slots** generated from `site_settings` business hours for the chosen day (e.g. Mon–Fri 10:00 AM–7:00 PM).
+- Disable already-booked slots by checking `appointments` for that date.
+- Apply to both `/booking` and `/contact`.
 
-**Threading**: Eyebrow $10 · Upper Lip $6 · Chin $8 · Cheeks $8 · Forehead $8 · Sideburns $12 · Full Face $35 · Full Face with Neck $40
+## 4. Google Calendar sync (one salon calendar)
 
-**Waxing**: Full Face $40 · Full Hand $30 · Full Leg $45 · Upper Leg $35 · Lower Leg $30 · Under Arms $15 · Bikini Line $20 · Brazilian $45 · Full Back $40 · Full Stomach $40 · Full Body Wax $180 & up
+- Use the **Google Calendar connector** (single connection, OAuth handled for you — you click "Connect" once after deploy).
+- New server function `syncAppointmentToCalendar`: when admin marks an appointment as **confirmed**, it creates a Google Calendar event (title = service + customer name, start = preferred date/time, duration 30 min, description = phone + notes). Status changes to **cancelled** delete the event. Store `google_event_id` on the appointment row.
+- Add a **"Sync to Calendar"** toggle in Admin → Settings so you can pause it.
 
-**Facials**: Mini Facial $45 · Teenage Facial $55 · Acne Facial $65 · Gold Facial $65 · Casmara Gold $75 · Oxygen Facial $90 · Shiner $20
+## 5. Admin → Dashboard (analytics)
 
-**Hair Care**: Scalp Oil Massage $35 · Henna Hair Dye $30 & up · Eyelash Lifting $75 · Eyelash Extension $60
+Replace the stub with a real dashboard:
 
-**Henna**: Simple Tattoo $15 & up
+- **KPI cards**: Today's appointments, This week, New inquiries, Revenue this month (sum of service prices for `completed` appointments), Page views (last 7 days).
+- **Charts** (recharts, already typical): appointments per day (last 30d), appointments by service category (pie), inquiries vs bookings (conversion), top viewed pages.
+- **Recent activity feed**: latest 10 bookings + inquiries combined.
 
-**Men**: Eyebrow $11 · Nose Hair Removal $15 · Blackhead Removal $15 · Ear Wax $15 · Back Wax $45 & up · Chest Wax $45 & up
+## 6. Admin → Appointments (full workflow)
 
-Mark a small set as `featured` for the homepage highlights (Eyebrow Threading, Gold Facial, Full Leg Waxing, Eyelash Extension).
+Currently a stub list. Rebuild as a real management screen:
 
-## 3. Replace offers with the flyer's 4 promos
+- Table with filters (status, date range, service, search by name/phone) and sort.
+- **Status pipeline** with colored badges: `new` → `confirmed` → `in_progress` → `completed` → (or `cancelled` / `no_show`). Click a badge to advance.
+- Detail drawer: full info, edit any field, internal notes, "Send WhatsApp" link (`https://wa.me/...`), "Add to Calendar" (manual sync), delete.
+- Calendar/day view toggle so the operator sees today at a glance.
+- Real-time updates via Supabase Realtime — multiple operators see status changes instantly with no refresh.
 
-Reset `offers` and seed:
-- $10 OFF – Facial
-- $10 OFF – Wax
-- $5 OFF – Hot Oil Hair Massage
-- $2 OFF – Eyebrow & Lip
+## 7. Admin → Inquiries (full hub)
 
-Add the flyer image as the top banner of `/offers` and as a teaser card on the homepage.
+- Same table pattern: search, filter by read/unread, sort by date.
+- Mark read/unread, add internal notes, **"Convert to appointment"** button that pre-fills a booking, reply via WhatsApp/email links.
+- Realtime so new inquiries pop in live with a toast + sound.
 
-## 4. QR codes & visiting-card content
+## 8. Admin → Services CMS
 
-- Copy `user-uploads://Insta.jpeg` → `src/assets/qr-instagram.jpg` and `user-uploads://Google_address.png` → `src/assets/qr-google.jpg`.
-- Show both QR codes on `/contact` (with captions "Follow @soithreadingsalon" and "Find us on Google Maps") and in the footer on desktop.
-- Add the loyalty line from the visiting card to the footer / offers page: *"Complete 9 eyebrow visits, get the 10th FREE."*
+- Inline-editable table grouped by category. Add/edit/delete service, change price, toggle `featured`, drag-to-reorder (`sort_order`).
+- "New category" button. Bulk price edit.
 
-## 5. Asset import + flyer
+## 9. Admin → Offers CMS
 
-- Copy `user-uploads://Offer.png` → `src/assets/offer-flyer.jpg` and use it as the banner on `/offers`.
-- Keep the existing logo (already replaced earlier).
+- Add/edit/delete offers. Image upload (powers homepage carousel). Toggle active. Set expiry date. Reorder.
+- Live preview of how the offer card will look.
 
-## 6. Spacing & alignment audit
+## 10. Admin → Gallery CMS
 
-Across `_public.index`, `_public.services`, `_public.offers`, `_public.about`, `_public.gallery`, `_public.contact`, `Header`, `Footer`:
-- Reduce vertical section padding (`py-24/py-20` → `py-12 md:py-16`).
-- Reduce hero top padding so content sits closer to the header.
-- Tighten card gaps (`gap-8` → `gap-4 md:gap-6`).
-- Remove empty wrapper divs that add stray margin.
-- Standardize container to `max-w-6xl mx-auto px-4 md:px-6`.
+- Upload images to `gallery-images` bucket. Assign category, caption, reorder. Bulk delete.
 
-## 7. Mobile responsiveness pass
+## 11. Admin → Settings CMS
 
-- Header: hamburger menu under `md`; ensure logo scales (`h-10 md:h-14`).
-- Services page: collapse sticky sidebar into the existing bottom selection bar at `<lg`; make category tabs horizontally scrollable.
-- Offers grid: 1 col mobile, 2 col tablet, 4 col desktop.
-- Footer: stack columns on mobile, center QR codes.
-- Contact: map + form stack vertically under `md`.
-- Tap targets ≥ 44px; test at 375px, 768px, 1024px.
+- Edit everything in `site_settings` (salon info, hours, hero copy, social, QR codes) from one form.
+- Upload new logo / hero image. Toggle Calendar sync.
 
-## 8. Verification
+## 12. Traffic analytics (lightweight, in-house)
 
-After edits, visually QA `/`, `/services`, `/offers`, `/contact` at 375px and 1024px viewports and confirm:
-- "Premium Beauty Care" no longer appears anywhere.
-- All menu prices match the PDF.
-- 4 offer cards render with correct discounts.
-- QR codes load on `/contact`.
-- No oversized whitespace between sections.
+- New `page_views` table (path, referrer, user_agent, created_at) — no third party, no cookies, GDPR-friendly.
+- `<PageTracker />` in `_public.tsx` posts a row to a `/api/public/track` server route on every route change.
+- Dashboard reads aggregates (top pages, daily trend) from this table.
+
+## 13. Database changes (one migration)
+
+- `appointments`: add `google_event_id text`, `internal_notes` already exists, ensure `status` allows the new values.
+- `offers`: ensure `image_url` writable; create `offer-images` storage bucket (public).
+- New `page_views` table + indexes.
+- `site_settings`: add `calendar_sync_enabled boolean default true`.
+- Storage buckets: `offer-images`, `gallery-images`, `site-assets` (all public read; public write via existing pattern).
 
 ## Technical notes
 
-- Services + offers reseed via a single SQL migration (DELETE + INSERT) — no schema change needed (tables already match).
-- QR / flyer images imported as ES6 modules from `src/assets`.
-- No new routes or dependencies.
+- Stack: TanStack Start server functions for all writes, Supabase Realtime for live admin updates, recharts for graphs, Google Calendar via Lovable's connector gateway (no API key needed from you — you'll get a "Connect Google Calendar" button after deploy).
+- Mobile: every admin screen designed mobile-first so you can manage on your phone.
+- All existing public routes untouched except homepage (carousel) and booking/contact (time picker).
+
+## What I'll need from you after the build
+
+1. Click **Connect Google Calendar** once when prompted (one-tap OAuth).
+2. Upload your offer flyer images in Admin → Offers (existing offers will keep working without images).
