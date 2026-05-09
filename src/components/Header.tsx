@@ -29,12 +29,11 @@ export function Header() {
         scrolled ? "glass-panel shadow-soft" : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-3 group" onClick={() => setOpen(false)}>
-          <Logo className="h-12 w-auto transition-transform group-hover:scale-105" />
+          <Logo className="h-10 md:h-12 w-auto transition-transform group-hover:scale-105" />
           <span className="hidden sm:flex flex-col leading-tight">
-            <span className="font-script text-gold text-xl -mb-1">Style of India</span>
-            <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Premium Beauty Care</span>
+            <span className="font-script text-gold text-xl">Style of India</span>
           </span>
         </Link>
 

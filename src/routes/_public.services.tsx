@@ -139,16 +139,16 @@ function ServicesPage() {
 
   return (
     <>
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-32 lg:pb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 pb-32 lg:pb-14">
         <SectionHeading eyebrow="Our Menu" title="Services & Pricing" subtitle="Every ritual is designed to refresh, refine, and restore your natural radiance." />
 
-        <div className="text-center mb-8 -mt-6">
+        <div className="text-center mb-6 -mt-4">
           <p className="text-sm text-muted-foreground">
             Browse to compare prices, or <span className="text-gold font-semibold">tap “Add”</span> on any service to build your appointment.
           </p>
         </div>
 
-        <div className="glass-panel rounded-2xl p-4 md:p-5 mb-8 flex flex-col md:flex-row gap-3 items-stretch">
+        <div className="glass-panel rounded-2xl p-3 md:p-5 mb-6 md:mb-8 flex flex-col md:flex-row gap-3 items-stretch">
           <div className="relative flex-1">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
@@ -159,12 +159,12 @@ function ServicesPage() {
               className="w-full pl-11 pr-4 py-3 rounded-xl bg-card border border-border focus:border-[var(--gold)] outline-none text-sm"
             />
           </div>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-nowrap md:flex-wrap gap-1.5 overflow-x-auto -mx-1 px-1 md:mx-0 md:px-0 pb-1 md:pb-0">
             {CATEGORIES.map((c) => (
               <button
                 key={c}
                 onClick={() => setCat(c)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase transition-all whitespace-nowrap shrink-0 ${
                   cat === c ? "btn-gold" : "bg-card border border-border hover:border-[var(--gold)]"
                 }`}
               >
@@ -180,27 +180,27 @@ function ServicesPage() {
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_340px] gap-8 items-start">
+        <div className="grid lg:grid-cols-[1fr_340px] gap-6 lg:gap-8 items-start">
           <div className="min-w-0">
             {loading ? (
               <p className="text-center text-muted-foreground py-12">Loading services…</p>
             ) : Object.keys(grouped).length === 0 ? (
               <p className="text-center text-muted-foreground py-12">No services match your search.</p>
             ) : (
-              <div className="space-y-12">
+              <div className="space-y-8 md:space-y-10">
                 {Object.entries(grouped).map(([category, items]) => (
                   <div key={category}>
-                    <div className="flex items-center gap-4 mb-6">
-                      <h2 className="font-serif text-3xl text-foreground">{category}</h2>
+                    <div className="flex items-center gap-4 mb-4 md:mb-5">
+                      <h2 className="font-serif text-2xl md:text-3xl text-foreground">{category}</h2>
                       <div className="flex-1 h-px bg-gradient-to-r from-[var(--gold)] to-transparent" />
                     </div>
-                    <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="grid sm:grid-cols-2 gap-3 md:gap-4">
                       {items.map((s) => {
                         const isSelected = selectedIds.has(s.id);
                         return (
                           <div
                             key={s.id}
-                            className={`card-3d rounded-2xl p-5 gold-border transition-all ${
+                            className={`card-3d rounded-2xl p-4 md:p-5 gold-border transition-all ${
                               isSelected ? "bg-[var(--gold)]/8 ring-2 ring-[var(--gold)]" : "glass-panel"
                             }`}
                           >
