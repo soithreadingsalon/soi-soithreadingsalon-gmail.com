@@ -52,15 +52,15 @@ function GalleryPage() {
   const filtered = useMemo(() => (cat === "All" ? items : items.filter((i) => i.category === cat)), [items, cat]);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
       <SectionHeading eyebrow="A Glimpse Inside" title="Our Gallery" subtitle="Moments from the SOI Threading Salon experience." />
 
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
+      <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 mb-6 md:mb-8 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
         {CATS.map((c) => (
           <button
             key={c}
             onClick={() => setCat(c)}
-            className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wide transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wide transition-all whitespace-nowrap shrink-0 ${
               cat === c ? "btn-gold" : "bg-card border border-border hover:border-[var(--gold)]"
             }`}
           >
@@ -72,7 +72,7 @@ function GalleryPage() {
       {filtered.length === 0 ? (
         <p className="text-center text-muted-foreground py-12">No images yet in this category.</p>
       ) : (
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:_balance]">
           {filtered.map((g, i) => (
             <button
               key={g.id}

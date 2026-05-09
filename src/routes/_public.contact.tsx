@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { Phone, Mail, MapPin, Clock, Instagram } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
+import qrInsta from "@/assets/qr-instagram.jpg";
+import qrGoogle from "@/assets/qr-google.png";
 
 export const Route = createFileRoute("/_public/contact")({
   head: () => ({
@@ -62,11 +64,11 @@ function ContactPage() {
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
       <SectionHeading eyebrow="Say Hello" title="Get in Touch" subtitle="Questions, bookings or just to say hi — we'd love to hear from you." />
 
-      <div className="grid lg:grid-cols-[1fr_1.2fr] gap-8">
-        <div className="glass-panel rounded-3xl p-8 gold-border">
+      <div className="grid lg:grid-cols-[1fr_1.2fr] gap-6 lg:gap-8">
+        <div className="glass-panel rounded-3xl p-6 md:p-8 gold-border">
           <h3 className="font-serif text-2xl mb-5">Visit & Connect</h3>
           <ul className="space-y-4 text-sm">
             <li className="flex gap-3"><MapPin className="h-5 w-5 text-gold mt-0.5" /><span>190 Hamburg Tpke<br />Wayne, NJ 07470</span></li>
@@ -86,9 +88,20 @@ function ContactPage() {
           <div className="mt-6 rounded-2xl overflow-hidden gold-border">
             <iframe title="Map" src="https://www.google.com/maps?q=190+Hamburg+Tpke,+Wayne,+NJ+07470&output=embed" className="w-full h-56 border-0" loading="lazy" />
           </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-4">
+            <div className="text-center bg-card rounded-2xl p-3 gold-border">
+              <img src={qrInsta} alt="Scan to follow us on Instagram" className="w-full h-auto rounded-lg bg-white p-1" />
+              <p className="mt-2 text-xs font-semibold text-gold">Follow @soithreadingsalon</p>
+            </div>
+            <div className="text-center bg-card rounded-2xl p-3 gold-border">
+              <img src={qrGoogle} alt="Scan to find us on Google Maps" className="w-full h-auto rounded-lg bg-white p-1" />
+              <p className="mt-2 text-xs font-semibold text-gold">Find us on Google</p>
+            </div>
+          </div>
         </div>
 
-        <form onSubmit={submit} className="glass-panel rounded-3xl p-8 gold-border space-y-4">
+        <form onSubmit={submit} className="glass-panel rounded-3xl p-6 md:p-8 gold-border space-y-4">
           <h3 className="font-serif text-2xl mb-1">Send a Message</h3>
           <p className="text-sm text-muted-foreground mb-4">We typically respond within one business day.</p>
 

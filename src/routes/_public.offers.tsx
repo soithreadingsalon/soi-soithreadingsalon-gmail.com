@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Phone, X, Sparkles } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
+import offerFlyer from "@/assets/offer-flyer.png";
 
 type Offer = { id: string; title: string; description: string | null; discount: string; expires_on: string | null; terms: string | null; image_url: string | null };
 
@@ -29,27 +30,31 @@ function OffersPage() {
   }, []);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
       <SectionHeading eyebrow="Indulge More" title="Current Offers" subtitle="Make your next visit even more special with our exclusive savings." />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
+      <div className="mb-8 rounded-3xl overflow-hidden gold-border shadow-lift">
+        <img src={offerFlyer} alt="SOI Threading Salon offers — $10 off Facial, $10 off Wax, $5 off Hot Oil Hair Massage, $2 off Eyebrow & Lip" className="w-full h-auto block" />
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
         {offers.map((o) => (
-          <div key={o.id} className="card-3d relative rounded-3xl overflow-hidden glass-panel gold-border p-7">
+          <div key={o.id} className="card-3d relative rounded-3xl overflow-hidden glass-panel gold-border p-5 md:p-7">
             <div className="absolute top-0 left-0 w-24 h-24 bg-[var(--gold)]/10 rounded-br-full" />
             <div className="absolute bottom-0 right-0 w-24 h-24 bg-[var(--blush)]/30 rounded-tl-full" />
-            <div className="relative grid sm:grid-cols-[auto_1fr] gap-5 items-center">
+            <div className="relative grid grid-cols-[auto_1fr] gap-4 md:gap-5 items-center">
               <div className="text-center">
                 <Sparkles className="h-6 w-6 text-gold mx-auto mb-2" />
-                <div className="font-serif text-5xl gradient-text-gold">{o.discount}</div>
+                <div className="font-serif text-4xl md:text-5xl gradient-text-gold whitespace-nowrap">{o.discount}</div>
                 <p className="text-xs uppercase tracking-[0.25em] text-gold-deep mt-1">Coupon</p>
               </div>
-              <div className="border-l-2 border-dashed border-[var(--gold)]/40 pl-5">
-                <h3 className="font-serif text-2xl">{o.title}</h3>
+              <div className="border-l-2 border-dashed border-[var(--gold)]/40 pl-4 md:pl-5 min-w-0">
+                <h3 className="font-serif text-xl md:text-2xl">{o.title}</h3>
                 {o.description && <p className="text-sm text-muted-foreground mt-1">{o.description}</p>}
                 <p className="text-xs text-muted-foreground mt-3">
                   {o.expires_on ? `Valid through ${new Date(o.expires_on).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}` : "Limited time"}
                 </p>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-3 md:mt-4 flex flex-wrap gap-2">
                   <a href="tel:5513013894" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold btn-gold">
                     <Phone className="h-3.5 w-3.5" /> Call to Redeem
                   </a>
@@ -62,6 +67,10 @@ function OffersPage() {
           </div>
         ))}
       </div>
+
+      <p className="text-center mt-8 text-sm text-muted-foreground italic">
+        ✦ Loyalty card: Complete 9 eyebrow visits, get the 10th FREE.
+      </p>
 
       {active && (
         <div onClick={() => setActive(null)} className="fixed inset-0 z-[60] bg-charcoal/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-up">
