@@ -16,9 +16,11 @@ export type Database = {
     Tables: {
       appointments: {
         Row: {
+          calendar_synced_at: string | null
           created_at: string
           email: string | null
           full_name: string
+          google_event_id: string | null
           id: string
           internal_notes: string | null
           notes: string | null
@@ -30,9 +32,11 @@ export type Database = {
           status: string
         }
         Insert: {
+          calendar_synced_at?: string | null
           created_at?: string
           email?: string | null
           full_name: string
+          google_event_id?: string | null
           id?: string
           internal_notes?: string | null
           notes?: string | null
@@ -44,9 +48,11 @@ export type Database = {
           status?: string
         }
         Update: {
+          calendar_synced_at?: string | null
           created_at?: string
           email?: string | null
           full_name?: string
+          google_event_id?: string | null
           id?: string
           internal_notes?: string | null
           notes?: string | null
@@ -170,6 +176,33 @@ export type Database = {
         }
         Relationships: []
       }
+      page_views: {
+        Row: {
+          created_at: string
+          id: string
+          path: string
+          referrer: string | null
+          session_id: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          path: string
+          referrer?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          path?: string
+          referrer?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       services: {
         Row: {
           category: string
@@ -210,7 +243,9 @@ export type Database = {
         Row: {
           about_text: string
           address: string
+          calendar_sync_enabled: boolean
           email: string
+          google_calendar_id: string
           google_qr_url: string | null
           hero_headline: string
           hero_subheadline: string
@@ -229,7 +264,9 @@ export type Database = {
         Insert: {
           about_text?: string
           address?: string
+          calendar_sync_enabled?: boolean
           email?: string
+          google_calendar_id?: string
           google_qr_url?: string | null
           hero_headline?: string
           hero_subheadline?: string
@@ -248,7 +285,9 @@ export type Database = {
         Update: {
           about_text?: string
           address?: string
+          calendar_sync_enabled?: boolean
           email?: string
+          google_calendar_id?: string
           google_qr_url?: string | null
           hero_headline?: string
           hero_subheadline?: string
