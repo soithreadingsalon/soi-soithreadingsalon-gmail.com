@@ -11,6 +11,7 @@ type Settings = {
   hours_weekday: string; hours_saturday: string; hours_sunday: string; maps_url: string;
   hero_headline: string; hero_subheadline: string; about_text: string;
   instagram_qr_url: string | null; google_qr_url: string | null;
+  calendar_sync_enabled: boolean; google_calendar_id: string;
 };
 
 function AdminSettings() {
@@ -53,6 +54,11 @@ function AdminSettings() {
         <Section title="QR Codes">
           <Row label="Instagram QR (image URL)"><input value={s.instagram_qr_url || ""} onChange={(e) => setF("instagram_qr_url", e.target.value)} className="admin-input" /></Row>
           <Row label="Google Location QR (image URL)"><input value={s.google_qr_url || ""} onChange={(e) => setF("google_qr_url", e.target.value)} className="admin-input" /></Row>
+        </Section>
+        <Section title="Google Calendar Sync">
+          <p className="text-xs text-muted-foreground -mt-2 mb-1">When ON, marking an appointment as <strong>confirmed</strong> creates a Google Calendar event automatically. Cancellation removes it.</p>
+          <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={!!s.calendar_sync_enabled} onChange={(e) => setF("calendar_sync_enabled", e.target.checked)} /> Sync confirmed appointments to Google Calendar</label>
+          <Row label="Calendar ID (use 'primary' for your main calendar)"><input value={s.google_calendar_id || "primary"} onChange={(e) => setF("google_calendar_id", e.target.value)} className="admin-input" /></Row>
         </Section>
         <button onClick={save} className="px-6 py-3 rounded-full text-sm font-semibold btn-gold">Save All Settings</button>
       </div>

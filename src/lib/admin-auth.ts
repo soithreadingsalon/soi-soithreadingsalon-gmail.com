@@ -1,6 +1,6 @@
 const KEY = "soi_admin_session";
-export const ADMIN_USER = "test123";
-export const ADMIN_PASS = "test123";
+export const ADMIN_USER = "soi";
+export const ADMIN_PASS = "Soi@wayne2026";
 
 export function loginAdmin(u: string, p: string) {
   if (u === ADMIN_USER && p === ADMIN_PASS) {

@@ -32,7 +32,7 @@ function AdminLogin() {
           <div className="text-center">
             <div className="mx-auto w-12 h-12 rounded-full gradient-gold flex items-center justify-center mb-2"><Lock className="h-5 w-5 text-white" /></div>
             <h1 className="font-serif text-2xl">Sign In</h1>
-            <p className="text-xs text-muted-foreground mt-1">Demo: test123 / test123</p>
+            <p className="text-xs text-muted-foreground mt-1">Restricted access</p>
           </div>
           <label className="block">
             <span className="block text-xs uppercase tracking-wider text-muted-foreground mb-1.5">Username</span>

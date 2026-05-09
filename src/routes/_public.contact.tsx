@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Phone, Mail, MapPin, Clock, Instagram } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
+import { TimeSlotPicker } from "@/components/TimeSlotPicker";
 import qrInsta from "@/assets/qr-instagram.jpg";
 import qrGoogle from "@/assets/qr-google.png";
 
@@ -118,7 +119,14 @@ function ContactPage() {
           </Field>
           <div className="grid sm:grid-cols-2 gap-4">
             <Field label="Preferred Date"><input type="date" value={form.preferred_date} onChange={handle("preferred_date")} className="input" /></Field>
-            <Field label="Preferred Time"><input value={form.preferred_time} onChange={handle("preferred_time")} className="input" placeholder="e.g. 2:00 PM" /></Field>
+            <Field label="Preferred Time">
+              <TimeSlotPicker
+                date={form.preferred_date}
+                value={form.preferred_time}
+                onChange={(v) => setForm({ ...form, preferred_time: v })}
+                className="input"
+              />
+            </Field>
           </div>
           <Field label="Message"><textarea rows={4} value={form.message} onChange={handle("message")} className="input" /></Field>
 
