@@ -25,6 +25,7 @@ import { Route as PublicGalleryRouteImport } from './routes/_public.gallery'
 import { Route as PublicContactRouteImport } from './routes/_public.contact'
 import { Route as PublicBookingRouteImport } from './routes/_public.booking'
 import { Route as PublicAboutRouteImport } from './routes/_public.about'
+import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
@@ -105,6 +106,11 @@ const PublicAboutRoute = PublicAboutRouteImport.update({
   path: '/about',
   getParentRoute: () => PublicRoute,
 } as any)
+const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
+  id: '/api/public/track',
+  path: '/api/public/track',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/admin/offers': typeof AdminOffersRoute
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
 }
 export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/admin/services': typeof AdminServicesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/': typeof PublicIndexRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/admin_/services': typeof AdminServicesRoute
   '/admin_/settings': typeof AdminSettingsRoute
   '/_public/': typeof PublicIndexRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/admin/offers'
     | '/admin/services'
     | '/admin/settings'
+    | '/api/public/track'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/admin'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/admin/services'
     | '/admin/settings'
     | '/'
+    | '/api/public/track'
   id:
     | '__root__'
     | '/_public'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/admin_/services'
     | '/admin_/settings'
     | '/_public/'
+    | '/api/public/track'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -224,6 +236,7 @@ export interface RootRouteChildren {
   AdminOffersRoute: typeof AdminOffersRoute
   AdminServicesRoute: typeof AdminServicesRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
+  ApiPublicTrackRoute: typeof ApiPublicTrackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -340,6 +353,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicAboutRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/api/public/track': {
+      id: '/api/public/track'
+      path: '/api/public/track'
+      fullPath: '/api/public/track'
+      preLoaderRoute: typeof ApiPublicTrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -376,6 +396,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminOffersRoute: AdminOffersRoute,
   AdminServicesRoute: AdminServicesRoute,
   AdminSettingsRoute: AdminSettingsRoute,
+  ApiPublicTrackRoute: ApiPublicTrackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
