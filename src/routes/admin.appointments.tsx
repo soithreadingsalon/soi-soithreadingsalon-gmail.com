@@ -7,7 +7,7 @@ import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 import { syncAppointmentToCalendar, deleteCalendarEvent } from "@/lib/calendar.functions";
 
-export const Route = createFileRoute("/admin_/appointments")({ component: AdminAppointments });
+export const Route = createFileRoute("/admin/appointments")({ component: AdminAppointments });
 
 type Row = {
   id: string; full_name: string; phone: string; email: string | null;
@@ -136,7 +136,6 @@ function AdminAppointments() {
           <button onClick={() => setView("today")} className={`px-3 py-2 ${view === "today" ? "bg-[var(--gold)] text-white" : ""}`}>Today</button>
         </div>
       </div>
-
       <div className="space-y-3">
         {filtered.length === 0 && <p className="text-center text-muted-foreground py-12">No appointments.</p>}
         {filtered.map((r) => {
@@ -170,7 +169,6 @@ function AdminAppointments() {
           );
         })}
       </div>
-
       {drawer && (
         <div className="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm flex md:items-center md:justify-end" onClick={() => setDrawer(null)}>
           <div onClick={(e) => e.stopPropagation()} className="bg-background w-full md:max-w-md md:h-full overflow-y-auto p-6 space-y-4 mt-auto md:mt-0 rounded-t-3xl md:rounded-none">
@@ -210,5 +208,5 @@ function AdminAppointments() {
         </div>
       )}
     </AdminPage>
-  );
+  )
 }

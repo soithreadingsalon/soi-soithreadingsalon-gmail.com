@@ -6,7 +6,7 @@ import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 import { uploadImage } from "@/lib/storage";
 
-export const Route = createFileRoute("/admin_/offers")({ component: AdminOffers });
+export const Route = createFileRoute("/admin/offers")({ component: AdminOffers });
 
 type Row = { id: string; title: string; description: string | null; discount: string; expires_on: string | null; terms: string | null; image_url: string | null; active: boolean; sort_order: number };
 const empty: Omit<Row, "id"> = { title: "", description: "", discount: "$10 OFF", expires_on: null, terms: "", image_url: "", active: true, sort_order: 0 };

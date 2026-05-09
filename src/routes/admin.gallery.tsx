@@ -6,7 +6,7 @@ import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 import { uploadImage } from "@/lib/storage";
 
-export const Route = createFileRoute("/admin_/gallery")({ component: AdminGallery });
+export const Route = createFileRoute("/admin/gallery")({ component: AdminGallery });
 
 type Row = { id: string; category: string; caption: string | null; image_url: string; sort_order: number };
 
