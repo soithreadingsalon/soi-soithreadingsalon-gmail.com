@@ -5,7 +5,7 @@ import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tool
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/admin_/dashboard")({ component: Dashboard });
+export const Route = createFileRoute("/admin/dashboard")({ component: Dashboard });
 
 type Appt = { id: string; full_name: string; service: string | null; service_category: string | null; preferred_date: string | null; status: string; created_at: string };
 type Inq = { id: string; name: string; created_at: string; read: boolean };

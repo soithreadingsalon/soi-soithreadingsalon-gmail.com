@@ -1,93 +1,93 @@
-# Complete Admin Panel + CMS + Analytics Build
+## Why you don't see the CMS chrome today
 
-## 1. Admin login
+The admin route files are named `admin_.dashboard.tsx`, `admin_.appointments.tsx`, etc. In TanStack Router, the **trailing underscore (`admin_.`) explicitly opts each page out of the `admin.tsx` parent layout**. That's why the nice sidebar in `src/components/AdminLayout.tsx` never renders — every admin page is being shown bare, with no nav, no header, no logout button.
 
-- Update credentials to **`soi` / `Soi@wayne2026`** (replace current `test123/test123` in `src/lib/admin-auth.ts`).
-- Keep the existing localStorage-based gate for now (matches your "simple" preference). All admin routes already redirect to `/admin` if unauthenticated.
+Fix = nest them properly under a real layout, and upgrade that layout to a standard CMS shell users recognize (collapsible sidebar + topbar + breadcrumbs + user menu), like Shopify / Vercel / Supabase admin.
 
-## 2. Homepage offer carousel (replaces the static "lady face" flyer)
+---
 
-- Add a new `hero_slides` table OR — per your answer — auto-build slides from **active offers that have an `image_url`**. We'll go with the latter: zero extra admin work.
-- Build `<OfferCarousel />` on the homepage where the flyer currently sits: auto-rotates every 5s, swipe on mobile, dots + arrows, each slide links to `/offers`.
-- In **Admin → Offers**, add an image uploader (Supabase Storage bucket `offer-images`, public). Any active offer with an image automatically appears in the homepage carousel.
-- Fallback: if no offers have images, show the current single flyer.
+## Plan
 
-## 3. Time picker on Booking & Contact forms
+### 1. Restructure admin routing (nest pages under a layout)
 
-- Replace the free-text "preferred time" with a **dropdown of 30-min slots** generated from `site_settings` business hours for the chosen day (e.g. Mon–Fri 10:00 AM–7:00 PM).
-- Disable already-booked slots by checking `appointments` for that date.
-- Apply to both `/booking` and `/contact`.
+```text
+src/routes/
+  admin.login.tsx        ← login page (was admin.tsx)
+  admin.tsx              ← NEW: layout shell (sidebar + topbar + Outlet)
+  admin.index.tsx        ← redirects /admin → /admin/dashboard (or /admin/login)
+  admin.dashboard.tsx    ← renamed from admin_.dashboard.tsx
+  admin.appointments.tsx ← renamed
+  admin.inquiries.tsx    ← renamed
+  admin.services.tsx     ← renamed
+  admin.offers.tsx       ← renamed
+  admin.gallery.tsx      ← renamed
+  admin.settings.tsx     ← renamed
+```
 
-## 4. Google Calendar sync (one salon calendar)
+Removing the `_` makes every `/admin/*` page render inside the shell automatically.
 
-- Use the **Google Calendar connector** (single connection, OAuth handled for you — you click "Connect" once after deploy).
-- New server function `syncAppointmentToCalendar`: when admin marks an appointment as **confirmed**, it creates a Google Calendar event (title = service + customer name, start = preferred date/time, duration 30 min, description = phone + notes). Status changes to **cancelled** delete the event. Store `google_event_id` on the appointment row.
-- Add a **"Sync to Calendar"** toggle in Admin → Settings so you can pause it.
+### 2. Replace custom AdminLayout with standard shadcn CMS shell
 
-## 5. Admin → Dashboard (analytics)
+Use the project's existing `components/ui/sidebar.tsx` (Shadcn Sidebar) which gives the standard CMS pattern: collapsible left rail, icon-only collapsed mode, mobile drawer, keyboard shortcut (`Cmd/Ctrl + B`), persistent state in cookie.
 
-Replace the stub with a real dashboard:
+**Sidebar (left)**
+- Logo + "SOI Admin" at top
+- Grouped nav:
+  - **Overview** → Dashboard
+  - **Operations** → Appointments (badge with today's count), Inquiries (badge with unread count)
+  - **Catalog** → Services, Offers, Gallery
+  - **Configuration** → Settings
+- Footer: "View public site ↗" + version
 
-- **KPI cards**: Today's appointments, This week, New inquiries, Revenue this month (sum of service prices for `completed` appointments), Page views (last 7 days).
-- **Charts** (recharts, already typical): appointments per day (last 30d), appointments by service category (pie), inquiries vs bookings (conversion), top viewed pages.
-- **Recent activity feed**: latest 10 bookings + inquiries combined.
+**Topbar (right, sticky)**
+- `SidebarTrigger` (collapse button)
+- Breadcrumbs (Admin / Appointments / …)
+- Right side: quick search (⌘K placeholder), notifications bell (unread inquiries), user dropdown (soi → Logout)
 
-## 6. Admin → Appointments (full workflow)
+**Page wrapper** — replace `AdminPage.tsx` with a tighter version:
+- Title + subtitle on left, action buttons on right
+- Optional tabs row underneath
+- Consistent `max-w-7xl` content area, `p-6` padding
 
-Currently a stub list. Rebuild as a real management screen:
+### 3. Keep dashboard-first login flow (you liked this)
 
-- Table with filters (status, date range, service, search by name/phone) and sort.
-- **Status pipeline** with colored badges: `new` → `confirmed` → `in_progress` → `completed` → (or `cancelled` / `no_show`). Click a badge to advance.
-- Detail drawer: full info, edit any field, internal notes, "Send WhatsApp" link (`https://wa.me/...`), "Add to Calendar" (manual sync), delete.
-- Calendar/day view toggle so the operator sees today at a glance.
-- Real-time updates via Supabase Realtime — multiple operators see status changes instantly with no refresh.
+- `/admin` → if not authed, redirect to `/admin/login`; if authed, redirect to `/admin/dashboard`
+- `/admin/login` → standalone (no sidebar)
+- All other `/admin/*` → wrapped in shell, auth-gated in `admin.tsx` layout's component (returns `<Navigate to="/admin/login" />` if not authed, otherwise renders shell + `<Outlet />`)
+- Dashboard stays exactly as it is — KPI cards, charts, recent activity. No changes to its content.
 
-## 7. Admin → Inquiries (full hub)
+### 4. Polish across all admin pages
+- Each page already has data tables/forms — just wrap with new `<AdminPage>` so they all inherit consistent header, padding, breadcrumb context
+- Add active-route highlighting in sidebar via `Link` `activeProps`
+- Mobile: sidebar becomes off-canvas drawer (Shadcn handles this automatically)
+- Add a small "back to site" link in the sidebar footer
 
-- Same table pattern: search, filter by read/unread, sort by date.
-- Mark read/unread, add internal notes, **"Convert to appointment"** button that pre-fills a booking, reply via WhatsApp/email links.
-- Realtime so new inquiries pop in live with a toast + sound.
+### 5. Files touched
 
-## 8. Admin → Services CMS
+**New**
+- `src/routes/admin.tsx` (layout shell — replaces current login file)
+- `src/routes/admin.index.tsx` (redirect)
+- `src/routes/admin.login.tsx` (current login content moved here)
+- `src/components/admin/AppSidebar.tsx`
+- `src/components/admin/AdminTopbar.tsx`
 
-- Inline-editable table grouped by category. Add/edit/delete service, change price, toggle `featured`, drag-to-reorder (`sort_order`).
-- "New category" button. Bulk price edit.
+**Renamed (drop the underscore)**
+- `admin_.dashboard.tsx` → `admin.dashboard.tsx`
+- `admin_.appointments.tsx` → `admin.appointments.tsx`
+- `admin_.inquiries.tsx` → `admin.inquiries.tsx`
+- `admin_.services.tsx` → `admin.services.tsx`
+- `admin_.offers.tsx` → `admin.offers.tsx`
+- `admin_.gallery.tsx` → `admin.gallery.tsx`
+- `admin_.settings.tsx` → `admin.settings.tsx`
 
-## 9. Admin → Offers CMS
+**Updated**
+- `src/components/AdminPage.tsx` (tighter, breadcrumb-aware)
+- Update any internal `<Link to="/admin">` that meant the dashboard to point to `/admin/dashboard`
 
-- Add/edit/delete offers. Image upload (powers homepage carousel). Toggle active. Set expiry date. Reorder.
-- Live preview of how the offer card will look.
+**Removed**
+- `src/components/AdminLayout.tsx` (replaced by `admin.tsx` + AppSidebar)
 
-## 10. Admin → Gallery CMS
+No database changes. No changes to the public website. No change to admin credentials (`soi` / `Soi@wayne2026`).
 
-- Upload images to `gallery-images` bucket. Assign category, caption, reorder. Bulk delete.
-
-## 11. Admin → Settings CMS
-
-- Edit everything in `site_settings` (salon info, hours, hero copy, social, QR codes) from one form.
-- Upload new logo / hero image. Toggle Calendar sync.
-
-## 12. Traffic analytics (lightweight, in-house)
-
-- New `page_views` table (path, referrer, user_agent, created_at) — no third party, no cookies, GDPR-friendly.
-- `<PageTracker />` in `_public.tsx` posts a row to a `/api/public/track` server route on every route change.
-- Dashboard reads aggregates (top pages, daily trend) from this table.
-
-## 13. Database changes (one migration)
-
-- `appointments`: add `google_event_id text`, `internal_notes` already exists, ensure `status` allows the new values.
-- `offers`: ensure `image_url` writable; create `offer-images` storage bucket (public).
-- New `page_views` table + indexes.
-- `site_settings`: add `calendar_sync_enabled boolean default true`.
-- Storage buckets: `offer-images`, `gallery-images`, `site-assets` (all public read; public write via existing pattern).
-
-## Technical notes
-
-- Stack: TanStack Start server functions for all writes, Supabase Realtime for live admin updates, recharts for graphs, Google Calendar via Lovable's connector gateway (no API key needed from you — you'll get a "Connect Google Calendar" button after deploy).
-- Mobile: every admin screen designed mobile-first so you can manage on your phone.
-- All existing public routes untouched except homepage (carousel) and booking/contact (time picker).
-
-## What I'll need from you after the build
-
-1. Click **Connect Google Calendar** once when prompted (one-tap OAuth).
-2. Upload your offer flyer images in Admin → Offers (existing offers will keep working without images).
+### What it'll feel like
+After this, logging in lands you on the Dashboard inside a familiar CMS frame: collapsible sidebar on the left, sticky topbar with breadcrumbs and your user menu, mobile drawer on phones — same pattern as Vercel, Linear, Shopify admin.
