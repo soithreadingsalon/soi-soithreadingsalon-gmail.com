@@ -10,6 +10,12 @@ type Settings = {
   hours_sunday: string;
 };
 
+const DEFAULT_SETTINGS: Settings = {
+  hours_weekday: "10:00 AM – 7:00 PM",
+  hours_saturday: "10:00 AM – 6:00 PM",
+  hours_sunday: "11:00 AM – 4:00 PM",
+};
+
 export function TimeSlotPicker({
   date,
   value,
@@ -21,7 +27,8 @@ export function TimeSlotPicker({
   onChange: (v: string) => void;
   className?: string;
 }) {
-  const [settings, setSettings] = useState<Settings | null>(null);
+  // Seed with defaults so the picker never gets stuck on "Loading…".
+  const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [taken, setTaken] = useState<Set<string>>(new Set());
   const [calendarBusy, setCalendarBusy] = useState<Set<string>>(new Set());
   const fetchBusy = useServerFn(getCalendarBusySlots);
@@ -31,8 +38,20 @@ export function TimeSlotPicker({
       .from("site_settings")
       .select("hours_weekday,hours_saturday,hours_sunday")
       .eq("id", 1)
-      .single()
-      .then(({ data }) => data && setSettings(data as Settings));
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (error) {
+          console.error("[TimeSlotPicker] site_settings load failed", error);
+          return;
+        }
+        if (data) {
+          setSettings({
+            hours_weekday: data.hours_weekday || DEFAULT_SETTINGS.hours_weekday,
+            hours_saturday: data.hours_saturday || DEFAULT_SETTINGS.hours_saturday,
+            hours_sunday: data.hours_sunday || DEFAULT_SETTINGS.hours_sunday,
+          });
+        }
+      });
   }, []);
 
   useEffect(() => {
@@ -55,12 +74,15 @@ export function TimeSlotPicker({
     let cancelled = false;
     fetchBusy({ data: { date } })
       .then((res) => { if (!cancelled) setCalendarBusy(new Set(res.busy || [])); })
-      .catch(() => { if (!cancelled) setCalendarBusy(new Set()); });
+      .catch((e) => {
+        console.error("[TimeSlotPicker] calendar busy load failed", e);
+        if (!cancelled) setCalendarBusy(new Set());
+      });
     return () => { cancelled = true; };
   }, [date, fetchBusy]);
 
   const slots = useMemo(() => {
-    if (!settings || !date) return [];
+    if (!date) return [];
     const hrs = pickHoursForDate(date, settings.hours_weekday, settings.hours_saturday, settings.hours_sunday);
     return generateSlots(hrs, 30);
   }, [settings, date]);
@@ -70,14 +92,6 @@ export function TimeSlotPicker({
       <div className={`text-xs text-muted-foreground italic px-3 py-2.5 rounded-xl bg-muted/30 ${className || ""}`}>
         Select a date first to see available times
       </div>
-    );
-  }
-
-  if (!settings) {
-    return (
-      <select value={value} onChange={(e) => onChange(e.target.value)} className={className}>
-        <option value="">Loading times…</option>
-      </select>
     );
   }
 
