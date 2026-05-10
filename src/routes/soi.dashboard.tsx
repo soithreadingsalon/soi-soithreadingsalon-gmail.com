@@ -5,7 +5,7 @@ import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tool
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/admin/dashboard")({ component: Dashboard });
+export const Route = createFileRoute("/soi/dashboard")({ component: Dashboard });
 
 type Appt = { id: string; full_name: string; service: string | null; service_category: string | null; preferred_date: string | null; status: string; created_at: string };
 type Inq = { id: string; name: string; created_at: string; read: boolean };
@@ -106,12 +106,12 @@ function Dashboard() {
   }, [appts, inquiries]);
 
   const cards = [
-    { label: "Today's Appointments", value: stats.todayCount, icon: Calendar, link: "/admin/appointments" },
-    { label: "This Week", value: stats.weekCount, icon: TrendingUp, link: "/admin/appointments" },
-    { label: "Unread Inquiries", value: stats.newInq, icon: MessageSquare, link: "/admin/inquiries" },
-    { label: "Revenue (Month)", value: `$${stats.revenue.toFixed(0)}`, icon: DollarSign, link: "/admin/appointments" },
-    { label: "Page Views (7d)", value: stats.pageViews, icon: Eye, link: "/admin/dashboard" },
-    { label: "Unique Visitors (7d)", value: stats.uniqueVisitors, icon: Tag, link: "/admin/dashboard" },
+    { label: "Today's Appointments", value: stats.todayCount, icon: Calendar, link: "/soi/appointments" },
+    { label: "This Week", value: stats.weekCount, icon: TrendingUp, link: "/soi/appointments" },
+    { label: "Unread Inquiries", value: stats.newInq, icon: MessageSquare, link: "/soi/inquiries" },
+    { label: "Revenue (Month)", value: `$${stats.revenue.toFixed(0)}`, icon: DollarSign, link: "/soi/appointments" },
+    { label: "Page Views (7d)", value: stats.pageViews, icon: Eye, link: "/soi/dashboard" },
+    { label: "Unique Visitors (7d)", value: stats.uniqueVisitors, icon: Tag, link: "/soi/dashboard" },
   ];
 
   return (
@@ -195,7 +195,7 @@ function Dashboard() {
         {recent.length === 0 ? <p className="text-sm text-muted-foreground py-8 text-center">Nothing yet.</p> : (
           <div className="divide-y divide-border/50">
             {recent.map((r) => (
-              <Link key={`${r.kind}-${r.id}`} to={r.kind === "Booking" ? "/admin/appointments" : "/admin/inquiries"} className="flex items-center justify-between py-2.5 hover:bg-card/50 px-2 rounded-lg transition-colors">
+              <Link key={`${r.kind}-${r.id}`} to={r.kind === "Booking" ? "/soi/appointments" : "/soi/inquiries"} className="flex items-center justify-between py-2.5 hover:bg-card/50 px-2 rounded-lg transition-colors">
                 <div className="flex items-center gap-3">
                   <span className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full ${r.kind === "Booking" ? "bg-[var(--gold)]/20 text-gold" : "bg-muted text-muted-foreground"}`}>{r.kind}</span>
                   <div>

@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/admin/settings")({ component: AdminSettings });
+export const Route = createFileRoute("/soi/settings")({ component: AdminSettings });
 
 type Settings = {
   salon_name: string; tagline: string; phone: string; email: string; address: string; website: string; instagram: string;

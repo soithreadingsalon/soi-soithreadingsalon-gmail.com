@@ -16,7 +16,7 @@ export function PageTracker() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (path.startsWith("/admin")) return;
+    if (path.startsWith("/soi")) return;
     const payload = {
       path,
       referrer: document.referrer || null,

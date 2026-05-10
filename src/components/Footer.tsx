@@ -48,13 +48,14 @@ export function Footer() {
             <li><Link to="/gallery" className="hover:text-gold-light">Gallery</Link></li>
             <li><Link to="/booking" className="hover:text-gold-light">Book Appointment</Link></li>
             <li><Link to="/contact" className="hover:text-gold-light">Contact</Link></li>
+            <li><Link to="/ai-business-summary" className="hover:text-gold-light">Business Information</Link></li>
           </ul>
         </div>
       </div>
       <div className="border-t border-[oklch(0.32_0.03_60)]">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[oklch(0.75_0.02_80)]">
           <p>© 2026 SOI Threading Salon. All rights reserved.</p>
-          <Link to="/admin" className="hover:text-gold-light">Admin</Link>
+          <a href="https://maps.google.com/?q=190+Hamburg+Tpke+Wayne+NJ+07470" target="_blank" rel="noopener noreferrer" className="hover:text-gold-light">190 Hamburg Tpke, Wayne, NJ 07470</a>
         </div>
       </div>
     </footer>

@@ -28,30 +28,30 @@ import { Logo } from "@/components/Logo";
 import { supabase } from "@/integrations/supabase/client";
 
 type NavItem = {
-  to: "/admin/dashboard" | "/admin/appointments" | "/admin/inquiries" | "/admin/services" | "/admin/offers" | "/admin/gallery" | "/admin/settings";
+  to: "/soi/dashboard" | "/soi/appointments" | "/soi/inquiries" | "/soi/services" | "/soi/offers" | "/soi/gallery" | "/soi/settings";
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   badgeKey?: "today" | "unread";
 };
 
 const GROUPS: { label: string; items: NavItem[] }[] = [
-  { label: "Overview", items: [{ to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard }] },
+  { label: "Overview", items: [{ to: "/soi/dashboard", label: "Dashboard", icon: LayoutDashboard }] },
   {
     label: "Operations",
     items: [
-      { to: "/admin/appointments", label: "Appointments", icon: Calendar, badgeKey: "today" },
-      { to: "/admin/inquiries", label: "Inquiries", icon: MessageSquare, badgeKey: "unread" },
+      { to: "/soi/appointments", label: "Appointments", icon: Calendar, badgeKey: "today" },
+      { to: "/soi/inquiries", label: "Inquiries", icon: MessageSquare, badgeKey: "unread" },
     ],
   },
   {
     label: "Catalog",
     items: [
-      { to: "/admin/services", label: "Services", icon: Scissors },
-      { to: "/admin/offers", label: "Offers", icon: Tag },
-      { to: "/admin/gallery", label: "Gallery", icon: ImageIcon },
+      { to: "/soi/services", label: "Services", icon: Scissors },
+      { to: "/soi/offers", label: "Offers", icon: Tag },
+      { to: "/soi/gallery", label: "Gallery", icon: ImageIcon },
     ],
   },
-  { label: "Configuration", items: [{ to: "/admin/settings", label: "Settings", icon: Settings }] },
+  { label: "Configuration", items: [{ to: "/soi/settings", label: "Settings", icon: Settings }] },
 ];
 
 export function AppSidebar() {

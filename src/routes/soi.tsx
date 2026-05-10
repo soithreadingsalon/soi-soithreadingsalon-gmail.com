@@ -5,22 +5,22 @@ import { AppSidebar } from "@/components/admin/AppSidebar";
 import { AdminTopbar } from "@/components/admin/AdminTopbar";
 import { useAdminAuth, signOutAdmin } from "@/lib/admin-auth";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/soi")({
   component: AdminLayout,
 });
 
 function AdminLayout() {
   const navigate = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const isLogin = path === "/admin/login";
+  const isLogin = path === "/soi/login";
   const { status } = useAdminAuth();
 
   useEffect(() => {
     if (isLogin) return;
-    if (status === "unauthenticated") navigate({ to: "/admin/login" });
+    if (status === "unauthenticated") navigate({ to: "/soi/login" });
     if (status === "forbidden") {
       // Signed in but not an admin — sign them out and bounce to login.
-      signOutAdmin().then(() => navigate({ to: "/admin/login" }));
+      signOutAdmin().then(() => navigate({ to: "/soi/login" }));
     }
   }, [isLogin, status, navigate]);
 
