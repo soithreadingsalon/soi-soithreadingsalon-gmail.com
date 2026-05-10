@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { logoutAdmin, ADMIN_USER } from "@/lib/admin-auth";
+import { signOutAdmin, useAdminAuth } from "@/lib/admin-auth";
 
 const LABELS: Record<string, string> = {
   dashboard: "Dashboard",
@@ -25,6 +25,9 @@ const LABELS: Record<string, string> = {
 export function AdminTopbar() {
   const navigate = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const { email } = useAdminAuth();
+  const displayName = email ?? "admin";
+  const initial = (displayName[0] ?? "A").toUpperCase();
   const segments = path.split("/").filter(Boolean); // e.g. ["admin", "appointments"]
   const crumbs = segments.map((seg, i) => ({
     label: LABELS[seg] ?? seg.charAt(0).toUpperCase() + seg.slice(1),
@@ -51,17 +54,17 @@ export function AdminTopbar() {
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-muted text-sm">
             <span className="w-7 h-7 rounded-full gradient-gold flex items-center justify-center text-white text-xs font-semibold uppercase">
-              {ADMIN_USER.charAt(0)}
+              {initial}
             </span>
-            <span className="hidden sm:inline font-medium">{ADMIN_USER}</span>
+            <span className="hidden sm:inline font-medium truncate max-w-[160px]">{displayName}</span>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuLabel>Signed in as <span className="font-semibold">{ADMIN_USER}</span></DropdownMenuLabel>
+            <DropdownMenuLabel className="truncate">Signed in as <span className="font-semibold">{displayName}</span></DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link to="/admin/settings"><User className="h-4 w-4 mr-2" /> Settings</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => { logoutAdmin(); navigate({ to: "/admin/login" }); }}>
+            <DropdownMenuItem onClick={async () => { await signOutAdmin(); navigate({ to: "/admin/login" }); }}>
               <LogOut className="h-4 w-4 mr-2" /> Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

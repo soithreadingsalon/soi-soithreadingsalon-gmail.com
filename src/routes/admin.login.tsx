@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Lock } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { isAdmin, loginAdmin } from "@/lib/admin-auth";
+import { signInAdmin, signUpAdmin, useAdminAuth } from "@/lib/admin-auth";
 
 export const Route = createFileRoute("/admin/login")({
   component: AdminLogin,
@@ -11,14 +11,35 @@ export const Route = createFileRoute("/admin/login")({
 
 function AdminLogin() {
   const navigate = useNavigate();
-  const [u, setU] = useState("");
-  const [p, setP] = useState("");
-  useEffect(() => { if (isAdmin()) navigate({ to: "/admin/dashboard" }); }, [navigate]);
+  const { status } = useAdminAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [busy, setBusy] = useState(false);
 
-  function submit(e: React.FormEvent) {
+  useEffect(() => {
+    if (status === "authenticated") navigate({ to: "/admin/dashboard" });
+  }, [status, navigate]);
+
+  async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (loginAdmin(u, p)) { toast.success("Welcome back"); navigate({ to: "/admin/dashboard" }); }
-    else toast.error("Invalid credentials");
+    setBusy(true);
+    try {
+      if (mode === "signup") {
+        const res = await signUpAdmin(email, password);
+        if (!res.ok) { toast.error(res.error); return; }
+        toast.success("Account created. Signing you in…");
+        const signIn = await signInAdmin(email, password);
+        if (!signIn.ok) { toast.error(signIn.error); return; }
+      } else {
+        const res = await signInAdmin(email, password);
+        if (!res.ok) { toast.error(res.error); return; }
+        toast.success("Welcome back");
+      }
+      // useAdminAuth effect will redirect once role is verified.
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -35,14 +56,19 @@ function AdminLogin() {
             <p className="text-xs text-muted-foreground mt-1">Restricted access</p>
           </div>
           <label className="block">
-            <span className="block text-xs uppercase tracking-wider text-muted-foreground mb-1.5">Username</span>
-            <input value={u} onChange={(e) => setU(e.target.value)} className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-[var(--gold)] outline-none text-sm" />
+            <span className="block text-xs uppercase tracking-wider text-muted-foreground mb-1.5">Email</span>
+            <input type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-[var(--gold)] outline-none text-sm" />
           </label>
           <label className="block">
             <span className="block text-xs uppercase tracking-wider text-muted-foreground mb-1.5">Password</span>
-            <input type="password" value={p} onChange={(e) => setP(e.target.value)} className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-[var(--gold)] outline-none text-sm" />
+            <input type="password" autoComplete={mode === "signup" ? "new-password" : "current-password"} required minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-[var(--gold)] outline-none text-sm" />
           </label>
-          <button type="submit" className="w-full px-6 py-3 rounded-full text-sm font-semibold btn-gold">Sign In</button>
+          <button type="submit" disabled={busy} className="w-full px-6 py-3 rounded-full text-sm font-semibold btn-gold disabled:opacity-60">
+            {busy ? "Please wait…" : mode === "signup" ? "Create admin account" : "Sign In"}
+          </button>
+          <button type="button" onClick={() => setMode(mode === "signup" ? "signin" : "signup")} className="w-full text-xs text-muted-foreground hover:text-foreground">
+            {mode === "signup" ? "Already have an account? Sign in" : "First time? Create admin account"}
+          </button>
         </form>
       </div>
     </div>
