@@ -1,8 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Mail, MapPin, Clock, Instagram, Sparkles } from "lucide-react";
 import { Logo } from "./Logo";
-import qrInsta from "@/assets/qr-instagram.jpg";
-import qrGoogle from "@/assets/qr-google.png";
 
 export function Footer() {
   return (
@@ -10,7 +8,9 @@ export function Footer() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-14 grid gap-8 md:gap-10 sm:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
-          <Logo className="h-12 md:h-14 w-auto mb-2" invert />
+          <div className="inline-flex items-center justify-center rounded-2xl bg-[oklch(0.97_0.02_85)] px-4 py-3 mb-3 shadow-soft">
+            <Logo className="h-12 md:h-14 w-auto" />
+          </div>
           <p className="font-script text-2xl text-gold-light">Style of India</p>
           <p className="text-sm text-[oklch(0.85_0.02_80)] mt-3 leading-relaxed max-w-sm">
             Threading, facials, waxing, hair care and henna — inspired by timeless Indian traditions and refined for modern elegance.
@@ -49,16 +49,6 @@ export function Footer() {
             <li><Link to="/booking" className="hover:text-gold-light">Book Appointment</Link></li>
             <li><Link to="/contact" className="hover:text-gold-light">Contact</Link></li>
           </ul>
-          <div className="mt-5 flex gap-3">
-            <div className="text-center">
-              <img src={qrInsta} alt="Instagram QR" className="w-16 h-16 rounded bg-white p-1" />
-              <p className="text-[9px] mt-1 text-gold-light">Instagram</p>
-            </div>
-            <div className="text-center">
-              <img src={qrGoogle} alt="Google Maps QR" className="w-16 h-16 rounded bg-white p-1" />
-              <p className="text-[9px] mt-1 text-gold-light">Find Us</p>
-            </div>
-          </div>
         </div>
       </div>
       <div className="border-t border-[oklch(0.32_0.03_60)]">

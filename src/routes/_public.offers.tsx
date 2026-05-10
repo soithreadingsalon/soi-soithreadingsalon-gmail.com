@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Phone, X, Sparkles } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
-import offerFlyer from "@/assets/offer-flyer.png";
 
 type Offer = { id: string; title: string; description: string | null; discount: string; expires_on: string | null; terms: string | null; image_url: string | null };
 
@@ -33,9 +32,34 @@ function OffersPage() {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
       <SectionHeading eyebrow="Indulge More" title="Current Offers" subtitle="Make your next visit even more special with our exclusive savings." />
 
-      <div className="mb-8 rounded-3xl overflow-hidden gold-border shadow-lift">
-        <img src={offerFlyer} alt="SOI Threading Salon offers — $10 off Facial, $10 off Wax, $5 off Hot Oil Hair Massage, $2 off Eyebrow & Lip" className="w-full h-auto block" />
-      </div>
+      {(() => {
+        const featured = offers.find((o) => o.image_url);
+        if (featured) {
+          return (
+            <div className="mb-8 rounded-3xl overflow-hidden gold-border shadow-lift relative">
+              <img src={featured.image_url!} alt={`${featured.discount} — ${featured.title}`} className="w-full h-[280px] sm:h-[380px] md:h-[460px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-white">
+                <p className="font-script text-2xl md:text-3xl text-[var(--gold)] drop-shadow">{featured.discount}</p>
+                <h3 className="font-serif text-3xl md:text-5xl drop-shadow">{featured.title}</h3>
+                {featured.description && <p className="mt-2 max-w-xl drop-shadow opacity-90">{featured.description}</p>}
+              </div>
+            </div>
+          );
+        }
+        if (offers.length > 0) {
+          return (
+            <div className="mb-8 rounded-3xl gradient-cream gold-border shadow-lift p-8 md:p-12 text-center relative overflow-hidden">
+              <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-[var(--gold)]/15 blur-3xl" />
+              <Sparkles className="h-7 w-7 text-gold mx-auto mb-3" />
+              <p className="font-script text-3xl md:text-4xl text-gold">Exclusive Savings</p>
+              <h3 className="font-serif text-3xl md:text-5xl mt-2">Treat yourself this season</h3>
+              <p className="text-muted-foreground mt-3 max-w-xl mx-auto">Browse our current coupons below and call to redeem.</p>
+            </div>
+          );
+        }
+        return null;
+      })()}
 
       <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
         {offers.map((o) => (
