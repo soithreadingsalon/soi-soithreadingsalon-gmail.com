@@ -5,6 +5,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
+import { TimeSlotPicker } from "@/components/TimeSlotPicker";
 import {
   Dialog,
   DialogContent,
@@ -357,7 +358,14 @@ function ServicesPage() {
                 <Field label="Email"><input type="email" value={form.email} onChange={handle("email")} className="svc-input" /></Field>
                 <div className="grid sm:grid-cols-2 gap-3">
                   <Field label="Preferred Date"><input type="date" value={form.preferred_date} onChange={handle("preferred_date")} className="svc-input" /></Field>
-                  <Field label="Preferred Time"><input value={form.preferred_time} onChange={handle("preferred_time")} className="svc-input" placeholder="e.g. 2:00 PM" /></Field>
+                  <Field label="Preferred Time">
+                    <TimeSlotPicker
+                      date={form.preferred_date}
+                      value={form.preferred_time}
+                      onChange={(v) => setForm((f) => ({ ...f, preferred_time: v }))}
+                      className="svc-input"
+                    />
+                  </Field>
                 </div>
                 <Field label="Notes"><textarea rows={3} value={form.notes} onChange={handle("notes")} className="svc-input" placeholder="Anything we should know?" /></Field>
 

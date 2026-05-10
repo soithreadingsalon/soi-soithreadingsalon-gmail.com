@@ -6,6 +6,8 @@ import { Phone, Mail, MapPin, Clock, Instagram } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { TimeSlotPicker } from "@/components/TimeSlotPicker";
+import { useServerFn } from "@tanstack/react-start";
+import { notifyInquiryByEmail } from "@/lib/inquiries.functions";
 
 export const Route = createFileRoute("/_public/contact")({
   head: () => ({
@@ -32,6 +34,7 @@ const schema = z.object({
 function ContactPage() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", service_interest: "", preferred_date: "", preferred_time: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
+  const notify = useServerFn(notifyInquiryByEmail);
 
   const handle = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm({ ...form, [k]: e.target.value });
@@ -44,7 +47,7 @@ function ContactPage() {
       return;
     }
     setSubmitting(true);
-    const { error } = await supabase.from("inquiries").insert({
+    const { data: inserted, error } = await supabase.from("inquiries").insert({
       name: form.name,
       phone: form.phone || null,
       email: form.email || null,
@@ -52,13 +55,16 @@ function ContactPage() {
       preferred_date: form.preferred_date || null,
       preferred_time: form.preferred_time || null,
       message: form.message || null,
-    });
+    }).select("id").single();
     setSubmitting(false);
     if (error) {
       toast.error("Could not send your message. Please try again.");
     } else {
       toast.success("Thank you. We'll be in touch shortly.");
       setForm({ name: "", phone: "", email: "", service_interest: "", preferred_date: "", preferred_time: "", message: "" });
+      if (inserted?.id) {
+        notify({ data: { inquiryId: inserted.id } }).catch((e) => console.error("notify failed", e));
+      }
     }
   }
 

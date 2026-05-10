@@ -134,3 +134,79 @@ export const listCalendars = createServerFn({ method: "GET" }).handler(async () 
     id: c.id, summary: c.summary, primary: !!c.primary,
   }));
 });
+
+// Format minute-of-day -> "10:30 AM"
+function fmtSlot(min: number) {
+  const h24 = Math.floor(min / 60);
+  const mm = min % 60;
+  const ap = h24 >= 12 ? "PM" : "AM";
+  const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+  return `${h12}:${mm.toString().padStart(2, "0")} ${ap}`;
+}
+
+// Returns busy 30-min slot labels for a given local date (America/New_York).
+export const getCalendarBusySlots = createServerFn({ method: "POST" })
+  .inputValidator((d: { date: string }) =>
+    z.object({ date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) }).parse(d)
+  )
+  .handler(async ({ data }) => {
+    const cfg = await getCalendarConfig();
+    if (!cfg.enabled) return { busy: [] as string[] };
+
+    // Salon timezone: America/New_York. Build day window in ET.
+    // We pass the offset; DST nuances are acceptable for slot blocking.
+    const timeMin = new Date(`${data.date}T00:00:00-05:00`).toISOString();
+    const timeMax = new Date(`${data.date}T23:59:59-05:00`).toISOString();
+
+    const resp = await fetch(`${GATEWAY}/freeBusy`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({
+        timeMin,
+        timeMax,
+        timeZone: "America/New_York",
+        items: [{ id: cfg.calendarId }],
+      }),
+    });
+    const json = await resp.json();
+    if (!resp.ok) {
+      console.error("freeBusy error", resp.status, json);
+      return { busy: [] as string[] };
+    }
+    const calendars = json.calendars || {};
+    const cal = calendars[cfg.calendarId] || Object.values(calendars)[0] as { busy?: { start: string; end: string }[] } | undefined;
+    const intervals: { start: string; end: string }[] = (cal as { busy?: { start: string; end: string }[] } | undefined)?.busy || [];
+
+    // Convert each interval to ET minute-of-day range and mark every overlapping 30-min slot.
+    const busySet = new Set<string>();
+    const fmt = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+    const toMin = (iso: string) => {
+      const parts = fmt.formatToParts(new Date(iso));
+      const get = (t: string) => parts.find((p) => p.type === t)?.value || "0";
+      const dateKey = `${get("year")}-${get("month")}-${get("day")}`;
+      const m = parseInt(get("hour")) * 60 + parseInt(get("minute"));
+      return { dateKey, m };
+    };
+    for (const iv of intervals) {
+      const s = toMin(iv.start);
+      const e = toMin(iv.end);
+      // Only mark slots on the requested local date.
+      const startMin = s.dateKey === data.date ? s.m : 0;
+      const endMin = e.dateKey === data.date ? e.m : 24 * 60;
+      // Snap start down to nearest 30-min, walk while < endMin.
+      let t = Math.floor(startMin / 30) * 30;
+      while (t < endMin) {
+        busySet.add(fmtSlot(t));
+        t += 30;
+      }
+    }
+    return { busy: Array.from(busySet) };
+  });
