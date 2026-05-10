@@ -10,15 +10,22 @@ import hennaImg from "@/assets/service-henna.jpg";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { OfferCarousel } from "@/components/OfferCarousel";
+import { FAQS, SITE_URL } from "@/data/seo-content";
 
 export const Route = createFileRoute("/_public/")({
   head: () => ({
     meta: [
-      { title: "SOI Threading Salon | Style of India — Wayne, NJ" },
-      { name: "description", content: "Premium threading, facials, waxing, hair care and henna in Wayne, NJ. Style of India — Enhance. Refresh. Radiate." },
-      { property: "og:title", content: "SOI Threading Salon | Style of India" },
-      { property: "og:description", content: "Premium threading, facials, waxing, hair care and henna in Wayne, NJ." },
+      { title: "SOI Threading Salon | Threading, Waxing, Facials & Henna in Wayne, NJ" },
+      { name: "description", content: "Premium threading, waxing, facials, hair care, henna, eyelash and men's grooming in Wayne, NJ. Visit SOI Threading Salon at 190 Hamburg Tpke." },
+      { name: "keywords", content: "threading salon Wayne NJ, eyebrow threading Wayne NJ, facial salon Wayne NJ, waxing Wayne NJ, henna Wayne NJ, beauty salon Wayne NJ, Indian beauty salon Wayne NJ, men's eyebrow threading Wayne NJ, eyelash extensions Wayne NJ" },
+      { property: "og:title", content: "SOI Threading Salon | Threading, Waxing, Facials & Henna in Wayne, NJ" },
+      { property: "og:description", content: "Premium threading, waxing, facials, hair care, henna and men's grooming in Wayne, NJ." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
     ],
+    links: [{ rel: "canonical", href: SITE_URL }],
   }),
   component: HomePage,
 });
@@ -56,8 +63,15 @@ function HomePage() {
     });
   }, []);
 
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -253,6 +267,19 @@ function HomePage() {
           <a href="https://maps.google.com/?q=190+Hamburg+Tpke+Wayne+NJ+07470" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold">
             <MapPin className="h-4 w-4" /> Get Directions
           </a>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <SectionHeading eyebrow="FAQ" title="Frequently Asked Questions" subtitle="Quick answers about SOI Threading Salon in Wayne, NJ." />
+        <div className="space-y-4">
+          {FAQS.map((f) => (
+            <details key={f.q} className="glass-panel gold-border rounded-2xl p-5">
+              <summary className="font-serif text-lg cursor-pointer text-foreground">{f.q}</summary>
+              <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{f.a}</p>
+            </details>
+          ))}
         </div>
       </section>
     </>

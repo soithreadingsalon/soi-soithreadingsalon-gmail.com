@@ -3,17 +3,21 @@ import { useEffect, useState } from "react";
 import { Phone, X, Sparkles } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
+import { SITE_URL } from "@/data/seo-content";
 
 type Offer = { id: string; title: string; description: string | null; discount: string; expires_on: string | null; terms: string | null; image_url: string | null };
 
 export const Route = createFileRoute("/_public/offers")({
   head: () => ({
     meta: [
-      { title: "Current Offers & Coupons | SOI Threading Salon" },
-      { name: "description", content: "Save with current SOI Threading Salon offers — facials, waxing, hair massage and brow combos in Wayne, NJ." },
+      { title: "Current Offers & Coupons | SOI Threading Salon — Wayne, NJ" },
+      { name: "description", content: "Save on threading, facials, waxing, hair massage and brow combos at SOI Threading Salon in Wayne, NJ. View limited-time coupons and call to redeem." },
       { property: "og:title", content: "Current Offers | SOI Threading Salon" },
-      { property: "og:description", content: "Limited-time savings on facials, waxing, hair massage and brow combos." },
+      { property: "og:description", content: "Limited-time savings on facials, waxing, hair massage and brow combos in Wayne, NJ." },
+      { property: "og:url", content: `${SITE_URL}/offers` },
+      { name: "robots", content: "index, follow" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/offers` }],
   }),
   component: OffersPage,
 });
