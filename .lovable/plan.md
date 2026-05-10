@@ -1,93 +1,43 @@
-## Why you don't see the CMS chrome today
+## Goals
 
-The admin route files are named `admin_.dashboard.tsx`, `admin_.appointments.tsx`, etc. In TanStack Router, the **trailing underscore (`admin_.`) explicitly opts each page out of the `admin.tsx` parent layout**. That's why the nice sidebar in `src/components/AdminLayout.tsx` never renders — every admin page is being shown bare, with no nav, no header, no logout button.
+1. **Consistent logo** across the site (header + footer use the same `Logo` component, same proportions, no inverted/recolored variant).
+2. **Remove the static offer flyer image** (`src/assets/offer-flyer.png`) wherever it appears, and let the dynamic offers (managed from the admin panel) drive the homepage and Offers page presentation instead.
+3. **Remove the Instagram and Google Maps QR codes** from the footer.
 
-Fix = nest them properly under a real layout, and upgrade that layout to a standard CMS shell users recognize (collapsible sidebar + topbar + breadcrumbs + user menu), like Shopify / Vercel / Supabase admin.
+No backend, routing, or admin changes — purely presentation.
 
 ---
 
-## Plan
+## Changes
 
-### 1. Restructure admin routing (nest pages under a layout)
+### 1. Footer (`src/components/Footer.tsx`)
+- Drop the two QR images and their imports (`qrInsta`, `qrGoogle`) and the wrapper div that holds them.
+- Replace the `invert` styling on the footer logo with the regular `Logo` so it matches the header exactly. To keep it readable on the dark footer, place it inside a small soft-background pill (rounded container with subtle ivory/champagne background) so the same gold logo reads cleanly without filter hacks.
+- Keep all text links and contact info.
 
-```text
-src/routes/
-  admin.login.tsx        ← login page (was admin.tsx)
-  admin.tsx              ← NEW: layout shell (sidebar + topbar + Outlet)
-  admin.index.tsx        ← redirects /admin → /admin/dashboard (or /admin/login)
-  admin.dashboard.tsx    ← renamed from admin_.dashboard.tsx
-  admin.appointments.tsx ← renamed
-  admin.inquiries.tsx    ← renamed
-  admin.services.tsx     ← renamed
-  admin.offers.tsx       ← renamed
-  admin.gallery.tsx      ← renamed
-  admin.settings.tsx     ← renamed
-```
+### 2. Logo component (`src/components/Logo.tsx`)
+- Remove the `invert` prop entirely (no longer needed once footer uses the standard logo). Single source of truth for sizing/spacing so header and footer render identically.
 
-Removing the `_` makes every `/admin/*` page render inside the shell automatically.
+### 3. Offers page (`src/routes/_public.offers.tsx`)
+- Remove the `import offerFlyer from "@/assets/offer-flyer.png"` and the `<img src={offerFlyer} … />` block.
+- Replace it with a smarter, dynamic hero strip that uses the **first active offer with an image** as a featured banner (falls back gracefully to a styled headline card if no offer has an image yet). This keeps the visual richness without hard-coding outdated discounts.
 
-### 2. Replace custom AdminLayout with standard shadcn CMS shell
+### 4. Homepage offers section (`src/routes/_public.index.tsx` + `src/components/OfferCarousel.tsx`)
+- In `OfferCarousel`, remove the `offerFlyerFallback` import and the static-image fallback branch. If there are no active offers with images, render nothing (the homepage already conditionally hides the whole "Current Offers" section when `offers.length === 0`, and the small coupon cards under the carousel still display when offers exist without images).
+- Make the carousel render even when offers don't have images by showing a stylized gradient slide with the discount/title/description (so the section still looks finished while the admin uploads flyers).
 
-Use the project's existing `components/ui/sidebar.tsx` (Shadcn Sidebar) which gives the standard CMS pattern: collapsible left rail, icon-only collapsed mode, mobile drawer, keyboard shortcut (`Cmd/Ctrl + B`), persistent state in cookie.
+### 5. Cleanup
+- Delete `src/assets/offer-flyer.png` (no longer referenced).
 
-**Sidebar (left)**
-- Logo + "SOI Admin" at top
-- Grouped nav:
-  - **Overview** → Dashboard
-  - **Operations** → Appointments (badge with today's count), Inquiries (badge with unread count)
-  - **Catalog** → Services, Offers, Gallery
-  - **Configuration** → Settings
-- Footer: "View public site ↗" + version
+---
 
-**Topbar (right, sticky)**
-- `SidebarTrigger` (collapse button)
-- Breadcrumbs (Admin / Appointments / …)
-- Right side: quick search (⌘K placeholder), notifications bell (unread inquiries), user dropdown (soi → Logout)
+## Files touched
 
-**Page wrapper** — replace `AdminPage.tsx` with a tighter version:
-- Title + subtitle on left, action buttons on right
-- Optional tabs row underneath
-- Consistent `max-w-7xl` content area, `p-6` padding
+- `src/components/Footer.tsx` — remove QRs, normalize logo
+- `src/components/Logo.tsx` — remove `invert` prop
+- `src/components/OfferCarousel.tsx` — remove static fallback, add styled no-image slide
+- `src/routes/_public.offers.tsx` — remove flyer image, add dynamic featured banner
+- `src/routes/_public.index.tsx` — no logic change (carousel already handles empty state)
+- `src/assets/offer-flyer.png` — delete
 
-### 3. Keep dashboard-first login flow (you liked this)
-
-- `/admin` → if not authed, redirect to `/admin/login`; if authed, redirect to `/admin/dashboard`
-- `/admin/login` → standalone (no sidebar)
-- All other `/admin/*` → wrapped in shell, auth-gated in `admin.tsx` layout's component (returns `<Navigate to="/admin/login" />` if not authed, otherwise renders shell + `<Outlet />`)
-- Dashboard stays exactly as it is — KPI cards, charts, recent activity. No changes to its content.
-
-### 4. Polish across all admin pages
-- Each page already has data tables/forms — just wrap with new `<AdminPage>` so they all inherit consistent header, padding, breadcrumb context
-- Add active-route highlighting in sidebar via `Link` `activeProps`
-- Mobile: sidebar becomes off-canvas drawer (Shadcn handles this automatically)
-- Add a small "back to site" link in the sidebar footer
-
-### 5. Files touched
-
-**New**
-- `src/routes/admin.tsx` (layout shell — replaces current login file)
-- `src/routes/admin.index.tsx` (redirect)
-- `src/routes/admin.login.tsx` (current login content moved here)
-- `src/components/admin/AppSidebar.tsx`
-- `src/components/admin/AdminTopbar.tsx`
-
-**Renamed (drop the underscore)**
-- `admin_.dashboard.tsx` → `admin.dashboard.tsx`
-- `admin_.appointments.tsx` → `admin.appointments.tsx`
-- `admin_.inquiries.tsx` → `admin.inquiries.tsx`
-- `admin_.services.tsx` → `admin.services.tsx`
-- `admin_.offers.tsx` → `admin.offers.tsx`
-- `admin_.gallery.tsx` → `admin.gallery.tsx`
-- `admin_.settings.tsx` → `admin.settings.tsx`
-
-**Updated**
-- `src/components/AdminPage.tsx` (tighter, breadcrumb-aware)
-- Update any internal `<Link to="/admin">` that meant the dashboard to point to `/admin/dashboard`
-
-**Removed**
-- `src/components/AdminLayout.tsx` (replaced by `admin.tsx` + AppSidebar)
-
-No database changes. No changes to the public website. No change to admin credentials (`soi` / `Soi@wayne2026`).
-
-### What it'll feel like
-After this, logging in lands you on the Dashboard inside a familiar CMS frame: collapsible sidebar on the left, sticky topbar with breadcrumbs and your user menu, mobile drawer on phones — same pattern as Vercel, Linear, Shopify admin.
+No DB, no auth, no admin route changes.

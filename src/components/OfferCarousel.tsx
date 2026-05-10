@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
-import offerFlyerFallback from "@/assets/offer-flyer.png";
 
 type Slide = { id: string; title: string; discount: string; image_url: string | null; description: string | null };
 
@@ -18,7 +17,7 @@ export function OfferCarousel() {
       .select("id,title,discount,image_url,description")
       .eq("active", true)
       .order("sort_order")
-      .then(({ data }) => setSlides(((data as Slide[]) || []).filter((s) => s.image_url)));
+      .then(({ data }) => setSlides((data as Slide[]) || []));
   }, []);
 
   useEffect(() => {
@@ -33,14 +32,7 @@ export function OfferCarousel() {
     };
   }, [embla, slides.length]);
 
-  // Fallback: single static flyer if no offers have images
-  if (slides.length === 0) {
-    return (
-      <div className="rounded-3xl overflow-hidden gold-border shadow-card">
-        <Link to="/offers"><img src={offerFlyerFallback} alt="SOI promotional offers" className="w-full h-auto block" loading="lazy" /></Link>
-      </div>
-    );
-  }
+  if (slides.length === 0) return null;
 
   return (
     <div className="relative">
@@ -48,14 +40,28 @@ export function OfferCarousel() {
         <div className="flex">
           {slides.map((s) => (
             <div key={s.id} className="flex-[0_0_100%] min-w-0 relative">
-              <Link to="/offers" className="block group">
-                <img src={s.image_url!} alt={`${s.discount} - ${s.title}`} className="w-full h-[280px] sm:h-[380px] md:h-[460px] object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 text-white">
-                  <p className="font-script text-2xl md:text-3xl text-[var(--gold)] drop-shadow">{s.discount}</p>
-                  <h3 className="font-serif text-2xl md:text-4xl drop-shadow">{s.title}</h3>
-                  {s.description && <p className="text-sm md:text-base mt-1 max-w-xl opacity-90 drop-shadow">{s.description}</p>}
-                </div>
+              <Link to="/offers" className="block group relative">
+                {s.image_url ? (
+                  <>
+                    <img src={s.image_url} alt={`${s.discount} - ${s.title}`} className="w-full h-[280px] sm:h-[380px] md:h-[460px] object-cover" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 text-white">
+                      <p className="font-script text-2xl md:text-3xl text-[var(--gold)] drop-shadow">{s.discount}</p>
+                      <h3 className="font-serif text-2xl md:text-4xl drop-shadow">{s.title}</h3>
+                      {s.description && <p className="text-sm md:text-base mt-1 max-w-xl opacity-90 drop-shadow">{s.description}</p>}
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-full h-[280px] sm:h-[380px] md:h-[460px] flex flex-col items-center justify-center text-center px-6 gradient-cream relative overflow-hidden">
+                    <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[var(--gold)]/15 blur-3xl" />
+                    <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-[var(--blush)]/30 blur-3xl" />
+                    <Sparkles className="h-7 w-7 text-gold mb-3" />
+                    <p className="font-script text-3xl md:text-4xl text-gold mb-2">Limited Time</p>
+                    <div className="font-serif text-5xl md:text-7xl gradient-text-gold">{s.discount}</div>
+                    <h3 className="font-serif text-2xl md:text-4xl mt-2">{s.title}</h3>
+                    {s.description && <p className="text-sm md:text-base mt-3 max-w-xl text-muted-foreground">{s.description}</p>}
+                  </div>
+                )}
               </Link>
             </div>
           ))}
