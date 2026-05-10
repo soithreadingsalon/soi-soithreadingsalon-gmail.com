@@ -52,7 +52,11 @@ export function useAdminAuth() {
     };
 
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
-      evaluate(session?.user?.id ?? null, session?.user?.email ?? null);
+      // Defer to avoid the Supabase auth-state deadlock when awaiting
+      // another Supabase call inside the listener.
+      setTimeout(() => {
+        evaluate(session?.user?.id ?? null, session?.user?.email ?? null);
+      }, 0);
     });
 
     supabase.auth.getSession().then(({ data }) => {
