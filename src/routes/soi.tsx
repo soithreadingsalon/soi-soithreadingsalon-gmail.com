@@ -1,9 +1,9 @@
 import { createFileRoute, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/soi/AppSidebar";
-import { AdminTopbar } from "@/components/soi/AdminTopbar";
-import { useAdminAuth, signOutAdmin } from "@/lib/soi-auth";
+import { AppSidebar } from "@/components/admin/AppSidebar";
+import { AdminTopbar } from "@/components/admin/AdminTopbar";
+import { useAdminAuth, signOutAdmin } from "@/lib/admin-auth";
 
 export const Route = createFileRoute("/soi")({
   component: AdminLayout,

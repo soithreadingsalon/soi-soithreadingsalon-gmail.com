@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOutAdmin, useAdminAuth } from "@/lib/soi-auth";
+import { signOutAdmin, useAdminAuth } from "@/lib/admin-auth";
 
 const LABELS: Record<string, string> = {
   dashboard: "Dashboard",

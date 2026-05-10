@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Lock } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { signInAdmin, signUpAdmin, useAdminAuth } from "@/lib/soi-auth";
+import { signInAdmin, signUpAdmin, useAdminAuth } from "@/lib/admin-auth";
 
 export const Route = createFileRoute("/soi/login")({
   component: AdminLogin,

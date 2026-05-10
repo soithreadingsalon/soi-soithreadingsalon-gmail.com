@@ -1,5 +1,5 @@
 import { createFileRoute, Navigate } from "@tanstack/react-router";
-import { useAdminAuth } from "@/lib/soi-auth";
+import { useAdminAuth } from "@/lib/admin-auth";
 
 export const Route = createFileRoute("/soi/")({
   component: AdminIndex,
