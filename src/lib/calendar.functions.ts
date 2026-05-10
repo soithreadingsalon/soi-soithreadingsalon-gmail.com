@@ -153,12 +153,15 @@ export const getCalendarBusySlots = createServerFn({ method: "POST" })
     const cfg = await getCalendarConfig();
     if (!cfg.enabled) return { busy: [] as string[] };
 
-    // Salon timezone: America/New_York. Build day window in ET.
-    // We pass the offset; DST nuances are acceptable for slot blocking.
-    const timeMin = new Date(`${data.date}T00:00:00-05:00`).toISOString();
-    const timeMax = new Date(`${data.date}T23:59:59-05:00`).toISOString();
+    // Salon timezone: America/New_York. Compute the correct ET offset for
+    // the requested date so DST is handled (EST -05:00 / EDT -04:00).
+    const offset = etOffsetForDate(data.date); // e.g. "-04:00"
+    const timeMin = new Date(`${data.date}T00:00:00${offset}`).toISOString();
+    const timeMax = new Date(`${data.date}T23:59:59${offset}`).toISOString();
 
-    const resp = await fetch(`${GATEWAY}/freeBusy`, {
+    let resp: Response;
+    try {
+      resp = await fetch(`${GATEWAY}/freeBusy`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({
@@ -167,7 +170,11 @@ export const getCalendarBusySlots = createServerFn({ method: "POST" })
         timeZone: "America/New_York",
         items: [{ id: cfg.calendarId }],
       }),
-    });
+      });
+    } catch (e) {
+      console.error("[getCalendarBusySlots] fetch failed", e);
+      return { busy: [] as string[] };
+    }
     const json = await resp.json();
     if (!resp.ok) {
       console.error("freeBusy error", resp.status, json);
