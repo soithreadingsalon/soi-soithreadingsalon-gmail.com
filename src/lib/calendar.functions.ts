@@ -144,6 +144,23 @@ function fmtSlot(min: number) {
   return `${h12}:${mm.toString().padStart(2, "0")} ${ap}`;
 }
 
+// Returns the America/New_York UTC offset (e.g. "-04:00" or "-05:00") for the given local date.
+function etOffsetForDate(isoDate: string): string {
+  const probe = new Date(`${isoDate}T12:00:00Z`);
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    timeZoneName: "shortOffset",
+    hour: "2-digit",
+  }).formatToParts(probe);
+  const tz = parts.find((p) => p.type === "timeZoneName")?.value || "GMT-5";
+  const m = tz.match(/GMT([+-])(\d{1,2})(?::?(\d{2}))?/);
+  if (!m) return "-05:00";
+  const sign = m[1];
+  const hh = m[2].padStart(2, "0");
+  const mm = (m[3] || "00").padStart(2, "0");
+  return `${sign}${hh}:${mm}`;
+}
+
 // Returns busy 30-min slot labels for a given local date (America/New_York).
 export const getCalendarBusySlots = createServerFn({ method: "POST" })
   .inputValidator((d: { date: string }) =>
