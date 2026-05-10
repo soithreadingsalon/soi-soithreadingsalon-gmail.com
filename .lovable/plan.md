@@ -1,43 +1,70 @@
 ## Goals
 
-1. **Consistent logo** across the site (header + footer use the same `Logo` component, same proportions, no inverted/recolored variant).
-2. **Remove the static offer flyer image** (`src/assets/offer-flyer.png`) wherever it appears, and let the dynamic offers (managed from the admin panel) drive the homepage and Offers page presentation instead.
-3. **Remove the Instagram and Google Maps QR codes** from the footer.
+1. Time slots should auto-load on the booking, contact, AND services-page booking modal — based on business hours from settings.
+2. Don't show time slots that are already booked — check both the `appointments` table AND the connected Google Calendar's busy times for the selected date.
+3. When a customer submits the Contact Us form, email the full inquiry details to the salon's inbox using the connected Gmail account.
 
-No backend, routing, or admin changes — purely presentation.
+## What's broken today
 
----
+- **Services page booking modal** (`src/routes/_public.services.tsx`) uses a plain text input for "Preferred Time" — that's why no times load there. The other two pages (`booking`, `contact`) already use `TimeSlotPicker`, but the picker only checks the local `appointments` table, not the Google Calendar. It also silently shows "Loading times…" if `site_settings` returns nothing.
+- **No email goes out** when the contact form is submitted. Inquiries land in the DB only.
+- **Calendar conflicts** are never consulted — admins can manually block time on Google Calendar but those slots still appear bookable on the site.
 
-## Changes
+## Plan
 
-### 1. Footer (`src/components/Footer.tsx`)
-- Drop the two QR images and their imports (`qrInsta`, `qrGoogle`) and the wrapper div that holds them.
-- Replace the `invert` styling on the footer logo with the regular `Logo` so it matches the header exactly. To keep it readable on the dark footer, place it inside a small soft-background pill (rounded container with subtle ivory/champagne background) so the same gold logo reads cleanly without filter hacks.
-- Keep all text links and contact info.
+### 1. Shared time-slot picker now reads calendar busy times
 
-### 2. Logo component (`src/components/Logo.tsx`)
-- Remove the `invert` prop entirely (no longer needed once footer uses the standard logo). Single source of truth for sizing/spacing so header and footer render identically.
+Update `src/components/TimeSlotPicker.tsx`:
+- Keep the existing read of `site_settings` business hours and the `appointments` table.
+- Additionally call a new server function `getCalendarBusySlots({ date })` that returns busy time labels (e.g. `["10:00 AM", "10:30 AM"]`) for the chosen date.
+- Merge `appointments` taken-times + calendar busy times into one disabled set.
+- Improve UX: when settings haven't loaded yet show "Loading times…"; when they load but the day is closed, show "Closed on this day — please pick another date."
 
-### 3. Offers page (`src/routes/_public.offers.tsx`)
-- Remove the `import offerFlyer from "@/assets/offer-flyer.png"` and the `<img src={offerFlyer} … />` block.
-- Replace it with a smarter, dynamic hero strip that uses the **first active offer with an image** as a featured banner (falls back gracefully to a styled headline card if no offer has an image yet). This keeps the visual richness without hard-coding outdated discounts.
+### 2. New server function: query Google Calendar free/busy
 
-### 4. Homepage offers section (`src/routes/_public.index.tsx` + `src/components/OfferCarousel.tsx`)
-- In `OfferCarousel`, remove the `offerFlyerFallback` import and the static-image fallback branch. If there are no active offers with images, render nothing (the homepage already conditionally hides the whole "Current Offers" section when `offers.length === 0`, and the small coupon cards under the carousel still display when offers exist without images).
-- Make the carousel render even when offers don't have images by showing a stylized gradient slide with the discount/title/description (so the section still looks finished while the admin uploads flyers).
+Add to `src/lib/calendar.functions.ts`:
+- `getCalendarBusySlots` — `createServerFn({ method: "POST" })` with Zod-validated `{ date: "YYYY-MM-DD" }`.
+- Reads `calendar_sync_enabled` + `google_calendar_id` from `site_settings`. If disabled, returns `[]`.
+- Calls Google Calendar `freeBusy.query` through the existing connector gateway for the day window in `America/New_York`.
+- Converts each busy interval into the same 30-min slot labels the picker uses (reuse `generateSlots` logic or a small helper).
+- Returns `{ busy: string[] }`.
 
-### 5. Cleanup
-- Delete `src/assets/offer-flyer.png` (no longer referenced).
+This is read-only and safe to call from the public booking forms.
 
----
+### 3. Wire the picker into the services-page booking modal
+
+In `src/routes/_public.services.tsx`:
+- Replace the plain `<input ... placeholder="e.g. 2:00 PM" />` for `preferred_time` with the existing `<TimeSlotPicker date={form.preferred_date} value={form.preferred_time} onChange={...} className="svc-input" />`.
+- No business-logic changes beyond that.
+
+### 4. Email inquiries to the salon (Gmail connector)
+
+Set up Gmail-based notifications for the contact form only (per your choice — appointments stay as-is for now):
+
+- Connect the Gmail connector (one-click; reuses your existing Google account).
+- New server function `src/lib/inquiries.functions.ts` → `notifyInquiryByEmail({ inquiryId })`:
+  - Loads the inquiry row with `supabaseAdmin`.
+  - Builds an RFC 2822 message (`To: soithreadingsalon@gmail.com` from settings, `Subject: New inquiry from <name>`, body with name/phone/email/service/preferred date+time/message).
+  - Sends via `POST https://connector-gateway.lovable.dev/google_mail/gmail/v1/users/me/messages/send` using `LOVABLE_API_KEY` + `GOOGLE_MAIL_API_KEY`.
+- Update `src/routes/_public.contact.tsx`: after the `inquiries.insert` succeeds, call `notifyInquiryByEmail` (fire-and-forget — toast still says "Thank you" even if the email is delayed; errors logged server-side).
+
+Note: emails will come **from your connected Gmail address** straight to the salon inbox. No domain/DNS setup required.
+
+### 5. (Calendar context for #2)
+
+Booking + services-page submissions already insert into `appointments`. Admin "confirm" already syncs to Google Calendar via `syncAppointmentToCalendar`. With #2 in place, both DB-pending appointments and calendar-confirmed events will block their slots correctly going forward.
+
+## Out of scope (intentionally)
+
+- Email notifications for appointments (you chose "Inquiries only for now").
+- Admin-side override to manually free a slot (calendar already serves as the source of truth).
+- Per-service durations (slots stay 30 min as today).
 
 ## Files touched
 
-- `src/components/Footer.tsx` — remove QRs, normalize logo
-- `src/components/Logo.tsx` — remove `invert` prop
-- `src/components/OfferCarousel.tsx` — remove static fallback, add styled no-image slide
-- `src/routes/_public.offers.tsx` — remove flyer image, add dynamic featured banner
-- `src/routes/_public.index.tsx` — no logic change (carousel already handles empty state)
-- `src/assets/offer-flyer.png` — delete
-
-No DB, no auth, no admin route changes.
+- `src/components/TimeSlotPicker.tsx` — add calendar busy fetch + better empty/closed state.
+- `src/lib/calendar.functions.ts` — add `getCalendarBusySlots`.
+- `src/lib/inquiries.functions.ts` — new, sends Gmail.
+- `src/routes/_public.services.tsx` — swap text input for `TimeSlotPicker`.
+- `src/routes/_public.contact.tsx` — trigger inquiry email after insert.
+- Connect the Gmail connector during implementation.
