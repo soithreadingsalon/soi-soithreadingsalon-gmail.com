@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Lock } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { signInAdmin, signUpAdmin, useAdminAuth } from "@/lib/admin-auth";
+import { signInAdmin, signUpAdmin, useAdminAuth } from "@/lib/soi-auth";
 
-export const Route = createFileRoute("/admin/login")({
+export const Route = createFileRoute("/soi/login")({
   component: AdminLogin,
 });
 
@@ -18,7 +18,7 @@ function AdminLogin() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    if (status === "authenticated") navigate({ to: "/admin/dashboard" });
+    if (status === "authenticated") navigate({ to: "/soi/dashboard" });
   }, [status, navigate]);
 
   async function submit(e: React.FormEvent) {

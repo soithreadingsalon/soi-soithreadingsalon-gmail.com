@@ -7,7 +7,7 @@ import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 import { syncAppointmentToCalendar, deleteCalendarEvent } from "@/lib/calendar.functions";
 
-export const Route = createFileRoute("/admin/appointments")({ component: AdminAppointments });
+export const Route = createFileRoute("/soi/appointments")({ component: AdminAppointments });
 
 type Row = {
   id: string; full_name: string; phone: string; email: string | null;

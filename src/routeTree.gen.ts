@@ -9,18 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AdminRouteImport } from './routes/admin'
+import { Route as SoiRouteImport } from './routes/soi'
 import { Route as PublicRouteImport } from './routes/_public'
-import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as SoiIndexRouteImport } from './routes/soi.index'
 import { Route as PublicIndexRouteImport } from './routes/_public.index'
-import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
-import { Route as AdminServicesRouteImport } from './routes/admin.services'
-import { Route as AdminOffersRouteImport } from './routes/admin.offers'
-import { Route as AdminLoginRouteImport } from './routes/admin.login'
-import { Route as AdminInquiriesRouteImport } from './routes/admin.inquiries'
-import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
-import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
-import { Route as AdminAppointmentsRouteImport } from './routes/admin.appointments'
+import { Route as SoiSettingsRouteImport } from './routes/soi.settings'
+import { Route as SoiServicesRouteImport } from './routes/soi.services'
+import { Route as SoiOffersRouteImport } from './routes/soi.offers'
+import { Route as SoiLoginRouteImport } from './routes/soi.login'
+import { Route as SoiInquiriesRouteImport } from './routes/soi.inquiries'
+import { Route as SoiGalleryRouteImport } from './routes/soi.gallery'
+import { Route as SoiDashboardRouteImport } from './routes/soi.dashboard'
+import { Route as SoiAppointmentsRouteImport } from './routes/soi.appointments'
 import { Route as PublicServicesRouteImport } from './routes/_public.services'
 import { Route as PublicOffersRouteImport } from './routes/_public.offers'
 import { Route as PublicGalleryRouteImport } from './routes/_public.gallery'
@@ -29,64 +29,64 @@ import { Route as PublicBookingRouteImport } from './routes/_public.booking'
 import { Route as PublicAboutRouteImport } from './routes/_public.about'
 import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const SoiRoute = SoiRouteImport.update({
+  id: '/soi',
+  path: '/soi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
+const SoiIndexRoute = SoiIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => SoiRoute,
 } as any)
 const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => PublicRoute,
 } as any)
-const AdminSettingsRoute = AdminSettingsRouteImport.update({
+const SoiSettingsRoute = SoiSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => SoiRoute,
 } as any)
-const AdminServicesRoute = AdminServicesRouteImport.update({
+const SoiServicesRoute = SoiServicesRouteImport.update({
   id: '/services',
   path: '/services',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => SoiRoute,
 } as any)
-const AdminOffersRoute = AdminOffersRouteImport.update({
+const SoiOffersRoute = SoiOffersRouteImport.update({
   id: '/offers',
   path: '/offers',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => SoiRoute,
 } as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
+const SoiLoginRoute = SoiLoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => SoiRoute,
 } as any)
-const AdminInquiriesRoute = AdminInquiriesRouteImport.update({
+const SoiInquiriesRoute = SoiInquiriesRouteImport.update({
   id: '/inquiries',
   path: '/inquiries',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => SoiRoute,
 } as any)
-const AdminGalleryRoute = AdminGalleryRouteImport.update({
+const SoiGalleryRoute = SoiGalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => SoiRoute,
 } as any)
-const AdminDashboardRoute = AdminDashboardRouteImport.update({
+const SoiDashboardRoute = SoiDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => SoiRoute,
 } as any)
-const AdminAppointmentsRoute = AdminAppointmentsRouteImport.update({
+const SoiAppointmentsRoute = SoiAppointmentsRouteImport.update({
   id: '/appointments',
   path: '/appointments',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => SoiRoute,
 } as any)
 const PublicServicesRoute = PublicServicesRouteImport.update({
   id: '/services',
@@ -126,22 +126,22 @@ const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
-  '/admin': typeof AdminRouteWithChildren
+  '/soi': typeof SoiRouteWithChildren
   '/about': typeof PublicAboutRoute
   '/booking': typeof PublicBookingRoute
   '/contact': typeof PublicContactRoute
   '/gallery': typeof PublicGalleryRoute
   '/offers': typeof PublicOffersRoute
   '/services': typeof PublicServicesRoute
-  '/admin/appointments': typeof AdminAppointmentsRoute
-  '/admin/dashboard': typeof AdminDashboardRoute
-  '/admin/gallery': typeof AdminGalleryRoute
-  '/admin/inquiries': typeof AdminInquiriesRoute
-  '/admin/login': typeof AdminLoginRoute
-  '/admin/offers': typeof AdminOffersRoute
-  '/admin/services': typeof AdminServicesRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/admin/': typeof AdminIndexRoute
+  '/soi/appointments': typeof SoiAppointmentsRoute
+  '/soi/dashboard': typeof SoiDashboardRoute
+  '/soi/gallery': typeof SoiGalleryRoute
+  '/soi/inquiries': typeof SoiInquiriesRoute
+  '/soi/login': typeof SoiLoginRoute
+  '/soi/offers': typeof SoiOffersRoute
+  '/soi/services': typeof SoiServicesRoute
+  '/soi/settings': typeof SoiSettingsRoute
+  '/soi/': typeof SoiIndexRoute
   '/api/public/track': typeof ApiPublicTrackRoute
 }
 export interface FileRoutesByTo {
@@ -151,60 +151,60 @@ export interface FileRoutesByTo {
   '/gallery': typeof PublicGalleryRoute
   '/offers': typeof PublicOffersRoute
   '/services': typeof PublicServicesRoute
-  '/admin/appointments': typeof AdminAppointmentsRoute
-  '/admin/dashboard': typeof AdminDashboardRoute
-  '/admin/gallery': typeof AdminGalleryRoute
-  '/admin/inquiries': typeof AdminInquiriesRoute
-  '/admin/login': typeof AdminLoginRoute
-  '/admin/offers': typeof AdminOffersRoute
-  '/admin/services': typeof AdminServicesRoute
-  '/admin/settings': typeof AdminSettingsRoute
+  '/soi/appointments': typeof SoiAppointmentsRoute
+  '/soi/dashboard': typeof SoiDashboardRoute
+  '/soi/gallery': typeof SoiGalleryRoute
+  '/soi/inquiries': typeof SoiInquiriesRoute
+  '/soi/login': typeof SoiLoginRoute
+  '/soi/offers': typeof SoiOffersRoute
+  '/soi/services': typeof SoiServicesRoute
+  '/soi/settings': typeof SoiSettingsRoute
   '/': typeof PublicIndexRoute
-  '/admin': typeof AdminIndexRoute
+  '/soi': typeof SoiIndexRoute
   '/api/public/track': typeof ApiPublicTrackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_public': typeof PublicRouteWithChildren
-  '/admin': typeof AdminRouteWithChildren
+  '/soi': typeof SoiRouteWithChildren
   '/_public/about': typeof PublicAboutRoute
   '/_public/booking': typeof PublicBookingRoute
   '/_public/contact': typeof PublicContactRoute
   '/_public/gallery': typeof PublicGalleryRoute
   '/_public/offers': typeof PublicOffersRoute
   '/_public/services': typeof PublicServicesRoute
-  '/admin/appointments': typeof AdminAppointmentsRoute
-  '/admin/dashboard': typeof AdminDashboardRoute
-  '/admin/gallery': typeof AdminGalleryRoute
-  '/admin/inquiries': typeof AdminInquiriesRoute
-  '/admin/login': typeof AdminLoginRoute
-  '/admin/offers': typeof AdminOffersRoute
-  '/admin/services': typeof AdminServicesRoute
-  '/admin/settings': typeof AdminSettingsRoute
+  '/soi/appointments': typeof SoiAppointmentsRoute
+  '/soi/dashboard': typeof SoiDashboardRoute
+  '/soi/gallery': typeof SoiGalleryRoute
+  '/soi/inquiries': typeof SoiInquiriesRoute
+  '/soi/login': typeof SoiLoginRoute
+  '/soi/offers': typeof SoiOffersRoute
+  '/soi/services': typeof SoiServicesRoute
+  '/soi/settings': typeof SoiSettingsRoute
   '/_public/': typeof PublicIndexRoute
-  '/admin/': typeof AdminIndexRoute
+  '/soi/': typeof SoiIndexRoute
   '/api/public/track': typeof ApiPublicTrackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/admin'
+    | '/soi'
     | '/about'
     | '/booking'
     | '/contact'
     | '/gallery'
     | '/offers'
     | '/services'
-    | '/admin/appointments'
-    | '/admin/dashboard'
-    | '/admin/gallery'
-    | '/admin/inquiries'
-    | '/admin/login'
-    | '/admin/offers'
-    | '/admin/services'
-    | '/admin/settings'
-    | '/admin/'
+    | '/soi/appointments'
+    | '/soi/dashboard'
+    | '/soi/gallery'
+    | '/soi/inquiries'
+    | '/soi/login'
+    | '/soi/offers'
+    | '/soi/services'
+    | '/soi/settings'
+    | '/soi/'
     | '/api/public/track'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -214,53 +214,53 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/offers'
     | '/services'
-    | '/admin/appointments'
-    | '/admin/dashboard'
-    | '/admin/gallery'
-    | '/admin/inquiries'
-    | '/admin/login'
-    | '/admin/offers'
-    | '/admin/services'
-    | '/admin/settings'
+    | '/soi/appointments'
+    | '/soi/dashboard'
+    | '/soi/gallery'
+    | '/soi/inquiries'
+    | '/soi/login'
+    | '/soi/offers'
+    | '/soi/services'
+    | '/soi/settings'
     | '/'
-    | '/admin'
+    | '/soi'
     | '/api/public/track'
   id:
     | '__root__'
     | '/_public'
-    | '/admin'
+    | '/soi'
     | '/_public/about'
     | '/_public/booking'
     | '/_public/contact'
     | '/_public/gallery'
     | '/_public/offers'
     | '/_public/services'
-    | '/admin/appointments'
-    | '/admin/dashboard'
-    | '/admin/gallery'
-    | '/admin/inquiries'
-    | '/admin/login'
-    | '/admin/offers'
-    | '/admin/services'
-    | '/admin/settings'
+    | '/soi/appointments'
+    | '/soi/dashboard'
+    | '/soi/gallery'
+    | '/soi/inquiries'
+    | '/soi/login'
+    | '/soi/offers'
+    | '/soi/services'
+    | '/soi/settings'
     | '/_public/'
-    | '/admin/'
+    | '/soi/'
     | '/api/public/track'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   PublicRoute: typeof PublicRouteWithChildren
-  AdminRoute: typeof AdminRouteWithChildren
+  SoiRoute: typeof SoiRouteWithChildren
   ApiPublicTrackRoute: typeof ApiPublicTrackRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/soi': {
+      id: '/soi'
+      path: '/soi'
+      fullPath: '/soi'
+      preLoaderRoute: typeof SoiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_public': {
@@ -270,12 +270,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
+    '/soi/': {
+      id: '/soi/'
       path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/soi/'
+      preLoaderRoute: typeof SoiIndexRouteImport
+      parentRoute: typeof SoiRoute
     }
     '/_public/': {
       id: '/_public/'
@@ -284,61 +284,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicIndexRouteImport
       parentRoute: typeof PublicRoute
     }
-    '/admin/settings': {
-      id: '/admin/settings'
+    '/soi/settings': {
+      id: '/soi/settings'
       path: '/settings'
-      fullPath: '/admin/settings'
-      preLoaderRoute: typeof AdminSettingsRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/soi/settings'
+      preLoaderRoute: typeof SoiSettingsRouteImport
+      parentRoute: typeof SoiRoute
     }
-    '/admin/services': {
-      id: '/admin/services'
+    '/soi/services': {
+      id: '/soi/services'
       path: '/services'
-      fullPath: '/admin/services'
-      preLoaderRoute: typeof AdminServicesRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/soi/services'
+      preLoaderRoute: typeof SoiServicesRouteImport
+      parentRoute: typeof SoiRoute
     }
-    '/admin/offers': {
-      id: '/admin/offers'
+    '/soi/offers': {
+      id: '/soi/offers'
       path: '/offers'
-      fullPath: '/admin/offers'
-      preLoaderRoute: typeof AdminOffersRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/soi/offers'
+      preLoaderRoute: typeof SoiOffersRouteImport
+      parentRoute: typeof SoiRoute
     }
-    '/admin/login': {
-      id: '/admin/login'
+    '/soi/login': {
+      id: '/soi/login'
       path: '/login'
-      fullPath: '/admin/login'
-      preLoaderRoute: typeof AdminLoginRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/soi/login'
+      preLoaderRoute: typeof SoiLoginRouteImport
+      parentRoute: typeof SoiRoute
     }
-    '/admin/inquiries': {
-      id: '/admin/inquiries'
+    '/soi/inquiries': {
+      id: '/soi/inquiries'
       path: '/inquiries'
-      fullPath: '/admin/inquiries'
-      preLoaderRoute: typeof AdminInquiriesRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/soi/inquiries'
+      preLoaderRoute: typeof SoiInquiriesRouteImport
+      parentRoute: typeof SoiRoute
     }
-    '/admin/gallery': {
-      id: '/admin/gallery'
+    '/soi/gallery': {
+      id: '/soi/gallery'
       path: '/gallery'
-      fullPath: '/admin/gallery'
-      preLoaderRoute: typeof AdminGalleryRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/soi/gallery'
+      preLoaderRoute: typeof SoiGalleryRouteImport
+      parentRoute: typeof SoiRoute
     }
-    '/admin/dashboard': {
-      id: '/admin/dashboard'
+    '/soi/dashboard': {
+      id: '/soi/dashboard'
       path: '/dashboard'
-      fullPath: '/admin/dashboard'
-      preLoaderRoute: typeof AdminDashboardRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/soi/dashboard'
+      preLoaderRoute: typeof SoiDashboardRouteImport
+      parentRoute: typeof SoiRoute
     }
-    '/admin/appointments': {
-      id: '/admin/appointments'
+    '/soi/appointments': {
+      id: '/soi/appointments'
       path: '/appointments'
-      fullPath: '/admin/appointments'
-      preLoaderRoute: typeof AdminAppointmentsRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/soi/appointments'
+      preLoaderRoute: typeof SoiAppointmentsRouteImport
+      parentRoute: typeof SoiRoute
     }
     '/_public/services': {
       id: '/_public/services'
@@ -415,35 +415,35 @@ const PublicRouteChildren: PublicRouteChildren = {
 const PublicRouteWithChildren =
   PublicRoute._addFileChildren(PublicRouteChildren)
 
-interface AdminRouteChildren {
-  AdminAppointmentsRoute: typeof AdminAppointmentsRoute
-  AdminDashboardRoute: typeof AdminDashboardRoute
-  AdminGalleryRoute: typeof AdminGalleryRoute
-  AdminInquiriesRoute: typeof AdminInquiriesRoute
-  AdminLoginRoute: typeof AdminLoginRoute
-  AdminOffersRoute: typeof AdminOffersRoute
-  AdminServicesRoute: typeof AdminServicesRoute
-  AdminSettingsRoute: typeof AdminSettingsRoute
-  AdminIndexRoute: typeof AdminIndexRoute
+interface SoiRouteChildren {
+  SoiAppointmentsRoute: typeof SoiAppointmentsRoute
+  SoiDashboardRoute: typeof SoiDashboardRoute
+  SoiGalleryRoute: typeof SoiGalleryRoute
+  SoiInquiriesRoute: typeof SoiInquiriesRoute
+  SoiLoginRoute: typeof SoiLoginRoute
+  SoiOffersRoute: typeof SoiOffersRoute
+  SoiServicesRoute: typeof SoiServicesRoute
+  SoiSettingsRoute: typeof SoiSettingsRoute
+  SoiIndexRoute: typeof SoiIndexRoute
 }
 
-const AdminRouteChildren: AdminRouteChildren = {
-  AdminAppointmentsRoute: AdminAppointmentsRoute,
-  AdminDashboardRoute: AdminDashboardRoute,
-  AdminGalleryRoute: AdminGalleryRoute,
-  AdminInquiriesRoute: AdminInquiriesRoute,
-  AdminLoginRoute: AdminLoginRoute,
-  AdminOffersRoute: AdminOffersRoute,
-  AdminServicesRoute: AdminServicesRoute,
-  AdminSettingsRoute: AdminSettingsRoute,
-  AdminIndexRoute: AdminIndexRoute,
+const SoiRouteChildren: SoiRouteChildren = {
+  SoiAppointmentsRoute: SoiAppointmentsRoute,
+  SoiDashboardRoute: SoiDashboardRoute,
+  SoiGalleryRoute: SoiGalleryRoute,
+  SoiInquiriesRoute: SoiInquiriesRoute,
+  SoiLoginRoute: SoiLoginRoute,
+  SoiOffersRoute: SoiOffersRoute,
+  SoiServicesRoute: SoiServicesRoute,
+  SoiSettingsRoute: SoiSettingsRoute,
+  SoiIndexRoute: SoiIndexRoute,
 }
 
-const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+const SoiRouteWithChildren = SoiRoute._addFileChildren(SoiRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   PublicRoute: PublicRouteWithChildren,
-  AdminRoute: AdminRouteWithChildren,
+  SoiRoute: SoiRouteWithChildren,
   ApiPublicTrackRoute: ApiPublicTrackRoute,
 }
 export const routeTree = rootRouteImport

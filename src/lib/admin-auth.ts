@@ -14,7 +14,7 @@ export async function signUpAdmin(email: string, password: string) {
   const { error } = await supabase.auth.signUp({
     email,
     password,
-    options: { emailRedirectTo: `${window.location.origin}/admin/login` },
+    options: { emailRedirectTo: `${window.location.origin}/soi/login` },
   });
   if (error) return { ok: false as const, error: error.message };
   return { ok: true as const };

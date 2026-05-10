@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/admin/services")({ component: AdminServices });
+export const Route = createFileRoute("/soi/services")({ component: AdminServices });
 
 type Row = { id: string; category: string; name: string; price: string; description: string | null; featured: boolean; sort_order: number };
 const empty: Omit<Row, "id"> = { category: "Threading", name: "", price: "$0", description: "", featured: false, sort_order: 0 };

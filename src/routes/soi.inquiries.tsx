@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/admin/inquiries")({ component: AdminInquiries });
+export const Route = createFileRoute("/soi/inquiries")({ component: AdminInquiries });
 
 type Row = { id: string; name: string; phone: string | null; email: string | null; service_interest: string | null; preferred_date: string | null; preferred_time: string | null; message: string | null; read: boolean; notes: string | null; created_at: string };
 
@@ -59,7 +59,7 @@ function AdminInquiries() {
     }).select().single();
     if (error || !data) { toast.error("Could not convert"); return; }
     toast.success("Converted to appointment");
-    navigate({ to: "/admin/appointments" });
+    navigate({ to: "/soi/appointments" });
   }
 
   return (

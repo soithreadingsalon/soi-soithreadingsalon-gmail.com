@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOutAdmin, useAdminAuth } from "@/lib/admin-auth";
+import { signOutAdmin, useAdminAuth } from "@/lib/soi-auth";
 
 const LABELS: Record<string, string> = {
   dashboard: "Dashboard",
@@ -44,7 +44,7 @@ export function AdminTopbar() {
             {i === crumbs.length - 1 ? (
               <span className="text-foreground font-medium truncate">{c.label}</span>
             ) : (
-              <Link to={c.href as "/admin/dashboard"} className="hover:text-foreground truncate">{c.label}</Link>
+              <Link to={c.href as "/soi/dashboard"} className="hover:text-foreground truncate">{c.label}</Link>
             )}
           </span>
         ))}
@@ -62,9 +62,9 @@ export function AdminTopbar() {
             <DropdownMenuLabel className="truncate">Signed in as <span className="font-semibold">{displayName}</span></DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link to="/admin/settings"><User className="h-4 w-4 mr-2" /> Settings</Link>
+              <Link to="/soi/settings"><User className="h-4 w-4 mr-2" /> Settings</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={async () => { await signOutAdmin(); navigate({ to: "/admin/login" }); }}>
+            <DropdownMenuItem onClick={async () => { await signOutAdmin(); navigate({ to: "/soi/login" }); }}>
               <LogOut className="h-4 w-4 mr-2" /> Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
