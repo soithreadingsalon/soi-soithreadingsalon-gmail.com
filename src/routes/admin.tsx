@@ -1,9 +1,9 @@
 import { createFileRoute, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/admin/AppSidebar";
 import { AdminTopbar } from "@/components/admin/AdminTopbar";
-import { isAdmin } from "@/lib/admin-auth";
+import { useAdminAuth, signOutAdmin } from "@/lib/admin-auth";
 
 export const Route = createFileRoute("/admin")({
   component: AdminLayout,
@@ -13,21 +13,19 @@ function AdminLayout() {
   const navigate = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const isLogin = path === "/admin/login";
-  const [ready, setReady] = useState(false);
+  const { status } = useAdminAuth();
 
   useEffect(() => {
-    // Auth gate (client-side; localStorage isn't available during SSR).
-    if (!isLogin && !isAdmin()) {
-      navigate({ to: "/admin/login" });
-      return;
+    if (isLogin) return;
+    if (status === "unauthenticated") navigate({ to: "/admin/login" });
+    if (status === "forbidden") {
+      // Signed in but not an admin — sign them out and bounce to login.
+      signOutAdmin().then(() => navigate({ to: "/admin/login" }));
     }
-    setReady(true);
-  }, [isLogin, path, navigate]);
+  }, [isLogin, status, navigate]);
 
-  // Login page renders without the shell.
   if (isLogin) return <Outlet />;
-
-  if (!ready) return null;
+  if (status !== "authenticated") return null;
 
   return (
     <SidebarProvider defaultOpen>
