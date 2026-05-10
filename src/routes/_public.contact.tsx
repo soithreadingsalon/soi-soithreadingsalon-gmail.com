@@ -6,8 +6,6 @@ import { Phone, Mail, MapPin, Clock, Instagram } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { TimeSlotPicker } from "@/components/TimeSlotPicker";
-import qrInsta from "@/assets/qr-instagram.jpg";
-import qrGoogle from "@/assets/qr-google.png";
 
 export const Route = createFileRoute("/_public/contact")({
   head: () => ({
@@ -88,17 +86,6 @@ function ContactPage() {
 
           <div className="mt-6 rounded-2xl overflow-hidden gold-border">
             <iframe title="Map" src="https://www.google.com/maps?q=190+Hamburg+Tpke,+Wayne,+NJ+07470&output=embed" className="w-full h-56 border-0" loading="lazy" />
-          </div>
-
-          <div className="mt-6 grid grid-cols-2 gap-4">
-            <div className="text-center bg-card rounded-2xl p-3 gold-border">
-              <img src={qrInsta} alt="Scan to follow us on Instagram" className="w-full h-auto rounded-lg bg-white p-1" />
-              <p className="mt-2 text-xs font-semibold text-gold">Follow @soithreadingsalon</p>
-            </div>
-            <div className="text-center bg-card rounded-2xl p-3 gold-border">
-              <img src={qrGoogle} alt="Scan to find us on Google Maps" className="w-full h-auto rounded-lg bg-white p-1" />
-              <p className="mt-2 text-xs font-semibold text-gold">Find us on Google</p>
-            </div>
           </div>
         </div>
 
