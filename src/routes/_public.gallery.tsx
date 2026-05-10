@@ -10,17 +10,21 @@ import haircareImg from "@/assets/service-haircare.jpg";
 import hennaImg from "@/assets/service-henna.jpg";
 import salonImg from "@/assets/salon-interior.jpg";
 import heroImg from "@/assets/hero-salon.jpg";
+import { SITE_URL } from "@/data/seo-content";
 
 type GalleryRow = { id: string; category: string; caption: string | null; image_url: string };
 
 export const Route = createFileRoute("/_public/gallery")({
   head: () => ({
     meta: [
-      { title: "Gallery | SOI Threading Salon" },
-      { name: "description", content: "Take a look inside SOI Threading Salon — threading, facials, waxing, hair care, henna and our luxurious salon space." },
+      { title: "Gallery | SOI Threading Salon — Wayne, NJ" },
+      { name: "description", content: "Browse SOI Threading Salon's gallery — threading, facials, waxing, hair care, henna and our luxurious salon space in Wayne, NJ." },
       { property: "og:title", content: "Gallery | SOI Threading Salon" },
-      { property: "og:description", content: "Photos of our salon, services and beauty work." },
+      { property: "og:description", content: "Photos of our salon, services and beauty work in Wayne, NJ." },
+      { property: "og:url", content: `${SITE_URL}/gallery` },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/gallery` }],
   }),
   component: GalleryPage,
 });

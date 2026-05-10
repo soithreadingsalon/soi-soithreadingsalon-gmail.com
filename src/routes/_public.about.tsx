@@ -2,16 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, Sparkles, ShieldCheck } from "lucide-react";
 import salonImg from "@/assets/salon-interior.jpg";
 import { SectionHeading } from "@/components/SectionHeading";
+import { SITE_URL } from "@/data/seo-content";
 
 export const Route = createFileRoute("/_public/about")({
   head: () => ({
     meta: [
-      { title: "About SOI Threading Salon | Style of India in Wayne, NJ" },
-      { name: "description", content: "SOI Threading Salon brings timeless Indian beauty traditions and modern salon care together in Wayne, NJ." },
-      { property: "og:title", content: "About SOI Threading Salon" },
-      { property: "og:description", content: "Style of India — premium threading, facials, waxing, hair care and henna." },
+      { title: "About SOI Threading Salon | Style of India — Wayne, NJ" },
+      { name: "description", content: "SOI Threading Salon brings timeless Indian beauty traditions and modern salon care together in Wayne, NJ. Threading, waxing, facials, henna and more at 190 Hamburg Tpke." },
+      { property: "og:title", content: "About SOI Threading Salon — Style of India" },
+      { property: "og:description", content: "Premium threading, facials, waxing, hair care and henna in Wayne, NJ." },
       { property: "og:image", content: salonImg },
+      { property: "og:url", content: `${SITE_URL}/about` },
+      { name: "robots", content: "index, follow" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/about` }],
   }),
   component: AboutPage,
 });

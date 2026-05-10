@@ -8,15 +8,19 @@ import { supabase } from "@/integrations/supabase/client";
 import { TimeSlotPicker } from "@/components/TimeSlotPicker";
 import { useServerFn } from "@tanstack/react-start";
 import { notifyInquiryByEmail } from "@/lib/inquiries.functions";
+import { SITE_URL } from "@/data/seo-content";
 
 export const Route = createFileRoute("/_public/contact")({
   head: () => ({
     meta: [
-      { title: "Contact SOI Threading Salon | Wayne, NJ" },
-      { name: "description", content: "Contact SOI Threading Salon in Wayne, NJ. Call 551-301-3894 or send us a message." },
-      { property: "og:title", content: "Contact SOI Threading Salon" },
-      { property: "og:description", content: "Call, email, or visit our salon in Wayne, NJ." },
+      { title: "Contact SOI Threading Salon | Wayne, NJ — Call 551-301-3894" },
+      { name: "description", content: "Contact SOI Threading Salon at 190 Hamburg Tpke, Wayne, NJ 07470. Call 551-301-3894 or send a message to book threading, waxing, facials, henna and more." },
+      { property: "og:title", content: "Contact SOI Threading Salon — Wayne, NJ" },
+      { property: "og:description", content: "Call 551-301-3894, email, or visit our salon at 190 Hamburg Tpke, Wayne, NJ." },
+      { property: "og:url", content: `${SITE_URL}/contact` },
+      { name: "robots", content: "index, follow" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/contact` }],
   }),
   component: ContactPage,
 });
@@ -32,6 +36,31 @@ const schema = z.object({
 });
 
 function ContactPage() {
+  const localBusinessLd = {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    name: "SOI Threading Salon",
+    image: `${SITE_URL}/og-image.jpg`,
+    "@id": SITE_URL,
+    url: SITE_URL,
+    telephone: "+1-551-301-3894",
+    email: "soithreadingsalon@gmail.com",
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "190 Hamburg Tpke",
+      addressLocality: "Wayne",
+      addressRegion: "NJ",
+      postalCode: "07470",
+      addressCountry: "US",
+    },
+    openingHoursSpecification: [
+      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "10:00", closes: "19:00" },
+      { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "18:00" },
+      { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "11:00", closes: "16:00" },
+    ],
+    sameAs: ["https://instagram.com/SOITHREADINGSALON"],
+  };
   const [form, setForm] = useState({ name: "", phone: "", email: "", service_interest: "", preferred_date: "", preferred_time: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const notify = useServerFn(notifyInquiryByEmail);
@@ -70,6 +99,7 @@ function ContactPage() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
       <SectionHeading eyebrow="Say Hello" title="Get in Touch" subtitle="Questions, bookings or just to say hi — we'd love to hear from you." />
 
       <div className="grid lg:grid-cols-[1fr_1.2fr] gap-6 lg:gap-8">

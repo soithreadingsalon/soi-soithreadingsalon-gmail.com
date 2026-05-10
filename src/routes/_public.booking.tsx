@@ -6,15 +6,19 @@ import { CheckCircle2, Phone } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { TimeSlotPicker } from "@/components/TimeSlotPicker";
+import { SITE_URL } from "@/data/seo-content";
 
 export const Route = createFileRoute("/_public/booking")({
   head: () => ({
     meta: [
-      { title: "Book Appointment | SOI Threading Salon, Wayne NJ" },
-      { name: "description", content: "Request your appointment at SOI Threading Salon in Wayne, NJ. Threading, facials, waxing, hair care and henna." },
-      { property: "og:title", content: "Book Appointment | SOI Threading Salon" },
+      { title: "Book an Appointment | SOI Threading Salon — Wayne, NJ" },
+      { name: "description", content: "Request your appointment at SOI Threading Salon in Wayne, NJ. Threading, waxing, facials, hair care, henna, eyelash and men's grooming. Call 551-301-3894." },
+      { property: "og:title", content: "Book an Appointment | SOI Threading Salon" },
       { property: "og:description", content: "Request your beauty appointment online or call 551-301-3894." },
+      { property: "og:url", content: `${SITE_URL}/booking` },
+      { name: "robots", content: "index, follow" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/booking` }],
   }),
   component: BookingPage,
 });
