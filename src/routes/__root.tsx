@@ -35,12 +35,12 @@ export const Route = createRootRoute({
       { property: "og:site_name", content: "SOI Threading Salon" },
       { property: "og:url", content: "https://www.soithreadingandsalon.com/" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "SOI Threading Salon | Premium Beauty Salon in Wayne, NJ" },
-      { name: "twitter:title", content: "SOI Threading Salon | Threading, Waxing, Facials & Beauty Care" },
-      { property: "og:description", content: "Expert eyebrow threading, waxing, facials, hair care, henna, and premium beauty care in Wayne, NJ." },
-      { name: "twitter:description", content: "Premium threading, waxing, facials, henna, hair care, and beauty services in Wayne, NJ." },
-      { property: "og:image", content: "https://www.soithreadingandsalon.com/og-image.jpg" },
-      { name: "twitter:image", content: "https://www.soithreadingandsalon.com/og-image.jpg" },
+      { property: "og:title", content: "SOI Threading Salon | Eyebrow Threading, Waxing, Facials & Beauty Salon in Wayne, NJ" },
+      { name: "twitter:title", content: "SOI Threading Salon | Eyebrow Threading, Waxing, Facials & Beauty Salon in Wayne, NJ" },
+      { property: "og:description", content: "Visit SOI Threading Salon in Wayne, NJ for expert eyebrow threading, waxing, facials, hair care, henna, eyelash services, and premium beauty care. Call 551-301-3894 to book your appointment." },
+      { name: "twitter:description", content: "Visit SOI Threading Salon in Wayne, NJ for expert eyebrow threading, waxing, facials, hair care, henna, eyelash services, and premium beauty care. Call 551-301-3894 to book your appointment." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/50344bdf-0ebe-458c-94ac-1365cfc500cf" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/50344bdf-0ebe-458c-94ac-1365cfc500cf" },
     ],
     links: [
       {
