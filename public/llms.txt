@@ -2,7 +2,7 @@
 
 SOI Threading Salon is a premium beauty salon located at 190 Hamburg Tpke, Wayne, NJ 07470.
 
-Website: https://www.soithreadingandsalon.com
+Website: https://soithreadingandsalon.com
 Phone: 551-301-3894
 Email: soithreadingsalon@gmail.com
 Instagram: @SOITHREADINGSALON
@@ -65,17 +65,17 @@ Customers can call 551-301-3894 or submit an appointment request on the website.
 
 ## Important Pages
 
-- Home: https://www.soithreadingandsalon.com/
-- Services: https://www.soithreadingandsalon.com/services
-- Eyebrow Threading: https://www.soithreadingandsalon.com/eyebrow-threading-wayne-nj
-- Waxing: https://www.soithreadingandsalon.com/waxing-wayne-nj
-- Facials: https://www.soithreadingandsalon.com/facials-wayne-nj
-- Henna: https://www.soithreadingandsalon.com/henna-wayne-nj
-- Threading Salon: https://www.soithreadingandsalon.com/threading-salon-wayne-nj
-- Beauty Salon: https://www.soithreadingandsalon.com/beauty-salon-wayne-nj
-- Eyelash Services: https://www.soithreadingandsalon.com/eyelash-services-wayne-nj
-- Men's Grooming: https://www.soithreadingandsalon.com/mens-grooming-wayne-nj
-- Offers: https://www.soithreadingandsalon.com/offers
-- Contact: https://www.soithreadingandsalon.com/contact
-- Booking: https://www.soithreadingandsalon.com/booking
-- Business Summary: https://www.soithreadingandsalon.com/ai-business-summary
+- Home: https://soithreadingandsalon.com/
+- Services: https://soithreadingandsalon.com/services
+- Eyebrow Threading: https://soithreadingandsalon.com/eyebrow-threading-wayne-nj
+- Waxing: https://soithreadingandsalon.com/waxing-wayne-nj
+- Facials: https://soithreadingandsalon.com/facials-wayne-nj
+- Henna: https://soithreadingandsalon.com/henna-wayne-nj
+- Threading Salon: https://soithreadingandsalon.com/threading-salon-wayne-nj
+- Beauty Salon: https://soithreadingandsalon.com/beauty-salon-wayne-nj
+- Eyelash Services: https://soithreadingandsalon.com/eyelash-services-wayne-nj
+- Men's Grooming: https://soithreadingandsalon.com/mens-grooming-wayne-nj
+- Offers: https://soithreadingandsalon.com/offers
+- Contact: https://soithreadingandsalon.com/contact
+- Booking: https://soithreadingandsalon.com/booking
+- Business Summary: https://soithreadingandsalon.com/ai-business-summary
