@@ -6,7 +6,7 @@ import eyelashImg from "@/assets/eyelash-services-wayne-nj.jpg";
 import mensImg from "@/assets/mens-grooming-wayne-nj.jpg";
 import heroImg from "@/assets/soi-threading-salon-hero.jpg";
 
-export const SITE_URL = "https://www.soithreadingandsalon.com";
+export const SITE_URL = "https://soithreadingandsalon.com";
 
 export const FAQS = [
   { q: "Where is SOI Threading Salon located?", a: "SOI Threading Salon is located at 190 Hamburg Tpke, Wayne, NJ 07470." },
