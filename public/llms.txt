@@ -63,19 +63,21 @@ Wayne, Totowa, Little Falls, Woodland Park, Paterson, Haledon, North Haledon, Po
 
 Customers can call 551-301-3894 or submit an appointment request on the website.
 
-## Important Pages
+## Pages
 
-- Home: https://soithreadingandsalon.com/
-- Services: https://soithreadingandsalon.com/services
-- Eyebrow Threading: https://soithreadingandsalon.com/eyebrow-threading-wayne-nj
-- Waxing: https://soithreadingandsalon.com/waxing-wayne-nj
-- Facials: https://soithreadingandsalon.com/facials-wayne-nj
-- Henna: https://soithreadingandsalon.com/henna-wayne-nj
-- Threading Salon: https://soithreadingandsalon.com/threading-salon-wayne-nj
-- Beauty Salon: https://soithreadingandsalon.com/beauty-salon-wayne-nj
-- Eyelash Services: https://soithreadingandsalon.com/eyelash-services-wayne-nj
-- Men's Grooming: https://soithreadingandsalon.com/mens-grooming-wayne-nj
-- Offers: https://soithreadingandsalon.com/offers
-- Contact: https://soithreadingandsalon.com/contact
-- Booking: https://soithreadingandsalon.com/booking
-- Business Summary: https://soithreadingandsalon.com/ai-business-summary
+- [Home](/): Premium threading, waxing, facials, hair care, henna, eyelash and men's grooming in Wayne, NJ.
+- [Services](/services): Full menu of beauty services with pricing.
+- [Eyebrow Threading](/eyebrow-threading-wayne-nj): Expert eyebrow threading in Wayne, NJ.
+- [Threading Salon](/threading-salon-wayne-nj): Eyebrow, lip, chin, and full face threading.
+- [Waxing](/waxing-wayne-nj): Face, body, bikini, and Brazilian waxing services.
+- [Facials](/facials-wayne-nj): Mini, acne, gold, oxygen, and Casmara Gold facials.
+- [Henna](/henna-wayne-nj): Natural mehndi tattoo designs and bridal henna.
+- [Beauty Salon](/beauty-salon-wayne-nj): Full-service beauty salon in Wayne, NJ.
+- [Eyelash Services](/eyelash-services-wayne-nj): Eyelash lifting and extensions.
+- [Men's Grooming](/mens-grooming-wayne-nj): Men's eyebrow threading and grooming.
+- [Offers](/offers): Current promotions and discounts.
+- [About](/about): About SOI Threading Salon.
+- [Gallery](/gallery): Photo gallery of our work and salon.
+- [Contact](/contact): Address, hours, phone, and directions.
+- [Booking](/booking): Request an appointment online.
+- [Business Summary](/ai-business-summary): Structured business summary for AI assistants.
