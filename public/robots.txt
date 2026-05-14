@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /soi/
 
-Sitemap: https://www.soithreadingandsalon.com/sitemap.xml
+Sitemap: https://soithreadingandsalon.com/sitemap.xml
 
 User-agent: Googlebot
 Allow: /

@@ -109,7 +109,7 @@ function HomePage() {
 
           <div className="relative animate-fade-up mt-2 lg:mt-0" style={{ animationDelay: "0.15s" }}>
             <div className="relative rounded-[2rem] overflow-hidden shadow-lift gold-border p-1">
-              <img src={heroImg} alt="SOI Threading Salon — expert threading, facials, waxing, hair care and henna" className="w-full h-[340px] sm:h-[420px] lg:h-[520px] object-cover rounded-[2rem]" width={1600} height={1200} />
+              <img src={heroImg} alt="SOI Threading Salon — expert threading, facials, waxing, hair care and henna" className="w-full h-[340px] sm:h-[420px] lg:h-[520px] object-cover rounded-[2rem]" width={1600} height={1200} fetchPriority="high" decoding="async" />
             </div>
 
             {/* Floating info card */}

@@ -2,7 +2,7 @@
 
 SOI Threading Salon is a premium beauty salon located at 190 Hamburg Tpke, Wayne, NJ 07470.
 
-Website: https://www.soithreadingandsalon.com
+Website: https://soithreadingandsalon.com
 Phone: 551-301-3894
 Email: soithreadingsalon@gmail.com
 Instagram: @SOITHREADINGSALON
@@ -63,19 +63,21 @@ Wayne, Totowa, Little Falls, Woodland Park, Paterson, Haledon, North Haledon, Po
 
 Customers can call 551-301-3894 or submit an appointment request on the website.
 
-## Important Pages
+## Pages
 
-- Home: https://www.soithreadingandsalon.com/
-- Services: https://www.soithreadingandsalon.com/services
-- Eyebrow Threading: https://www.soithreadingandsalon.com/eyebrow-threading-wayne-nj
-- Waxing: https://www.soithreadingandsalon.com/waxing-wayne-nj
-- Facials: https://www.soithreadingandsalon.com/facials-wayne-nj
-- Henna: https://www.soithreadingandsalon.com/henna-wayne-nj
-- Threading Salon: https://www.soithreadingandsalon.com/threading-salon-wayne-nj
-- Beauty Salon: https://www.soithreadingandsalon.com/beauty-salon-wayne-nj
-- Eyelash Services: https://www.soithreadingandsalon.com/eyelash-services-wayne-nj
-- Men's Grooming: https://www.soithreadingandsalon.com/mens-grooming-wayne-nj
-- Offers: https://www.soithreadingandsalon.com/offers
-- Contact: https://www.soithreadingandsalon.com/contact
-- Booking: https://www.soithreadingandsalon.com/booking
-- Business Summary: https://www.soithreadingandsalon.com/ai-business-summary
+- [Home](/): Premium threading, waxing, facials, hair care, henna, eyelash and men's grooming in Wayne, NJ.
+- [Services](/services): Full menu of beauty services with pricing.
+- [Eyebrow Threading](/eyebrow-threading-wayne-nj): Expert eyebrow threading in Wayne, NJ.
+- [Threading Salon](/threading-salon-wayne-nj): Eyebrow, lip, chin, and full face threading.
+- [Waxing](/waxing-wayne-nj): Face, body, bikini, and Brazilian waxing services.
+- [Facials](/facials-wayne-nj): Mini, acne, gold, oxygen, and Casmara Gold facials.
+- [Henna](/henna-wayne-nj): Natural mehndi tattoo designs and bridal henna.
+- [Beauty Salon](/beauty-salon-wayne-nj): Full-service beauty salon in Wayne, NJ.
+- [Eyelash Services](/eyelash-services-wayne-nj): Eyelash lifting and extensions.
+- [Men's Grooming](/mens-grooming-wayne-nj): Men's eyebrow threading and grooming.
+- [Offers](/offers): Current promotions and discounts.
+- [About](/about): About SOI Threading Salon.
+- [Gallery](/gallery): Photo gallery of our work and salon.
+- [Contact](/contact): Address, hours, phone, and directions.
+- [Booking](/booking): Request an appointment online.
+- [Business Summary](/ai-business-summary): Structured business summary for AI assistants.
