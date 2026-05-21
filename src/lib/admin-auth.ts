@@ -9,17 +9,6 @@ export async function signInAdmin(email: string, password: string) {
   return { ok: true as const };
 }
 
-export async function signUpAdmin(email: string, password: string) {
-  // First user to sign up is auto-promoted to admin via DB trigger.
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: { emailRedirectTo: `${window.location.origin}/soi/login` },
-  });
-  if (error) return { ok: false as const, error: error.message };
-  return { ok: true as const };
-}
-
 export async function signOutAdmin() {
   await supabase.auth.signOut();
 }
