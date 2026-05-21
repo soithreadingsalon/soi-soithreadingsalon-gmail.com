@@ -27,6 +27,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "SOI Threading Salon | Wayne, NJ" },
+      { name: "google-site-verification", content: "2GW0yU5dDKejUWY_X-GZ3fZfZ53koWmNAJhmmOgYW_k" },
       { name: "description", content: "Expert eyebrow threading, waxing, facials, henna and eyelash services in Wayne, NJ. Call 551-301-3894 to book." },
       { name: "keywords", content: "SOI Threading Salon, threading salon Wayne NJ, eyebrow threading Wayne NJ, eyebrow salon Wayne NJ, waxing salon Wayne NJ, facial salon Wayne NJ, beauty salon Wayne NJ, henna Wayne NJ, eyelash lifting Wayne NJ, Indian beauty salon Wayne NJ, hair care Wayne NJ, men eyebrow threading Wayne NJ, full face threading Wayne NJ, Brazilian waxing Wayne NJ, beauty services Wayne NJ" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
