@@ -14,14 +14,12 @@ export async function signOutAdmin() {
 }
 
 async function checkAdminRole(userId: string): Promise<boolean> {
-  const { data, error } = await supabase
-    .from("user_roles")
-    .select("role")
-    .eq("user_id", userId)
-    .eq("role", "admin")
-    .maybeSingle();
+  const { data, error } = await supabase.rpc("has_role", {
+    _user_id: userId,
+    _role: "admin",
+  });
   if (error) return false;
-  return !!data;
+  return data === true;
 }
 
 export function useAdminAuth() {
