@@ -18,7 +18,8 @@ async function checkAdminRole(userId: string): Promise<boolean> {
     .from("user_roles")
     .select("role")
     .eq("user_id", userId)
-    .eq("role", "admin")
+    .in("role", ["admin", "superadmin"])
+    .limit(1)
     .maybeSingle();
   if (error) return false;
   return !!data;
