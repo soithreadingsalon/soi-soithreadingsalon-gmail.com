@@ -9,7 +9,7 @@ import heroImg from "@/assets/soi-threading-salon-hero.jpg";
 export const SITE_URL = "https://soithreadingandsalon.com";
 
 export const FAQS = [
-  { q: "Where is SOI Threading Salon located?", a: "SOI Threading Salon is located at 190 Hamburg Tpke, Wayne, NJ 07470." },
+  { q: "Where is SOI Threading Salon located?", a: "SOI Threading Salon is located at 180 Hamburg Turnpk, Wayne, NJ 07470." },
   { q: "What services does SOI Threading Salon offer?", a: "SOI Threading Salon offers eyebrow threading, full face threading, waxing, facials, hair care, henna, eyelash lifting, eyelash extensions, and men's grooming services." },
   { q: "How much is eyebrow threading at SOI Threading Salon?", a: "Eyebrow threading is $10. Men's eyebrow threading is $11." },
   { q: "Does SOI Threading Salon offer waxing?", a: "Yes. SOI Threading Salon offers full face waxing, full hand waxing, full leg waxing, underarms, bikini line, Brazilian, full back, full stomach, and body waxing." },
@@ -166,7 +166,7 @@ export const LANDING_PAGES: Record<string, LandingContent> = {
     image: heroImg,
     alt: "SOI Threading Salon — premium beauty salon in Wayne NJ",
     serviceName: "Beauty Salon",
-    intro: "SOI Threading Salon is a full-service beauty salon Wayne NJ clients call home for everything from quick brow refreshes to a complete pre-event glow-up. Located at 190 Hamburg Tpke, we bring the elegance of Indian beauty traditions together with modern salon care.",
+    intro: "SOI Threading Salon is a full-service beauty salon Wayne NJ clients call home for everything from quick brow refreshes to a complete pre-event glow-up. Located at 180 Hamburg Turnpk, we bring the elegance of Indian beauty traditions together with modern salon care.",
     paragraphs: [
       "Our menu covers every essential: precision threading, smooth and comfortable waxing, glow-restoring facials, scalp and hair care rituals, all-natural henna art, eyelash lifting and extensions, and a full men's grooming line. Whatever you walked in needing, you'll leave refreshed.",
       "Inside, the salon is clean, calm, and welcoming — the kind of place where regulars become friends. Walk-ins are always welcome, but if you have a specific time in mind, request an appointment and we'll confirm by phone.",

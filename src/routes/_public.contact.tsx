@@ -14,9 +14,9 @@ export const Route = createFileRoute("/_public/contact")({
   head: () => ({
     meta: [
       { title: "Contact SOI Threading Salon | Wayne, NJ — Call 551-301-3894" },
-      { name: "description", content: "Contact SOI Threading Salon at 190 Hamburg Tpke, Wayne, NJ 07470. Call 551-301-3894 or send a message to book threading, waxing, facials, henna and more." },
+      { name: "description", content: "Contact SOI Threading Salon at 180 Hamburg Turnpk, Wayne, NJ 07470. Call 551-301-3894 or send a message to book threading, waxing, facials, henna and more." },
       { property: "og:title", content: "Contact SOI Threading Salon — Wayne, NJ" },
-      { property: "og:description", content: "Call 551-301-3894, email, or visit our salon at 190 Hamburg Tpke, Wayne, NJ." },
+      { property: "og:description", content: "Call 551-301-3894, email, or visit our salon at 180 Hamburg Turnpk, Wayne, NJ." },
       { property: "og:url", content: `${SITE_URL}/contact` },
       { name: "robots", content: "index, follow" },
     ],
@@ -48,7 +48,7 @@ function ContactPage() {
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "190 Hamburg Tpke",
+      streetAddress: "180 Hamburg Turnpk",
       addressLocality: "Wayne",
       addressRegion: "NJ",
       postalCode: "07470",
@@ -106,7 +106,7 @@ function ContactPage() {
         <div className="glass-panel rounded-3xl p-6 md:p-8 gold-border">
           <h3 className="font-serif text-2xl mb-5">Visit & Connect</h3>
           <ul className="space-y-4 text-sm">
-            <li className="flex gap-3"><MapPin className="h-5 w-5 text-gold mt-0.5" /><span>190 Hamburg Tpke<br />Wayne, NJ 07470</span></li>
+            <li className="flex gap-3"><MapPin className="h-5 w-5 text-gold mt-0.5" /><span>180 Hamburg Turnpk<br />Wayne, NJ 07470</span></li>
             <li><a href="tel:5513013894" className="flex gap-3 hover:text-gold"><Phone className="h-5 w-5 text-gold mt-0.5" />551-301-3894</a></li>
             <li><a href="mailto:soithreadingsalon@gmail.com" className="flex gap-3 hover:text-gold break-all"><Mail className="h-5 w-5 text-gold mt-0.5" />soithreadingsalon@gmail.com</a></li>
             <li className="flex gap-3"><Clock className="h-5 w-5 text-gold mt-0.5" /><span>M–F: 10am–7pm<br />Sat: 10am–6pm<br />Sun: 11am–4pm</span></li>
@@ -116,12 +116,12 @@ function ContactPage() {
           <div className="mt-6 grid grid-cols-2 gap-2">
             <a href="tel:5513013894" className="text-center px-4 py-2.5 rounded-full text-xs font-semibold btn-gold">Call Now</a>
             <a href="mailto:soithreadingsalon@gmail.com" className="text-center px-4 py-2.5 rounded-full text-xs font-semibold border border-[var(--gold)] text-gold">Email</a>
-            <a href="https://maps.google.com/?q=190+Hamburg+Tpke+Wayne+NJ+07470" target="_blank" rel="noopener noreferrer" className="text-center px-4 py-2.5 rounded-full text-xs font-semibold border border-[var(--gold)] text-gold">Directions</a>
+            <a href="https://maps.google.com/?q=180+Hamburg+Turnpk+Wayne+NJ+07470" target="_blank" rel="noopener noreferrer" className="text-center px-4 py-2.5 rounded-full text-xs font-semibold border border-[var(--gold)] text-gold">Directions</a>
             <a href="https://instagram.com/SOITHREADINGSALON" target="_blank" rel="noopener noreferrer" className="text-center px-4 py-2.5 rounded-full text-xs font-semibold border border-[var(--gold)] text-gold">Instagram</a>
           </div>
 
           <div className="mt-6 rounded-2xl overflow-hidden gold-border">
-            <iframe title="Map" src="https://www.google.com/maps?q=190+Hamburg+Tpke,+Wayne,+NJ+07470&output=embed" className="w-full h-56 border-0" loading="lazy" />
+            <iframe title="Map" src="https://www.google.com/maps?q=180+Hamburg+Turnpk,+Wayne,+NJ+07470&output=embed" className="w-full h-56 border-0" loading="lazy" />
           </div>
         </div>
 
