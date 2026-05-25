@@ -20,7 +20,7 @@ export function LandingPage({ content }: { content: LandingContent }) {
       url: SITE_URL,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "190 Hamburg Tpke",
+        streetAddress: "180 Hamburg Turnpk",
         addressLocality: "Wayne",
         addressRegion: "NJ",
         postalCode: "07470",
@@ -117,7 +117,7 @@ export function LandingPage({ content }: { content: LandingContent }) {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         <div className="rounded-[2rem] gradient-cream gold-border shadow-lift p-8 md:p-12 text-center relative overflow-hidden">
           <h2 className="font-serif text-3xl md:text-5xl mb-3">Ready to visit SOI Threading Salon?</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mb-6">190 Hamburg Tpke, Wayne, NJ 07470 · Call 551-301-3894 · Open 7 days a week.</p>
+          <p className="text-muted-foreground max-w-xl mx-auto mb-6">180 Hamburg Turnpk, Wayne, NJ 07470 · Call 551-301-3894 · Open 7 days a week.</p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link to="/booking" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold"><Calendar className="h-4 w-4" /> Book Appointment</Link>
             <a href="tel:5513013894" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold"><Phone className="h-4 w-4" /> Call Now</a>

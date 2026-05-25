@@ -16,7 +16,7 @@ export const Route = createFileRoute("/_public/")({
   head: () => ({
     meta: [
       { title: "SOI Threading Salon | Threading, Waxing, Facials & Henna in Wayne, NJ" },
-      { name: "description", content: "Premium threading, waxing, facials, hair care, henna, eyelash and men's grooming in Wayne, NJ. Visit SOI Threading Salon at 190 Hamburg Tpke." },
+      { name: "description", content: "Premium threading, waxing, facials, hair care, henna, eyelash and men's grooming in Wayne, NJ. Visit SOI Threading Salon at 180 Hamburg Turnpk." },
       { name: "keywords", content: "threading salon Wayne NJ, eyebrow threading Wayne NJ, facial salon Wayne NJ, waxing Wayne NJ, henna Wayne NJ, beauty salon Wayne NJ, Indian beauty salon Wayne NJ, men's eyebrow threading Wayne NJ, eyelash extensions Wayne NJ" },
       { property: "og:title", content: "SOI Threading Salon | Threading, Waxing, Facials & Henna in Wayne, NJ" },
       { property: "og:description", content: "Premium threading, waxing, facials, hair care, henna and men's grooming in Wayne, NJ." },
@@ -97,7 +97,7 @@ function HomePage() {
               <a href="tel:5513013894" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold hover:bg-[var(--gold)]/5 transition-colors">
                 <Phone className="h-4 w-4" /> Call Now
               </a>
-              <a href="https://maps.google.com/?q=190+Hamburg+Tpke+Wayne+NJ+07470" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold text-foreground hover:text-gold">
+              <a href="https://maps.google.com/?q=180+Hamburg+Turnpk+Wayne+NJ+07470" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold text-foreground hover:text-gold">
                 <MapPin className="h-4 w-4" /> Get Directions
               </a>
             </div>
@@ -115,7 +115,7 @@ function HomePage() {
             {/* Floating info card */}
             <div className="absolute -left-4 lg:-left-12 bottom-6 lg:bottom-12 glass-panel rounded-2xl p-5 shadow-lift max-w-[280px] animate-float gold-border">
               <p className="font-script text-2xl text-gold mb-1">Visit Us</p>
-              <p className="font-serif text-sm text-foreground/90 leading-snug">190 Hamburg Tpke<br />Wayne, NJ 07470</p>
+              <p className="font-serif text-sm text-foreground/90 leading-snug">180 Hamburg Turnpk<br />Wayne, NJ 07470</p>
               <div className="my-3 h-px bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
               <a href="tel:5513013894" className="flex items-center gap-2 text-sm font-semibold text-gold">
                 <Phone className="h-4 w-4" /> 551-301-3894
@@ -254,17 +254,17 @@ function HomePage() {
 
       {/* LOCATION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-        <SectionHeading eyebrow="Visit Us" title="Find Us in Wayne, NJ" subtitle="190 Hamburg Tpke, Wayne, NJ 07470 — easy parking, warm welcome." />
+        <SectionHeading eyebrow="Visit Us" title="Find Us in Wayne, NJ" subtitle="180 Hamburg Turnpk, Wayne, NJ 07470 — easy parking, warm welcome." />
         <div className="rounded-[2rem] overflow-hidden gold-border shadow-card">
           <iframe
             title="SOI Threading Salon Location"
-            src="https://www.google.com/maps?q=190+Hamburg+Tpke,+Wayne,+NJ+07470&output=embed"
+            src="https://www.google.com/maps?q=180+Hamburg+Turnpk,+Wayne,+NJ+07470&output=embed"
             className="w-full h-[320px] md:h-[420px] border-0"
             loading="lazy"
           />
         </div>
         <div className="text-center mt-6">
-          <a href="https://maps.google.com/?q=190+Hamburg+Tpke+Wayne+NJ+07470" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold">
+          <a href="https://maps.google.com/?q=180+Hamburg+Turnpk+Wayne+NJ+07470" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold">
             <MapPin className="h-4 w-4" /> Get Directions
           </a>
         </div>

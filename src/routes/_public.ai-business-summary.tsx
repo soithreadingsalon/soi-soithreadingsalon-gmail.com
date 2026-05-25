@@ -62,7 +62,7 @@ function AiBusinessSummary() {
     telephone: "+1-551-301-3894",
     email: "soithreadingsalon@gmail.com",
     priceRange: "$$",
-    address: { "@type": "PostalAddress", streetAddress: "190 Hamburg Tpke", addressLocality: "Wayne", addressRegion: "NJ", postalCode: "07470", addressCountry: "US" },
+    address: { "@type": "PostalAddress", streetAddress: "180 Hamburg Turnpk", addressLocality: "Wayne", addressRegion: "NJ", postalCode: "07470", addressCountry: "US" },
     sameAs: ["https://www.instagram.com/SOITHREADINGSALON"],
   };
   const faqLd = {
@@ -88,7 +88,7 @@ function AiBusinessSummary() {
           <div>
             <h2 className="font-serif text-2xl mb-2">Contact</h2>
             <ul className="text-sm space-y-2">
-              <li className="flex gap-2"><MapPin className="h-4 w-4 text-gold" /> 190 Hamburg Tpke, Wayne, NJ 07470</li>
+              <li className="flex gap-2"><MapPin className="h-4 w-4 text-gold" /> 180 Hamburg Turnpk, Wayne, NJ 07470</li>
               <li className="flex gap-2"><Phone className="h-4 w-4 text-gold" /> <a href="tel:5513013894" className="hover:text-gold">551-301-3894</a></li>
               <li className="flex gap-2"><Mail className="h-4 w-4 text-gold" /> <a href="mailto:soithreadingsalon@gmail.com" className="hover:text-gold break-all">soithreadingsalon@gmail.com</a></li>
               <li className="flex gap-2"><Instagram className="h-4 w-4 text-gold" /> <a href="https://instagram.com/SOITHREADINGSALON" className="hover:text-gold">@SOITHREADINGSALON</a></li>

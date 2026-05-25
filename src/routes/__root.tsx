@@ -65,7 +65,7 @@ export const Route = createRootRoute({
           email: "soithreadingsalon@gmail.com",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "190 Hamburg Tpke",
+            streetAddress: "180 Hamburg Turnpk",
             addressLocality: "Wayne",
             addressRegion: "NJ",
             postalCode: "07470",
