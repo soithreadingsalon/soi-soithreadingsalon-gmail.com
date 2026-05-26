@@ -46,7 +46,15 @@ export const notifyInquiryByEmail = createServerFn({ method: "POST" })
 
     const to = settings?.email || "soithreadingsalon@gmail.com";
     const salon = settings?.salon_name || "SOI Threading Salon";
-    const subject = `New inquiry from ${inq.name}`;
+    // Sanitize any field used in RFC 2822 headers to prevent header injection
+    // (e.g. names containing \r or \n could inject Bcc/Cc headers).
+    const stripCRLF = (s: string | null | undefined, max = 200) =>
+      (s ?? "").replace(/[\r\n]+/g, " ").trim().slice(0, max);
+    const safeName = stripCRLF(inq.name) || "Website visitor";
+    const safeEmail = stripCRLF(inq.email);
+    // Basic email shape check before using in Reply-To header
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(safeEmail);
+    const subject = `New inquiry from ${safeName}`;
 
     const lines = [
       `New inquiry submitted on the ${salon} website`,
@@ -64,7 +72,7 @@ export const notifyInquiryByEmail = createServerFn({ method: "POST" })
       `— Sent automatically from your website contact form`,
     ].filter(Boolean).join("\r\n");
 
-    const replyTo = inq.email ? `\r\nReply-To: ${inq.email}` : "";
+    const replyTo = isEmail ? `\r\nReply-To: ${safeEmail}` : "";
     const rfc2822 = [
       `To: ${to}`,
       `Subject: ${subject}`,
