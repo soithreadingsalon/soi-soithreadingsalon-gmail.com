@@ -1,6 +1,18 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+
+async function assertAdmin(userId: string) {
+  const { data, error } = await supabaseAdmin
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", userId)
+    .in("role", ["admin", "superadmin"])
+    .limit(1)
+    .maybeSingle();
+  if (error || !data) throw new Error("Forbidden: admin role required");
+}
 
 const GATEWAY = "https://connector-gateway.lovable.dev/google_calendar/calendar/v3";
 
@@ -41,8 +53,10 @@ async function getCalendarConfig() {
 }
 
 export const syncAppointmentToCalendar = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((d: { appointmentId: string }) => z.object({ appointmentId: z.string().uuid() }).parse(d))
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.userId);
     const cfg = await getCalendarConfig();
     if (!cfg.enabled) return { skipped: true, reason: "Calendar sync is disabled" };
 
@@ -100,8 +114,10 @@ export const syncAppointmentToCalendar = createServerFn({ method: "POST" })
   });
 
 export const deleteCalendarEvent = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((d: { appointmentId: string }) => z.object({ appointmentId: z.string().uuid() }).parse(d))
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.userId);
     const cfg = await getCalendarConfig();
     const { data: appt } = await supabaseAdmin
       .from("appointments")
@@ -126,7 +142,10 @@ export const deleteCalendarEvent = createServerFn({ method: "POST" })
     return { success: true };
   });
 
-export const listCalendars = createServerFn({ method: "GET" }).handler(async () => {
+export const listCalendars = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+  await assertAdmin(context.userId);
   const resp = await fetch(`${GATEWAY}/users/me/calendarList`, { headers: authHeaders() });
   const json = await resp.json();
   if (!resp.ok) throw new Error(`Calendar list ${resp.status}: ${JSON.stringify(json)}`);
