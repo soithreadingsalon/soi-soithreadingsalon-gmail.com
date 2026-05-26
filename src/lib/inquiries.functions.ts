@@ -26,6 +26,18 @@ export const notifyInquiryByEmail = createServerFn({ method: "POST" })
     z.object({ inquiryId: z.string().uuid() }).parse(d)
   )
   .handler(async ({ data }) => {
+    // Idempotency: atomically claim the notification so repeated calls cannot
+    // spam the salon inbox. Only the first caller for a given inquiry sends.
+    const { data: claimed, error: claimErr } = await supabaseAdmin
+      .from("inquiries")
+      .update({ notified_at: new Date().toISOString() })
+      .eq("id", data.inquiryId)
+      .is("notified_at", null)
+      .select("id")
+      .maybeSingle();
+    if (claimErr) throw new Error(claimErr.message);
+    if (!claimed) return { success: true, skipped: true };
+
     const [{ data: inq, error }, { data: settings }] = await Promise.all([
       supabaseAdmin.from("inquiries").select("*").eq("id", data.inquiryId).single(),
       supabaseAdmin.from("site_settings").select("email,salon_name").eq("id", 1).maybeSingle(),
