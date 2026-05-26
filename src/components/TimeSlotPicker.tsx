@@ -35,20 +35,18 @@ export function TimeSlotPicker({
 
   useEffect(() => {
     supabase
-      .from("site_settings")
-      .select("hours_weekday,hours_saturday,hours_sunday")
-      .eq("id", 1)
-      .maybeSingle()
+      .rpc("get_public_hours")
       .then(({ data, error }) => {
         if (error) {
           console.error("[TimeSlotPicker] site_settings load failed", error);
           return;
         }
-        if (data) {
+        const row = Array.isArray(data) ? data[0] : data;
+        if (row) {
           setSettings({
-            hours_weekday: data.hours_weekday || DEFAULT_SETTINGS.hours_weekday,
-            hours_saturday: data.hours_saturday || DEFAULT_SETTINGS.hours_saturday,
-            hours_sunday: data.hours_sunday || DEFAULT_SETTINGS.hours_sunday,
+            hours_weekday: row.hours_weekday || DEFAULT_SETTINGS.hours_weekday,
+            hours_saturday: row.hours_saturday || DEFAULT_SETTINGS.hours_saturday,
+            hours_sunday: row.hours_sunday || DEFAULT_SETTINGS.hours_sunday,
           });
         }
       });
