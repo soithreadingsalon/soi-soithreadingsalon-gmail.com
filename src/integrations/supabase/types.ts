@@ -100,6 +100,7 @@ export type Database = {
           message: string | null
           name: string
           notes: string | null
+          notified_at: string | null
           phone: string | null
           preferred_date: string | null
           preferred_time: string | null
@@ -113,6 +114,7 @@ export type Database = {
           message?: string | null
           name: string
           notes?: string | null
+          notified_at?: string | null
           phone?: string | null
           preferred_date?: string | null
           preferred_time?: string | null
@@ -126,6 +128,7 @@ export type Database = {
           message?: string | null
           name?: string
           notes?: string | null
+          notified_at?: string | null
           phone?: string | null
           preferred_date?: string | null
           preferred_time?: string | null
@@ -331,6 +334,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_public_hours: {
+        Args: never
+        Returns: {
+          hours_saturday: string
+          hours_sunday: string
+          hours_weekday: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
