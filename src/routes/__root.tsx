@@ -40,8 +40,8 @@ export const Route = createRootRoute({
       { name: "twitter:title", content: "SOI Threading Salon | Wayne, NJ" },
       { property: "og:description", content: "Expert eyebrow threading, waxing, facials, henna and eyelash services in Wayne, NJ. Call 551-301-3894 to book." },
       { name: "twitter:description", content: "Expert eyebrow threading, waxing, facials, henna and eyelash services in Wayne, NJ. Call 551-301-3894 to book." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/50344bdf-0ebe-458c-94ac-1365cfc500cf" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/50344bdf-0ebe-458c-94ac-1365cfc500cf" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2YwBggDaACM9izL3EAlef1vZ0ha2/social-images/social-1779995178576-Screenshot_2026-05-28_at_3.06.09_PM.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2YwBggDaACM9izL3EAlef1vZ0ha2/social-images/social-1779995178576-Screenshot_2026-05-28_at_3.06.09_PM.webp" },
     ],
     links: [
       {
