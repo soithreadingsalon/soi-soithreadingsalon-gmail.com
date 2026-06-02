@@ -150,7 +150,7 @@ function AdminAppointments() {
                     <span className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border ${s.color}`}>{s.label}</span>
                     {r.google_event_id && <span title="On Google Calendar" className="text-[10px] inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-100 text-green-800"><CalendarIcon className="h-3 w-3" /> Synced</span>}
                   </div>
-                  <p className="text-sm text-muted-foreground mt-1">{[r.service_category, r.service].filter(Boolean).join(" · ") || "—"}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{[r.service_category, r.service].filter(Boolean).join(" · ") || "-"}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {r.preferred_date && new Date(r.preferred_date + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} {r.preferred_time && `· ${r.preferred_time}`}
                   </p>

@@ -10,7 +10,7 @@ type Offer = { id: string; title: string; description: string | null; discount: 
 export const Route = createFileRoute("/_public/offers")({
   head: () => ({
     meta: [
-      { title: "Current Offers & Coupons | SOI Threading Salon — Wayne, NJ" },
+      { title: "Current Offers & Coupons | SOI Threading Salon, Wayne, NJ" },
       { name: "description", content: "Save on threading, facials, waxing, hair massage and brow combos at SOI Threading Salon in Wayne, NJ. View limited-time coupons and call to redeem." },
       { property: "og:title", content: "Current Offers | SOI Threading Salon" },
       { property: "og:description", content: "Limited-time savings on facials, waxing, hair massage and brow combos in Wayne, NJ." },
@@ -41,7 +41,7 @@ function OffersPage() {
         if (featured) {
           return (
             <div className="mb-8 rounded-3xl overflow-hidden gold-border shadow-lift relative">
-              <img src={featured.image_url!} alt={`${featured.discount} — ${featured.title}`} className="w-full h-[280px] sm:h-[380px] md:h-[460px] object-cover" />
+              <img src={featured.image_url!} alt={`${featured.discount}, ${featured.title}`} className="w-full h-[280px] sm:h-[380px] md:h-[460px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-white">
                 <p className="font-script text-2xl md:text-3xl text-[var(--gold)] drop-shadow">{featured.discount}</p>

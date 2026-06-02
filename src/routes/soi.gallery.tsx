@@ -32,7 +32,7 @@ function AdminGallery() {
     try {
       const url = await uploadImage("gallery-images", f);
       setForm({ ...form, image_url: url });
-      toast.success("Uploaded — click Add to save");
+      toast.success("Uploaded, click Add to save");
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : "Upload failed");
     } finally {

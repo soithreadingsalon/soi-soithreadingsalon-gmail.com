@@ -96,7 +96,7 @@ export function TimeSlotPicker({
   if (slots.length === 0) {
     return (
       <div className={`text-xs text-muted-foreground italic px-3 py-2.5 rounded-xl bg-muted/30 ${className || ""}`}>
-        Closed on this day — please pick another date
+        Closed on this day, please pick another date
       </div>
     );
   }
@@ -108,7 +108,7 @@ export function TimeSlotPicker({
         const isTaken = taken.has(s) || calendarBusy.has(s);
         return (
           <option key={s} value={s} disabled={isTaken}>
-            {s}{isTaken ? " — booked" : ""}
+            {s}{isTaken ? ", booked" : ""}
           </option>
         );
       })}

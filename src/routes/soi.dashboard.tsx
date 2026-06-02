@@ -130,7 +130,7 @@ function Dashboard() {
 
       <div className="grid lg:grid-cols-2 gap-4 mb-4">
         <div className="glass-panel rounded-2xl p-5 gold-border">
-          <h3 className="font-serif text-lg mb-3">Bookings & Inquiries — Last 30 Days</h3>
+          <h3 className="font-serif text-lg mb-3">Bookings & Inquiries, Last 30 Days</h3>
           <ResponsiveContainer width="100%" height={240}>
             <LineChart data={bookingsTrend}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" />

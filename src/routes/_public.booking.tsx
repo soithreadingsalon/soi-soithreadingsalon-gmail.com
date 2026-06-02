@@ -11,7 +11,7 @@ import { SITE_URL } from "@/data/seo-content";
 export const Route = createFileRoute("/_public/booking")({
   head: () => ({
     meta: [
-      { title: "Book an Appointment | SOI Threading Salon — Wayne, NJ" },
+      { title: "Book an Appointment | SOI Threading Salon, Wayne, NJ" },
       { name: "description", content: "Request your appointment at SOI Threading Salon in Wayne, NJ. Threading, waxing, facials, hair care, henna, eyelash and men's grooming. Call 551-301-3894." },
       { property: "og:title", content: "Book an Appointment | SOI Threading Salon" },
       { property: "og:description", content: "Request your beauty appointment online or call 551-301-3894." },

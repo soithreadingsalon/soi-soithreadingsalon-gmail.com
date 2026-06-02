@@ -19,7 +19,7 @@ function AdminLayout() {
     if (isLogin) return;
     if (status === "unauthenticated") navigate({ to: "/soi/login" });
     if (status === "forbidden") {
-      // Signed in but not an admin — sign them out and bounce to login.
+      // Signed in but not an admin, sign them out and bounce to login.
       signOutAdmin().then(() => navigate({ to: "/soi/login" }));
     }
   }, [isLogin, status, navigate]);

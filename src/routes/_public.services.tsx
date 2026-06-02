@@ -20,7 +20,7 @@ type Service = { id: string; category: string; name: string; price: string; desc
 export const Route = createFileRoute("/_public/services")({
   head: () => ({
     meta: [
-      { title: "Services & Pricing | SOI Threading Salon — Wayne, NJ" },
+      { title: "Services & Pricing | SOI Threading Salon, Wayne, NJ" },
       { name: "description", content: "Full menu and pricing for threading, waxing, facials, hair care, henna, eyelash services and men's grooming at SOI Threading Salon in Wayne, NJ." },
       { property: "og:title", content: "Services & Pricing | SOI Threading Salon" },
       { property: "og:description", content: "Threading, waxing, facials, hair care, henna, eyelash and men's grooming pricing in Wayne, NJ." },

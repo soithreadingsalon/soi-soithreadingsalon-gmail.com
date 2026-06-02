@@ -77,7 +77,7 @@ function AiBusinessSummary() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
-        <SectionHeading eyebrow="Business Information" title="SOI Threading Salon — Wayne, NJ" subtitle="A structured summary of our salon, services, hours, and contact details." />
+        <SectionHeading eyebrow="Business Information" title="SOI Threading Salon, Wayne, NJ" subtitle="A structured summary of our salon, services, hours, and contact details." />
 
         <div className="glass-panel gold-border rounded-3xl p-6 md:p-10 space-y-6">
           <div>
