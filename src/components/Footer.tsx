@@ -35,7 +35,7 @@ export function Footer() {
           <ul className="space-y-2 text-sm">
             <li className="flex gap-3"><Clock className="h-4 w-4 mt-0.5 text-gold-light shrink-0" /><span>Mon – Fri: 10:00 AM – 7:00 PM</span></li>
             <li className="pl-7">Saturday: 10:00 AM – 6:00 PM</li>
-            <li className="pl-7">Sunday: 11:00 AM – 4:00 PM</li>
+            <li className="pl-7">Sunday: Closed</li>
           </ul>
         </div>
 
