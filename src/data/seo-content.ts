@@ -17,7 +17,7 @@ export const FAQS = [
   { q: "Does SOI Threading Salon offer eyelash services?", a: "Yes. SOI Threading Salon offers eyelash lifting and eyelash extension services." },
   { q: "Does SOI Threading Salon offer men's grooming services?", a: "Yes. SOI Threading Salon offers men's eyebrow threading, nose hair removal, blackhead removal, ear wax, back wax, and chest wax services." },
   { q: "How can I book an appointment?", a: "Customers can call 551-301-3894 or submit an appointment request through the website." },
-  { q: "What are the salon hours?", a: "SOI Threading Salon is open Monday to Friday from 10:00 AM to 7:00 PM, Saturday from 10:00 AM to 6:00 PM, and Sunday from 11:00 AM to 4:00 PM." },
+  { q: "What are the salon hours?", a: "SOI Threading Salon is open Monday to Friday from 10:00 AM to 7:00 PM and Saturday from 10:00 AM to 6:00 PM. Closed on Sunday." },
 ];
 
 export const SERVICE_AREAS = "Wayne, Totowa, Little Falls, Woodland Park, Paterson, Haledon, North Haledon, Pompton Lakes, Fairfield, Clifton, Lincoln Park, Pompton Plains, Franklin Lakes, Oakland, and surrounding Passaic County and North Jersey communities.";
