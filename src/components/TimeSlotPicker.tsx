@@ -13,7 +13,7 @@ type Settings = {
 const DEFAULT_SETTINGS: Settings = {
   hours_weekday: "10:00 AM – 7:00 PM",
   hours_saturday: "10:00 AM – 6:00 PM",
-  hours_sunday: "11:00 AM – 4:00 PM",
+  hours_sunday: "Closed",
 };
 
 export function TimeSlotPicker({
