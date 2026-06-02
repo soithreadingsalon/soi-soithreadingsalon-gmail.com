@@ -69,7 +69,7 @@ export const notifyInquiryByEmail = createServerFn({ method: "POST" })
       `Message:`,
       inq.message || "(no message)",
       ``,
-      `— Sent automatically from your website contact form`,
+      `- Sent automatically from your website contact form`,
     ].filter(Boolean).join("\r\n");
 
     const replyTo = isEmail ? `\r\nReply-To: ${safeEmail}` : "";

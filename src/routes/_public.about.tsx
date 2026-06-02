@@ -7,9 +7,9 @@ import { SITE_URL } from "@/data/seo-content";
 export const Route = createFileRoute("/_public/about")({
   head: () => ({
     meta: [
-      { title: "About SOI Threading Salon | Style of India — Wayne, NJ" },
+      { title: "About SOI Threading Salon | Style of India, Wayne, NJ" },
       { name: "description", content: "SOI Threading Salon brings timeless Indian beauty traditions and modern salon care together in Wayne, NJ. Threading, waxing, facials, henna and more at 180 Hamburg Turnpk." },
-      { property: "og:title", content: "About SOI Threading Salon — Style of India" },
+      { property: "og:title", content: "About SOI Threading Salon, Style of India" },
       { property: "og:description", content: "Premium threading, facials, waxing, hair care and henna in Wayne, NJ." },
       { property: "og:image", content: salonImg },
       { property: "og:url", content: `${SITE_URL}/about` },
@@ -32,7 +32,7 @@ function AboutPage() {
               SOI Threading Salon brings timeless Indian beauty traditions together with modern salon care. Located in Wayne, NJ, SOI offers expert threading, facials, waxing, hair care, henna, and beauty services designed to help every client feel refreshed, confident, and radiant.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              Every visit is crafted around comfort and care — clean, welcoming spaces and meticulous attention to detail in every service we offer.
+              Every visit is crafted around comfort and care, clean, welcoming spaces and meticulous attention to detail in every service we offer.
             </p>
             <Link to="/booking" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold">
               Book Your Visit
@@ -48,7 +48,7 @@ function AboutPage() {
         <SectionHeading eyebrow="Our Promise" title="Our Beauty Philosophy" subtitle="Care, craftsmanship and warmth in every visit." />
         <div className="grid md:grid-cols-3 gap-4 md:gap-6">
           {[
-            { icon: Heart, title: "Welcoming Comfort", desc: "A warm, clean space designed for relaxation and confidence — every detail considered for you." },
+            { icon: Heart, title: "Welcoming Comfort", desc: "A warm, clean space designed for relaxation and confidence, every detail considered for you." },
             { icon: Sparkles, title: "Expert Craftsmanship", desc: "Years of skill behind every brow shape, facial ritual, and waxing service. Precision you can feel." },
             { icon: ShieldCheck, title: "Safe & Natural", desc: "Premium products, hygienic tools, and gentle techniques. Your skin and well-being come first." },
           ].map((f, i) => (

@@ -13,7 +13,7 @@ export function Footer() {
           </div>
           <p className="font-script text-2xl text-gold-light">Style of India</p>
           <p className="text-sm text-[oklch(0.85_0.02_80)] mt-3 leading-relaxed max-w-sm">
-            Threading, facials, waxing, hair care and henna — inspired by timeless Indian traditions and refined for modern elegance.
+            Threading, facials, waxing, hair care and henna, inspired by timeless Indian traditions and refined for modern elegance.
           </p>
           <p className="mt-4 inline-flex items-center gap-2 text-xs text-gold-light">
             <Sparkles className="h-3.5 w-3.5" /> 9 eyebrow visits = 10th FREE

@@ -74,7 +74,7 @@ export const syncAppointmentToCalendar = createServerFn({ method: "POST" })
     const end = new Date(start.getTime() + 30 * 60 * 1000);
 
     const eventBody = {
-      summary: `${appt.service || appt.service_category || "Appointment"} — ${appt.full_name}`,
+      summary: `${appt.service || appt.service_category || "Appointment"}, ${appt.full_name}`,
       description: [
         `Customer: ${appt.full_name}`,
         `Phone: ${appt.phone}`,

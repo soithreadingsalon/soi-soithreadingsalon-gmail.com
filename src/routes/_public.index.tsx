@@ -87,7 +87,7 @@ function HomePage() {
               Enhance. <span className="gradient-text-gold">Refresh.</span> Radiate.
             </h1>
             <p className="mt-4 md:mt-6 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
-              Experience expert care and timeless beauty with our premium threading, waxing, facials, hair care, henna and more — in Wayne, NJ.
+              Experience expert care and timeless beauty with our premium threading, waxing, facials, hair care, henna and more, in Wayne, NJ.
             </p>
 
             <div className="mt-6 md:mt-8 flex flex-wrap gap-3">
@@ -109,7 +109,7 @@ function HomePage() {
 
           <div className="relative animate-fade-up mt-2 lg:mt-0" style={{ animationDelay: "0.15s" }}>
             <div className="relative rounded-[2rem] overflow-hidden shadow-lift gold-border p-1">
-              <img src={heroImg} alt="SOI Threading Salon — expert threading, facials, waxing, hair care and henna" className="w-full h-[340px] sm:h-[420px] lg:h-[520px] object-cover rounded-[2rem]" width={1600} height={1200} fetchPriority="high" decoding="async" />
+              <img src={heroImg} alt="SOI Threading Salon, expert threading, facials, waxing, hair care and henna" className="w-full h-[340px] sm:h-[420px] lg:h-[520px] object-cover rounded-[2rem]" width={1600} height={1200} fetchPriority="high" decoding="async" />
             </div>
 
             {/* Floating info card */}
@@ -254,7 +254,7 @@ function HomePage() {
 
       {/* LOCATION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-        <SectionHeading eyebrow="Visit Us" title="Find Us in Wayne, NJ" subtitle="180 Hamburg Turnpk, Wayne, NJ 07470 — easy parking, warm welcome." />
+        <SectionHeading eyebrow="Visit Us" title="Find Us in Wayne, NJ" subtitle="180 Hamburg Turnpk, Wayne, NJ 07470, easy parking, warm welcome." />
         <div className="rounded-[2rem] overflow-hidden gold-border shadow-card">
           <iframe
             title="SOI Threading Salon Location"

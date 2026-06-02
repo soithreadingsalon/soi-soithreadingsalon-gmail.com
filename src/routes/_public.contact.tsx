@@ -13,9 +13,9 @@ import { SITE_URL } from "@/data/seo-content";
 export const Route = createFileRoute("/_public/contact")({
   head: () => ({
     meta: [
-      { title: "Contact SOI Threading Salon | Wayne, NJ — Call 551-301-3894" },
+      { title: "Contact SOI Threading Salon | Wayne, NJ, Call 551-301-3894" },
       { name: "description", content: "Contact SOI Threading Salon at 180 Hamburg Turnpk, Wayne, NJ 07470. Call 551-301-3894 or send a message to book threading, waxing, facials, henna and more." },
-      { property: "og:title", content: "Contact SOI Threading Salon — Wayne, NJ" },
+      { property: "og:title", content: "Contact SOI Threading Salon, Wayne, NJ" },
       { property: "og:description", content: "Call 551-301-3894, email, or visit our salon at 180 Hamburg Turnpk, Wayne, NJ." },
       { property: "og:url", content: `${SITE_URL}/contact` },
       { name: "robots", content: "index, follow" },
@@ -99,7 +99,7 @@ function ContactPage() {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }} />
-      <SectionHeading eyebrow="Say Hello" title="Get in Touch" subtitle="Questions, bookings or just to say hi — we'd love to hear from you." />
+      <SectionHeading eyebrow="Say Hello" title="Get in Touch" subtitle="Questions, bookings or just to say hi, we'd love to hear from you." />
 
       <div className="grid lg:grid-cols-[1fr_1.2fr] gap-6 lg:gap-8">
         <div className="glass-panel rounded-3xl p-6 md:p-8 gold-border">

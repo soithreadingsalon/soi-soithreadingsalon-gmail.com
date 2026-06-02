@@ -17,8 +17,8 @@ type GalleryRow = { id: string; category: string; caption: string | null; image_
 export const Route = createFileRoute("/_public/gallery")({
   head: () => ({
     meta: [
-      { title: "Gallery | SOI Threading Salon — Wayne, NJ" },
-      { name: "description", content: "Browse SOI Threading Salon's gallery — threading, facials, waxing, hair care, henna and our luxurious salon space in Wayne, NJ." },
+      { title: "Gallery | SOI Threading Salon, Wayne, NJ" },
+      { name: "description", content: "Browse SOI Threading Salon's gallery, threading, facials, waxing, hair care, henna and our luxurious salon space in Wayne, NJ." },
       { property: "og:title", content: "Gallery | SOI Threading Salon" },
       { property: "og:description", content: "Photos of our salon, services and beauty work in Wayne, NJ." },
       { property: "og:url", content: `${SITE_URL}/gallery` },
