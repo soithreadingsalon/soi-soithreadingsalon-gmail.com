@@ -123,7 +123,7 @@ export function LandingPage({ content }: { content: LandingContent }) {
             <a href="tel:5513013894" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold"><Phone className="h-4 w-4" /> Call Now</a>
             <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold"><MapPin className="h-4 w-4" /> Contact Us</Link>
           </div>
-          <p className="mt-5 text-xs text-muted-foreground inline-flex items-center gap-2"><Clock className="h-3 w-3" /> Mon–Fri 10am–7pm · Sat 10am–6pm · Sun 11am–4pm</p>
+          <p className="mt-5 text-xs text-muted-foreground inline-flex items-center gap-2"><Clock className="h-3 w-3" /> Mon–Fri 10am–7pm · Sat 10am–6pm · Sun Closed</p>
         </div>
       </section>
     </>

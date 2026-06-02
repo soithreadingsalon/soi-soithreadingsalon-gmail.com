@@ -74,7 +74,6 @@ export const Route = createRootRoute({
           openingHoursSpecification: [
             { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "10:00", closes: "19:00" },
             { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "18:00" },
-            { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "11:00", closes: "16:00" },
           ],
           areaServed: ["Wayne NJ","Totowa NJ","Little Falls NJ","Woodland Park NJ","Paterson NJ","Haledon NJ","North Haledon NJ","Pompton Lakes NJ","Fairfield NJ","Clifton NJ","Lincoln Park NJ","Pompton Plains NJ","Franklin Lakes NJ","Oakland NJ","Passaic County NJ"],
           sameAs: ["https://www.instagram.com/SOITHREADINGSALON"],

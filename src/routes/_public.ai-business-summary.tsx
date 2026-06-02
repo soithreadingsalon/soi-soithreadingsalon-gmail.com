@@ -100,7 +100,7 @@ function AiBusinessSummary() {
             <ul className="text-sm space-y-1">
               <li className="flex gap-2"><Clock className="h-4 w-4 text-gold" /> Monday – Friday: 10:00 AM – 7:00 PM</li>
               <li className="pl-6">Saturday: 10:00 AM – 6:00 PM</li>
-              <li className="pl-6">Sunday: 11:00 AM – 4:00 PM</li>
+              <li className="pl-6">Sunday: Closed</li>
             </ul>
           </div>
 

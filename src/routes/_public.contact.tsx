@@ -57,7 +57,6 @@ function ContactPage() {
     openingHoursSpecification: [
       { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "10:00", closes: "19:00" },
       { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "10:00", closes: "18:00" },
-      { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "11:00", closes: "16:00" },
     ],
     sameAs: ["https://instagram.com/SOITHREADINGSALON"],
   };
@@ -109,7 +108,7 @@ function ContactPage() {
             <li className="flex gap-3"><MapPin className="h-5 w-5 text-gold mt-0.5" /><span>180 Hamburg Turnpk<br />Wayne, NJ 07470</span></li>
             <li><a href="tel:5513013894" className="flex gap-3 hover:text-gold"><Phone className="h-5 w-5 text-gold mt-0.5" />551-301-3894</a></li>
             <li><a href="mailto:soithreadingsalon@gmail.com" className="flex gap-3 hover:text-gold break-all"><Mail className="h-5 w-5 text-gold mt-0.5" />soithreadingsalon@gmail.com</a></li>
-            <li className="flex gap-3"><Clock className="h-5 w-5 text-gold mt-0.5" /><span>M–F: 10am–7pm<br />Sat: 10am–6pm<br />Sun: 11am–4pm</span></li>
+            <li className="flex gap-3"><Clock className="h-5 w-5 text-gold mt-0.5" /><span>M–F: 10am–7pm<br />Sat: 10am–6pm<br />Sun: Closed</span></li>
             <li><a href="https://instagram.com/SOITHREADINGSALON" target="_blank" rel="noopener noreferrer" className="flex gap-3 hover:text-gold"><Instagram className="h-5 w-5 text-gold mt-0.5" />@SOITHREADINGSALON</a></li>
           </ul>
 

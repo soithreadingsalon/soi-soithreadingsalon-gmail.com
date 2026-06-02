@@ -50,7 +50,7 @@ function HomePage() {
 
   useEffect(() => {
     const day = new Date().getDay();
-    if (day === 0) setTodayHours("11:00 AM – 4:00 PM");
+    if (day === 0) setTodayHours("Closed");
     else if (day === 6) setTodayHours("10:00 AM – 6:00 PM");
     else setTodayHours("10:00 AM – 7:00 PM");
   }, []);
