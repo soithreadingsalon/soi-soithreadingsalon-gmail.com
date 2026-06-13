@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { TimeSlotPicker } from "@/components/TimeSlotPicker";
 import { SITE_URL } from "@/data/seo-content";
+import { notifyPosOfBooking } from "@/lib/pos.functions";
 
 export const Route = createFileRoute("/_public/booking")({
   head: () => ({
@@ -49,7 +50,7 @@ function BookingPage() {
       return;
     }
     setSubmitting(true);
-    const { error } = await supabase.from("appointments").insert({
+    const { data: inserted, error } = await supabase.from("appointments").insert({
       full_name: form.full_name,
       phone: form.phone,
       email: form.email || null,
@@ -58,10 +59,18 @@ function BookingPage() {
       preferred_date: form.preferred_date || null,
       preferred_time: form.preferred_time || null,
       notes: form.notes || null,
-    });
+    }).select("id").single();
     setSubmitting(false);
     if (error) toast.error("Could not submit. Please try again or call us.");
-    else { setDone(true); toast.success("Appointment request received!"); }
+    else {
+      setDone(true);
+      toast.success("Appointment request received!");
+      if (inserted?.id) {
+        notifyPosOfBooking({ data: { appointmentId: inserted.id } }).catch((err) => {
+          console.error("POS notify failed", err);
+        });
+      }
+    }
   }
 
   if (done) {
