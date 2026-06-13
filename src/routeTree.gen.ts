@@ -37,6 +37,7 @@ import { Route as PublicBeautySalonWayneNjRouteImport } from './routes/_public.b
 import { Route as PublicAiBusinessSummaryRouteImport } from './routes/_public.ai-business-summary'
 import { Route as PublicAboutRouteImport } from './routes/_public.about'
 import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
+import { Route as ApiPublicPosAppointmentsRouteImport } from './routes/api/public/pos.appointments'
 
 const SoiRoute = SoiRouteImport.update({
   id: '/soi',
@@ -182,6 +183,12 @@ const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
   path: '/api/public/track',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicPosAppointmentsRoute =
+  ApiPublicPosAppointmentsRouteImport.update({
+    id: '/api/public/pos/appointments',
+    path: '/api/public/pos/appointments',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
@@ -211,6 +218,7 @@ export interface FileRoutesByFullPath {
   '/soi/settings': typeof SoiSettingsRoute
   '/soi/': typeof SoiIndexRoute
   '/api/public/track': typeof ApiPublicTrackRoute
+  '/api/public/pos/appointments': typeof ApiPublicPosAppointmentsRoute
 }
 export interface FileRoutesByTo {
   '/about': typeof PublicAboutRoute
@@ -239,6 +247,7 @@ export interface FileRoutesByTo {
   '/': typeof PublicIndexRoute
   '/soi': typeof SoiIndexRoute
   '/api/public/track': typeof ApiPublicTrackRoute
+  '/api/public/pos/appointments': typeof ApiPublicPosAppointmentsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -270,6 +279,7 @@ export interface FileRoutesById {
   '/_public/': typeof PublicIndexRoute
   '/soi/': typeof SoiIndexRoute
   '/api/public/track': typeof ApiPublicTrackRoute
+  '/api/public/pos/appointments': typeof ApiPublicPosAppointmentsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -301,6 +311,7 @@ export interface FileRouteTypes {
     | '/soi/settings'
     | '/soi/'
     | '/api/public/track'
+    | '/api/public/pos/appointments'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/about'
@@ -329,6 +340,7 @@ export interface FileRouteTypes {
     | '/'
     | '/soi'
     | '/api/public/track'
+    | '/api/public/pos/appointments'
   id:
     | '__root__'
     | '/_public'
@@ -359,12 +371,14 @@ export interface FileRouteTypes {
     | '/_public/'
     | '/soi/'
     | '/api/public/track'
+    | '/api/public/pos/appointments'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   PublicRoute: typeof PublicRouteWithChildren
   SoiRoute: typeof SoiRouteWithChildren
   ApiPublicTrackRoute: typeof ApiPublicTrackRoute
+  ApiPublicPosAppointmentsRoute: typeof ApiPublicPosAppointmentsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -565,6 +579,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicTrackRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/pos/appointments': {
+      id: '/api/public/pos/appointments'
+      path: '/api/public/pos/appointments'
+      fullPath: '/api/public/pos/appointments'
+      preLoaderRoute: typeof ApiPublicPosAppointmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -639,6 +660,7 @@ const rootRouteChildren: RootRouteChildren = {
   PublicRoute: PublicRouteWithChildren,
   SoiRoute: SoiRouteWithChildren,
   ApiPublicTrackRoute: ApiPublicTrackRoute,
+  ApiPublicPosAppointmentsRoute: ApiPublicPosAppointmentsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
