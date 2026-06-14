@@ -7,6 +7,8 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { TimeSlotPicker } from "@/components/TimeSlotPicker";
 import { SITE_URL } from "@/data/seo-content";
+import { useServerFn } from "@tanstack/react-start";
+import { submitBooking as submitBookingRequest } from "@/lib/booking.functions";
 import {
   Dialog,
   DialogContent,
@@ -59,6 +61,7 @@ function ServicesPage() {
   const [bookingDone, setBookingDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ full_name: "", phone: "", email: "", preferred_date: "", preferred_time: "", notes: "" });
+  const submitBookingFn = useServerFn(submitBookingRequest);
 
   useEffect(() => {
     supabase.from("services").select("*").order("sort_order").then(({ data }) => {
@@ -121,21 +124,25 @@ function ServicesPage() {
       `Estimated total: $${totalEstimate}${hasUpPricing ? "+" : ""}`,
     ].filter(Boolean).join("\n");
 
-    const { error } = await supabase.from("appointments").insert({
-      full_name: form.full_name,
-      phone: form.phone,
-      email: form.email || null,
-      service_category: cats || null,
-      service: serviceNames || null,
-      preferred_date: form.preferred_date || null,
-      preferred_time: form.preferred_time || null,
-      notes: notesWithEstimate,
-    });
-    setSubmitting(false);
-    if (error) {
+    try {
+      await submitBookingFn({
+        data: {
+          full_name: form.full_name,
+          phone: form.phone,
+          email: form.email || null,
+          service_category: cats || null,
+          service: serviceNames || null,
+          preferred_date: form.preferred_date || null,
+          preferred_time: form.preferred_time || null,
+          notes: notesWithEstimate,
+        },
+      });
+    } catch (error) {
+      setSubmitting(false);
       toast.error("Could not submit. Please try again or call us.");
       return;
     }
+    setSubmitting(false);
     setBookingDone(true);
     toast.success("Appointment request received!");
     setSelectedIds(new Set());
