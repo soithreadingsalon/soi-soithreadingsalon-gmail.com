@@ -1,38 +1,46 @@
-## Why POS isn't receiving bookings
+## Goal
 
-The server-side push code (`src/lib/booking.functions.ts → pushToPos`) is already wired into the booking flow. It exits silently when either `BOOKING_INTEGRATION_SECRET` or `POS_WEBHOOK_URL` is missing — and neither has actually been saved yet (verified: only Google connector secrets + `LOVABLE_API_KEY` exist). That's the only thing blocking delivery.
+Preview/sandbox bookings should land in the **test** POS, while production bookings keep going to the live POS — using the same booking code and the same shared secret.
 
-## Plan
+## How it works
 
-Add two backend secrets — no code changes needed:
+Lovable Cloud keeps two independent secret stores:
 
-| Secret | Value |
-|---|---|
-| `POS_WEBHOOK_URL` | `https://pos.soithreadingandsalon.com/api/public/website-appointment` |
-| `BOOKING_INTEGRATION_SECRET` | the matching shared secret from the POS (the same value already pasted into the POS's `WEBSITE_BOOKING_SECRET` field) |
+- **Production environment** (served from `soithreadingandsalon.com` and `sois-beauty-suite.lovable.app`)
+- **Preview/Dev environment** (served from `id-preview--…lovable.app` and any `*-dev.lovable.app` URL)
 
-Once saved, every new booking will:
+Our booking code already reads `POS_WEBHOOK_URL` at runtime, so the same code can deliver to two different POS instances just by giving each environment its own value for that secret. No code changes.
 
-1. Insert into our `appointments` table (admin keeps working — unchanged).
-2. POST to the POS URL with:
-   - `Authorization: Bearer <BOOKING_INTEGRATION_SECRET>`
-   - `X-Signature: sha256=<HMAC of the body using the same secret>`
-   - JSON body `{ "event": "appointment.created", "appointment": { …full row… } }`
+## Changes
 
-If the POS responds non-2xx, the failure is logged server-side but the customer still sees the success screen (we never want a POS hiccup to look like a booking failure to the visitor).
+1. **Preview environment secret** — set:
+   - `POS_WEBHOOK_URL` = `https://project--f66027a0-e6c6-4be1-a361-27e67adff7d8-dev.lovable.app/api/public/website-appointment`
+   - `BOOKING_INTEGRATION_SECRET` = the same shared secret (so HMAC + bearer match the POS's `WEBSITE_BOOKING_SECRET`)
+
+2. **Production environment secret** — leave as-is:
+   - `POS_WEBHOOK_URL` = `https://pos.soithreadingandsalon.com/api/public/website-appointment`
+   - `BOOKING_INTEGRATION_SECRET` = unchanged
+
+3. **No code edits.** `src/lib/booking.functions.ts → pushToPos` already:
+   - reads both env vars at call time,
+   - signs the body with HMAC-SHA256,
+   - sends `Authorization: Bearer <secret>` + `X-Signature: sha256=…`,
+   - logs (but doesn't fail the booking) on non-2xx.
+
+4. **No publish required for this routing to work in preview** — preview already runs the latest code with the preview-environment secrets. Publishing is only needed if the user also wants the production POS URL or any other prod change to go live.
 
 ## Verification
 
-After the secrets are saved I will:
+After the preview secrets are saved:
 
-1. Submit a test booking from the live preview.
-2. Check the server logs for `[submitBooking] POS responded` errors.
-3. Confirm the row appears both in admin Appointments and in the POS.
+1. Submit a test booking from the preview site (`id-preview--…lovable.app/booking`).
+2. Confirm it appears in the **test/sandbox** POS at `project--f66027a0…-dev.lovable.app/appointments` under Environment: Test.
+3. Confirm production bookings (from `soithreadingandsalon.com`) still land in the live POS.
 
-If the POS returns 401, the secret values don't match between the two systems — we re-sync them. If it returns 404, the path is wrong and we update `POS_WEBHOOK_URL`.
+If the test POS returns 401, the secret values don't match between this project's preview env and the test POS's `WEBSITE_BOOKING_SECRET` — re-sync them. If 404, the path on the test POS isn't deployed yet.
 
 ## Out of scope
 
-- Backfilling past appointments to the POS (only new bookings going forward).
-- Changing auth/signature scheme — staying on `Bearer` + `X-Signature sha256=…`.
-- Two-way sync (POS → website is not part of this).
+- Code changes to `booking.functions.ts` (not needed — env-var driven).
+- Backfilling past appointments.
+- A separate `POS_WEBHOOK_URL_TEST` variable (unnecessary; environment-scoped secrets already give us per-environment routing).
