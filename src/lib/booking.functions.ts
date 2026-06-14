@@ -93,8 +93,8 @@ async function pushToPos(appt: InsertedAppt) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "x-booking-secret": secret,
         "x-soi-signature": signature,
-        Authorization: `Bearer ${secret}`,
       },
       body,
       signal: controller.signal,
