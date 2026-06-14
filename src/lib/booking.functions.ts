@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getRequestHeader } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { createHmac } from "crypto";
 
@@ -50,17 +49,11 @@ type InsertedAppt = {
   notes: string | null;
 };
 
-async function pushToPos(appt: InsertedAppt) {
+async function pushToPos(appt: InsertedAppt, host: string) {
   const configuredSecret = process.env.BOOKING_INTEGRATION_SECRET;
   const prodTarget = process.env.POS_WEBHOOK_URL;
   const testTarget = process.env.POS_WEBHOOK_URL_TEST;
-  let host = "";
-  try {
-    host = (getRequestHeader("host") || "").toLowerCase();
-  } catch {
-    host = "";
-  }
-  const isProd = host.includes("soithreadingandsalon.com");
+  const isProd = host.toLowerCase().includes("soithreadingandsalon.com");
   const target = isProd ? prodTarget : (testTarget || prodTarget);
   const secret = configuredSecret?.trim();
   if (!secret || !target) return;
@@ -126,6 +119,9 @@ async function pushToPos(appt: InsertedAppt) {
 export const submitBooking = createServerFn({ method: "POST" })
   .inputValidator((data: BookingInput) => BookingInput.parse(data))
   .handler(async ({ data }) => {
+    const { getRequestHeader } = await import("@tanstack/react-start/server");
+    let host = "";
+    try { host = getRequestHeader("host") || ""; } catch { host = ""; }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const payload = {
       full_name: data.full_name,
@@ -146,6 +142,6 @@ export const submitBooking = createServerFn({ method: "POST" })
       console.error("[submitBooking] insert failed", error);
       throw new Error("Could not save appointment");
     }
-    await pushToPos(inserted);
+    await pushToPos(inserted, host);
     return { id: inserted.id };
   });
