@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequestHeader } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { createHmac } from "crypto";
 
@@ -51,7 +52,16 @@ type InsertedAppt = {
 
 async function pushToPos(appt: InsertedAppt) {
   const configuredSecret = process.env.BOOKING_INTEGRATION_SECRET;
-  const target = process.env.POS_WEBHOOK_URL;
+  const prodTarget = process.env.POS_WEBHOOK_URL;
+  const testTarget = process.env.POS_WEBHOOK_URL_TEST;
+  let host = "";
+  try {
+    host = (getRequestHeader("host") || "").toLowerCase();
+  } catch {
+    host = "";
+  }
+  const isProd = host.includes("soithreadingandsalon.com");
+  const target = isProd ? prodTarget : (testTarget || prodTarget);
   const secret = configuredSecret?.trim();
   if (!secret || !target) return;
 
