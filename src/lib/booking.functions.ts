@@ -50,8 +50,9 @@ type InsertedAppt = {
 };
 
 async function pushToPos(appt: InsertedAppt) {
-  const secret = process.env.BOOKING_INTEGRATION_SECRET;
+  const configuredSecret = process.env.BOOKING_INTEGRATION_SECRET;
   const target = process.env.POS_WEBHOOK_URL;
+  const secret = configuredSecret?.trim();
   if (!secret || !target) return;
 
   const apptTime = to24h(appt.preferred_time);
@@ -78,8 +79,16 @@ async function pushToPos(appt: InsertedAppt) {
   try {
     const body = JSON.stringify(payload);
     const signature = createHmac("sha256", secret).update(body).digest("hex");
+    const secretFingerprint = createHmac("sha256", "soi-booking-debug").update(secret).digest("hex").slice(0, 12);
+    const bodyFingerprint = createHmac("sha256", "soi-booking-body").update(body).digest("hex").slice(0, 12);
     const controller = new AbortController();
     const t = setTimeout(() => controller.abort(), 5000);
+    console.log("[submitBooking] POS push prepared", {
+      targetHost: new URL(target).host,
+      external_booking_id: appt.id,
+      secretFingerprint,
+      bodyFingerprint,
+    });
     const res = await fetch(target, {
       method: "POST",
       headers: {
