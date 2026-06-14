@@ -1,42 +1,38 @@
-## Problem
+## Why POS isn't receiving bookings
 
-Booking form fails with "Could not submit…" and no row reaches the admin Appointments list.
+The server-side push code (`src/lib/booking.functions.ts → pushToPos`) is already wired into the booking flow. It exits silently when either `BOOKING_INTEGRATION_SECRET` or `POS_WEBHOOK_URL` is missing — and neither has actually been saved yet (verified: only Google connector secrets + `LOVABLE_API_KEY` exist). That's the only thing blocking delivery.
 
-Two root causes on the `appointments` table:
+## Plan
 
-1. **Missing Data-API GRANTs.** Only the sandbox role has `INSERT`/`SELECT`. `anon` and `authenticated` have no privileges, so the public booking form can't insert — PostgREST rejects it with `permission denied for table appointments` before RLS is even evaluated.
-2. **`.select("id").single()` after insert is blocked by RLS.** The SELECT policy restricts reads to admins. Even once GRANTs are fixed, the returning-row read finds 0 rows and `.single()` throws — the insert silently rolls back from the client's perspective and the toast shows the failure path.
+Add two backend secrets — no code changes needed:
 
-## Fix
+| Secret | Value |
+|---|---|
+| `POS_WEBHOOK_URL` | `https://pos.soithreadingandsalon.com/api/public/website-appointment` |
+| `BOOKING_INTEGRATION_SECRET` | the matching shared secret from the POS (the same value already pasted into the POS's `WEBSITE_BOOKING_SECRET` field) |
 
-### 1. Migration: add GRANTs on `appointments`
+Once saved, every new booking will:
 
-```sql
-GRANT INSERT ON public.appointments TO anon, authenticated;
-GRANT SELECT, UPDATE, DELETE ON public.appointments TO authenticated;
-GRANT ALL ON public.appointments TO service_role;
-```
+1. Insert into our `appointments` table (admin keeps working — unchanged).
+2. POST to the POS URL with:
+   - `Authorization: Bearer <BOOKING_INTEGRATION_SECRET>`
+   - `X-Signature: sha256=<HMAC of the body using the same secret>`
+   - JSON body `{ "event": "appointment.created", "appointment": { …full row… } }`
 
-(SELECT is still gated by the admin RLS policy — granting the privilege only lets PostgREST consider the row; the policy still filters it.)
+If the POS responds non-2xx, the failure is logged server-side but the customer still sees the success screen (we never want a POS hiccup to look like a booking failure to the visitor).
 
-### 2. Move the whole submit flow to a server function
+## Verification
 
-Create `src/lib/booking.functions.ts` exporting `submitBooking` — a public `createServerFn` (no auth middleware) that:
+After the secrets are saved I will:
 
-- validates the form payload with the same Zod schema,
-- uses `supabaseAdmin` (loaded inside the handler via `await import(...)`) to insert and return `id`,
-- calls the existing `notifyPosOfBooking` logic inline (or re-uses the helper) and swallows its error so a POS hiccup never blocks the user,
-- returns `{ id }`.
+1. Submit a test booking from the live preview.
+2. Check the server logs for `[submitBooking] POS responded` errors.
+3. Confirm the row appears both in admin Appointments and in the POS.
 
-This sidesteps the RLS read-after-insert problem entirely and keeps the POS notify server-side where the secret already lives.
-
-### 3. Update `src/routes/_public.booking.tsx`
-
-- Replace the direct `supabase.from("appointments").insert(...).select("id").single()` with `useServerFn(submitBooking)` + call it with the form payload.
-- Drop the separate `notifyPosOfBooking` call from the client (folded into the server fn).
-- Keep the existing success UI and toast.
+If the POS returns 401, the secret values don't match between the two systems — we re-sync them. If it returns 404, the path is wrong and we update `POS_WEBHOOK_URL`.
 
 ## Out of scope
 
-- No RLS policy changes — admin-only SELECT/UPDATE/DELETE stays as-is.
-- No change to POS notify auth headers or signature format.
+- Backfilling past appointments to the POS (only new bookings going forward).
+- Changing auth/signature scheme — staying on `Bearer` + `X-Signature sha256=…`.
+- Two-way sync (POS → website is not part of this).
