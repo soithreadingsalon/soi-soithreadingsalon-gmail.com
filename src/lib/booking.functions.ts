@@ -95,6 +95,8 @@ async function pushToPos(appt: InsertedAppt) {
     const t = setTimeout(() => controller.abort(), 5000);
     console.log("[submitBooking] POS push prepared", {
       targetHost: new URL(target).host,
+      requestHost: host,
+      env: isProd ? "production" : "test",
       external_booking_id: appt.id,
       secretFingerprint,
       bodyFingerprint,
