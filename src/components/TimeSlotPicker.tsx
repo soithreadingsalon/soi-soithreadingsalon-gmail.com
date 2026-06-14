@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
-import { generateSlots, pickHoursForDate } from "@/lib/time-slots";
+import { generateSlots, pickHoursForDate, to24h } from "@/lib/time-slots";
 import { getCalendarBusySlots } from "@/lib/calendar.functions";
 
 type Settings = {
@@ -82,7 +82,18 @@ export function TimeSlotPicker({
   const slots = useMemo(() => {
     if (!date) return [];
     const hrs = pickHoursForDate(date, settings.hours_weekday, settings.hours_saturday, settings.hours_sunday);
-    return generateSlots(hrs, 30);
+    const all = generateSlots(hrs, 30);
+    const todayISO = new Date().toISOString().slice(0, 10);
+    if (date < todayISO) return [];
+    if (date !== todayISO) return all;
+    const now = new Date();
+    const nowMin = now.getHours() * 60 + now.getMinutes();
+    return all.filter((label) => {
+      const t = to24h(label);
+      if (!t) return true;
+      const [h, m] = t.split(":").map(Number);
+      return h * 60 + m > nowMin;
+    });
   }, [settings, date]);
 
   if (!date) {

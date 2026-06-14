@@ -5,8 +5,8 @@ import { createHmac } from "crypto";
 const BookingInput = z.object({
   full_name: z.string().trim().min(1).max(100),
   phone: z.string().trim().min(7).max(30),
-  email: z.string().trim().email().max(255).nullable().optional(),
-  service_category: z.string().max(50).nullable().optional(),
+  email: z.string().trim().email().max(255),
+  service_category: z.string().trim().min(1).max(50),
   service: z.string().max(100).nullable().optional(),
   preferred_date: z.string().max(20).nullable().optional(),
   preferred_time: z.string().max(40).nullable().optional(),
