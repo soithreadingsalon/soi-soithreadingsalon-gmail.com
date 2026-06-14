@@ -1,47 +1,23 @@
-## Diagnosis
+## Booking form: stricter validation + future-only date/time
 
-The website is saving the appointment correctly in its own backend. The newest test appointment is present there.
+### Changes to `src/routes/_public.booking.tsx`
+- Make **Email** required (add `required`, update label to `Email *`, update Zod schema to require a valid email — remove the `.optional()/literal("")` branch).
+- Make **Service Category** required (add `required` on the `<select>`, label `Service Category *`, Zod: non-empty string).
+- Update the `submit` handler to send `email` as a plain string (no `|| null`) and `service_category` as a string.
+- Restrict **Preferred Date** input to today or later via `min={todayISO}` on the `<input type="date">`.
 
-The POS webhook call is failing with:
+### Changes to `src/components/TimeSlotPicker.tsx` (and/or `src/lib/time-slots.ts`)
+- When the selected date is **today**, filter out any slot whose time has already passed (compare against `new Date()` in local time).
+- When the selected date is in the **past**, show no slots (the date input will already block this, but guard anyway).
+- Future dates: unchanged behavior.
 
-```text
-[submitBooking] POS responded 401 {"error":"Invalid signature"}
-```
+### Server-side validation (`src/lib/booking.functions.ts`)
+- Tighten the `inputValidator` Zod schema to match: `email` required + valid, `service_category` required non-empty. This keeps the API consistent with the form so direct POSTs can't bypass the new rules.
 
-The previous test also hit a 404, which means the POS endpoint path/deployment was not ready at that time. Now it reaches the POS endpoint, but authentication/signature verification fails.
+### Out of scope
+- No DB schema change. `appointments.email` and `service_category` remain nullable in the DB (existing rows keep working); only new submissions through the form/API are required to include them.
+- Admin UI (`/soi/appointments`) is unchanged.
 
-## Root cause
-
-The website sends the webhook like this:
-
-- Body: `{ event: "appointment.created", appointment: ... }`
-- Header: `X-Signature: sha256=<hmac>`
-- Header: `Authorization: Bearer <secret>`
-
-The POS endpoint expects this instead:
-
-- Body: flat appointment fields like `customer_name`, `appointment_date`, `appointment_time`, etc.
-- Header: `x-soi-signature: <hmac>` with no `sha256=` prefix
-- Secret name on POS side: `WEBSITE_BOOKING_SECRET`
-
-So the POS receives the request but rejects it before creating the appointment.
-
-## Implementation plan
-
-1. Update the website booking webhook sender in `src/lib/booking.functions.ts`.
-2. Convert the saved website appointment into the flat POS payload the POS endpoint expects:
-   - `customer_name` from `full_name`
-   - `customer_phone` from `phone`
-   - `customer_email` from `email`
-   - `service_name` from `service` or `service_category`
-   - `appointment_date` from `preferred_date`
-   - `appointment_time` converted from display format like `10:00 AM` to `10:00:00`
-   - `notes`, `external_booking_id`, `external_source`
-3. Sign the exact JSON body with HMAC-SHA256 and send it as `x-soi-signature` without the `sha256=` prefix.
-4. Keep `Authorization: Bearer <secret>` only as extra compatibility; POS currently ignores it.
-5. Add concise logging that reports whether POS accepted, deduped, or rejected the appointment, without logging the secret.
-6. Verify by submitting or simulating a test booking and checking the POS response/logs.
-
-## Expected result
-
-New preview/sandbox bookings will appear in the POS appointments list under `Environment: Test (sandbox)`. Production bookings will continue going to the production POS URL using the production environment configuration.
+### Notes
+- "Future only" for time uses the visitor's local clock — same basis the picker already uses to render slots.
+- I'll read `TimeSlotPicker.tsx`, `src/lib/time-slots.ts`, and `src/lib/booking.functions.ts` before editing to match existing patterns.

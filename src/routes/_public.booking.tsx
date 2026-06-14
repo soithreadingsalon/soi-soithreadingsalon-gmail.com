@@ -27,8 +27,8 @@ export const Route = createFileRoute("/_public/booking")({
 const schema = z.object({
   full_name: z.string().trim().min(1).max(100),
   phone: z.string().trim().min(7).max(30),
-  email: z.string().trim().email().max(255).optional().or(z.literal("")),
-  service_category: z.string().max(50).optional(),
+  email: z.string().trim().email("Please enter a valid email").max(255),
+  service_category: z.string().trim().min(1, "Please select a service category").max(50),
   service: z.string().max(100).optional(),
   preferred_date: z.string().optional().or(z.literal("")),
   preferred_time: z.string().max(40).optional().or(z.literal("")),
@@ -40,6 +40,7 @@ function BookingPage() {
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const submitBookingFn = useServerFn(submitBooking);
+  const todayISO = new Date().toISOString().slice(0, 10);
   const handle = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm({ ...form, [k]: e.target.value });
 
@@ -56,8 +57,8 @@ function BookingPage() {
         data: {
           full_name: form.full_name,
           phone: form.phone,
-          email: form.email || null,
-          service_category: form.service_category || null,
+          email: form.email,
+          service_category: form.service_category,
           service: form.service || null,
           preferred_date: form.preferred_date || null,
           preferred_time: form.preferred_time || null,
@@ -97,10 +98,10 @@ function BookingPage() {
           <Field label="Full Name *"><input required value={form.full_name} onChange={handle("full_name")} className="input" /></Field>
           <Field label="Phone Number *"><input required value={form.phone} onChange={handle("phone")} className="input" /></Field>
         </div>
-        <Field label="Email"><input type="email" value={form.email} onChange={handle("email")} className="input" /></Field>
+        <Field label="Email *"><input type="email" required value={form.email} onChange={handle("email")} className="input" /></Field>
         <div className="grid sm:grid-cols-2 gap-4">
-          <Field label="Service Category">
-            <select value={form.service_category} onChange={handle("service_category")} className="input">
+          <Field label="Service Category *">
+            <select required value={form.service_category} onChange={handle("service_category")} className="input">
               <option value="">Select…</option>
               {["Threading","Waxing","Facials","Hair Care","Henna","Men"].map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
@@ -108,7 +109,7 @@ function BookingPage() {
           <Field label="Service"><input value={form.service} onChange={handle("service")} className="input" placeholder="e.g. Eyebrow threading" /></Field>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
-          <Field label="Preferred Date"><input type="date" value={form.preferred_date} onChange={handle("preferred_date")} className="input" /></Field>
+          <Field label="Preferred Date"><input type="date" min={todayISO} value={form.preferred_date} onChange={handle("preferred_date")} className="input" /></Field>
           <Field label="Preferred Time">
             <TimeSlotPicker
               date={form.preferred_date}
