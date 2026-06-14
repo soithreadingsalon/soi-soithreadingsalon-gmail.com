@@ -4,10 +4,10 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { CheckCircle2, Phone } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { supabase } from "@/integrations/supabase/client";
 import { TimeSlotPicker } from "@/components/TimeSlotPicker";
 import { SITE_URL } from "@/data/seo-content";
-import { notifyPosOfBooking } from "@/lib/pos.functions";
+import { useServerFn } from "@tanstack/react-start";
+import { submitBooking } from "@/lib/booking.functions";
 
 export const Route = createFileRoute("/_public/booking")({
   head: () => ({
@@ -39,6 +39,7 @@ function BookingPage() {
   const [form, setForm] = useState({ full_name: "", phone: "", email: "", service_category: "", service: "", preferred_date: "", preferred_time: "", notes: "" });
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const submitBookingFn = useServerFn(submitBooking);
   const handle = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm({ ...form, [k]: e.target.value });
 
@@ -50,26 +51,26 @@ function BookingPage() {
       return;
     }
     setSubmitting(true);
-    const { data: inserted, error } = await supabase.from("appointments").insert({
-      full_name: form.full_name,
-      phone: form.phone,
-      email: form.email || null,
-      service_category: form.service_category || null,
-      service: form.service || null,
-      preferred_date: form.preferred_date || null,
-      preferred_time: form.preferred_time || null,
-      notes: form.notes || null,
-    }).select("id").single();
-    setSubmitting(false);
-    if (error) toast.error("Could not submit. Please try again or call us.");
-    else {
+    try {
+      await submitBookingFn({
+        data: {
+          full_name: form.full_name,
+          phone: form.phone,
+          email: form.email || null,
+          service_category: form.service_category || null,
+          service: form.service || null,
+          preferred_date: form.preferred_date || null,
+          preferred_time: form.preferred_time || null,
+          notes: form.notes || null,
+        },
+      });
       setDone(true);
       toast.success("Appointment request received!");
-      if (inserted?.id) {
-        notifyPosOfBooking({ data: { appointmentId: inserted.id } }).catch((err) => {
-          console.error("POS notify failed", err);
-        });
-      }
+    } catch (err) {
+      console.error("submit booking failed", err);
+      toast.error("Could not submit. Please try again or call us.");
+    } finally {
+      setSubmitting(false);
     }
   }
 
