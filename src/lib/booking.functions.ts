@@ -15,28 +15,87 @@ const BookingInput = z.object({
 
 export type BookingInput = z.infer<typeof BookingInput>;
 
-async function pushToPos(appt: Record<string, unknown>) {
+function to24h(t: string | null | undefined): string | null {
+  if (!t) return null;
+  const s = t.trim();
+  // Already HH:MM or HH:MM:SS (24h)
+  const m24 = s.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
+  if (m24 && !/[ap]m/i.test(s)) {
+    const h = String(parseInt(m24[1], 10)).padStart(2, "0");
+    return `${h}:${m24[2]}:${m24[3] ?? "00"}`;
+  }
+  // 12h like "10:00 AM", "10AM", "2:30 pm"
+  const m12 = s.match(/^(\d{1,2})(?::(\d{2}))?\s*([ap])m$/i);
+  if (m12) {
+    let h = parseInt(m12[1], 10);
+    const min = m12[2] ?? "00";
+    const isPm = m12[3].toLowerCase() === "p";
+    if (h === 12) h = isPm ? 12 : 0;
+    else if (isPm) h += 12;
+    return `${String(h).padStart(2, "0")}:${min}:00`;
+  }
+  return null;
+}
+
+type InsertedAppt = {
+  id: string;
+  full_name: string;
+  phone: string;
+  email: string | null;
+  service_category: string | null;
+  service: string | null;
+  preferred_date: string | null;
+  preferred_time: string | null;
+  notes: string | null;
+};
+
+async function pushToPos(appt: InsertedAppt) {
   const secret = process.env.BOOKING_INTEGRATION_SECRET;
   const target = process.env.POS_WEBHOOK_URL;
   if (!secret || !target) return;
+
+  const apptTime = to24h(appt.preferred_time);
+  if (!appt.preferred_date || !apptTime) {
+    console.warn("[submitBooking] skipping POS push — missing date/time", {
+      date: appt.preferred_date,
+      time: appt.preferred_time,
+    });
+    return;
+  }
+
+  const payload = {
+    customer_name: appt.full_name,
+    customer_phone: appt.phone,
+    customer_email: appt.email,
+    service_name: appt.service || appt.service_category || "Appointment",
+    appointment_date: appt.preferred_date,
+    appointment_time: apptTime,
+    notes: appt.notes,
+    external_booking_id: appt.id,
+    external_source: "website",
+  };
+
   try {
-    const body = JSON.stringify({ event: "appointment.created", appointment: appt });
-    const signature = "sha256=" + createHmac("sha256", secret).update(body).digest("hex");
+    const body = JSON.stringify(payload);
+    const signature = createHmac("sha256", secret).update(body).digest("hex");
     const controller = new AbortController();
     const t = setTimeout(() => controller.abort(), 5000);
     const res = await fetch(target, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "x-soi-signature": signature,
         Authorization: `Bearer ${secret}`,
-        "X-Signature": signature,
       },
       body,
       signal: controller.signal,
     });
     clearTimeout(t);
+    const text = await res.text().catch(() => "");
     if (!res.ok) {
-      console.error("[submitBooking] POS responded", res.status, await res.text().catch(() => ""));
+      console.error("[submitBooking] POS responded", res.status, text);
+    } else {
+      console.log("[submitBooking] POS accepted", res.status, text);
     }
   } catch (err) {
     console.error("[submitBooking] POS push failed", err);
