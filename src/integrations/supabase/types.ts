@@ -65,6 +65,66 @@ export type Database = {
         }
         Relationships: []
       }
+      appointments_deleted: {
+        Row: {
+          backup_id: string
+          calendar_synced_at: string | null
+          deleted_at: string
+          deleted_by: string | null
+          email: string | null
+          full_name: string
+          google_event_id: string | null
+          internal_notes: string | null
+          notes: string | null
+          original_created_at: string | null
+          original_id: string
+          phone: string
+          preferred_date: string | null
+          preferred_time: string | null
+          service: string | null
+          service_category: string | null
+          status: string | null
+        }
+        Insert: {
+          backup_id?: string
+          calendar_synced_at?: string | null
+          deleted_at?: string
+          deleted_by?: string | null
+          email?: string | null
+          full_name: string
+          google_event_id?: string | null
+          internal_notes?: string | null
+          notes?: string | null
+          original_created_at?: string | null
+          original_id: string
+          phone: string
+          preferred_date?: string | null
+          preferred_time?: string | null
+          service?: string | null
+          service_category?: string | null
+          status?: string | null
+        }
+        Update: {
+          backup_id?: string
+          calendar_synced_at?: string | null
+          deleted_at?: string
+          deleted_by?: string | null
+          email?: string | null
+          full_name?: string
+          google_event_id?: string | null
+          internal_notes?: string | null
+          notes?: string | null
+          original_created_at?: string | null
+          original_id?: string
+          phone?: string
+          preferred_date?: string | null
+          preferred_time?: string | null
+          service?: string | null
+          service_category?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
       gallery: {
         Row: {
           caption: string | null

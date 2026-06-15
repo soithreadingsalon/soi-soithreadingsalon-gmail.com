@@ -20,6 +20,7 @@ import { Route as SoiLoginRouteImport } from './routes/soi.login'
 import { Route as SoiInquiriesRouteImport } from './routes/soi.inquiries'
 import { Route as SoiGalleryRouteImport } from './routes/soi.gallery'
 import { Route as SoiDashboardRouteImport } from './routes/soi.dashboard'
+import { Route as SoiAppointmentsBackupRouteImport } from './routes/soi.appointments-backup'
 import { Route as SoiAppointmentsRouteImport } from './routes/soi.appointments'
 import { Route as PublicWaxingWayneNjRouteImport } from './routes/_public.waxing-wayne-nj'
 import { Route as PublicThreadingSalonWayneNjRouteImport } from './routes/_public.threading-salon-wayne-nj'
@@ -91,6 +92,11 @@ const SoiGalleryRoute = SoiGalleryRouteImport.update({
 const SoiDashboardRoute = SoiDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiAppointmentsBackupRoute = SoiAppointmentsBackupRouteImport.update({
+  id: '/appointments-backup',
+  path: '/appointments-backup',
   getParentRoute: () => SoiRoute,
 } as any)
 const SoiAppointmentsRoute = SoiAppointmentsRouteImport.update({
@@ -209,6 +215,7 @@ export interface FileRoutesByFullPath {
   '/threading-salon-wayne-nj': typeof PublicThreadingSalonWayneNjRoute
   '/waxing-wayne-nj': typeof PublicWaxingWayneNjRoute
   '/soi/appointments': typeof SoiAppointmentsRoute
+  '/soi/appointments-backup': typeof SoiAppointmentsBackupRoute
   '/soi/dashboard': typeof SoiDashboardRoute
   '/soi/gallery': typeof SoiGalleryRoute
   '/soi/inquiries': typeof SoiInquiriesRoute
@@ -237,6 +244,7 @@ export interface FileRoutesByTo {
   '/threading-salon-wayne-nj': typeof PublicThreadingSalonWayneNjRoute
   '/waxing-wayne-nj': typeof PublicWaxingWayneNjRoute
   '/soi/appointments': typeof SoiAppointmentsRoute
+  '/soi/appointments-backup': typeof SoiAppointmentsBackupRoute
   '/soi/dashboard': typeof SoiDashboardRoute
   '/soi/gallery': typeof SoiGalleryRoute
   '/soi/inquiries': typeof SoiInquiriesRoute
@@ -269,6 +277,7 @@ export interface FileRoutesById {
   '/_public/threading-salon-wayne-nj': typeof PublicThreadingSalonWayneNjRoute
   '/_public/waxing-wayne-nj': typeof PublicWaxingWayneNjRoute
   '/soi/appointments': typeof SoiAppointmentsRoute
+  '/soi/appointments-backup': typeof SoiAppointmentsBackupRoute
   '/soi/dashboard': typeof SoiDashboardRoute
   '/soi/gallery': typeof SoiGalleryRoute
   '/soi/inquiries': typeof SoiInquiriesRoute
@@ -302,6 +311,7 @@ export interface FileRouteTypes {
     | '/threading-salon-wayne-nj'
     | '/waxing-wayne-nj'
     | '/soi/appointments'
+    | '/soi/appointments-backup'
     | '/soi/dashboard'
     | '/soi/gallery'
     | '/soi/inquiries'
@@ -330,6 +340,7 @@ export interface FileRouteTypes {
     | '/threading-salon-wayne-nj'
     | '/waxing-wayne-nj'
     | '/soi/appointments'
+    | '/soi/appointments-backup'
     | '/soi/dashboard'
     | '/soi/gallery'
     | '/soi/inquiries'
@@ -361,6 +372,7 @@ export interface FileRouteTypes {
     | '/_public/threading-salon-wayne-nj'
     | '/_public/waxing-wayne-nj'
     | '/soi/appointments'
+    | '/soi/appointments-backup'
     | '/soi/dashboard'
     | '/soi/gallery'
     | '/soi/inquiries'
@@ -458,6 +470,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/soi/dashboard'
       preLoaderRoute: typeof SoiDashboardRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/appointments-backup': {
+      id: '/soi/appointments-backup'
+      path: '/appointments-backup'
+      fullPath: '/soi/appointments-backup'
+      preLoaderRoute: typeof SoiAppointmentsBackupRouteImport
       parentRoute: typeof SoiRoute
     }
     '/soi/appointments': {
@@ -632,6 +651,7 @@ const PublicRouteWithChildren =
 
 interface SoiRouteChildren {
   SoiAppointmentsRoute: typeof SoiAppointmentsRoute
+  SoiAppointmentsBackupRoute: typeof SoiAppointmentsBackupRoute
   SoiDashboardRoute: typeof SoiDashboardRoute
   SoiGalleryRoute: typeof SoiGalleryRoute
   SoiInquiriesRoute: typeof SoiInquiriesRoute
@@ -644,6 +664,7 @@ interface SoiRouteChildren {
 
 const SoiRouteChildren: SoiRouteChildren = {
   SoiAppointmentsRoute: SoiAppointmentsRoute,
+  SoiAppointmentsBackupRoute: SoiAppointmentsBackupRoute,
   SoiDashboardRoute: SoiDashboardRoute,
   SoiGalleryRoute: SoiGalleryRoute,
   SoiInquiriesRoute: SoiInquiriesRoute,

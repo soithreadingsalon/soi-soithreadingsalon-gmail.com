@@ -57,7 +57,7 @@ function BookingPage() {
         data: {
           full_name: form.full_name,
           phone: form.phone,
-          email: form.email,
+          email: form.email || null,
           service_category: form.service_category,
           service: form.service || null,
           preferred_date: form.preferred_date || null,
