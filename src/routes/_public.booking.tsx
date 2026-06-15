@@ -80,8 +80,9 @@ function BookingPage() {
       <section className="max-w-2xl mx-auto px-4 py-24 text-center">
         <div className="glass-panel rounded-3xl p-10 gold-border animate-fade-up">
           <CheckCircle2 className="h-16 w-16 text-gold mx-auto mb-4" />
-          <h1 className="font-serif text-4xl mb-3">Thank you!</h1>
-          <p className="text-muted-foreground mb-6">Your appointment request has been received. SOI Threading Salon will contact you to confirm your appointment.</p>
+          <h1 className="font-serif text-3xl mb-3">Thank you for choosing SOI Threading Salon!</h1>
+          <p className="text-muted-foreground mb-2">Your appointment details have been received for your requested date and time. We look forward to welcoming you soon.</p>
+          <p className="text-xs text-muted-foreground mb-6">Disclaimer: Appointments are managed based on staff availability and salon schedule.</p>
           <a href="tel:5513013894" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold btn-gold">
             <Phone className="h-4 w-4" /> Call 551-301-3894
           </a>
