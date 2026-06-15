@@ -184,7 +184,7 @@ function HomePage() {
                 <div className="flex flex-col">
                   <GoldStars />
                   <span className="text-sm font-semibold text-foreground mt-0.5 group-hover:text-gold transition-colors">
-                    4.7 <Star className="inline h-3.5 w-3.5 fill-current -mt-0.5" /> · 138+ Google reviews
+                    {REVIEW_RATING} <Star className="inline h-3.5 w-3.5 fill-current -mt-0.5" /> · {REVIEW_COUNT_LABEL} Google reviews
                   </span>
                 </div>
               </a>
