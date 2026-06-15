@@ -1,23 +1,36 @@
-## Booking form: stricter validation + future-only date/time
+## Plan: Google Reviews + Social CTAs on Home Page
 
-### Changes to `src/routes/_public.booking.tsx`
-- Make **Email** required (add `required`, update label to `Email *`, update Zod schema to require a valid email — remove the `.optional()/literal("")` branch).
-- Make **Service Category** required (add `required` on the `<select>`, label `Service Category *`, Zod: non-empty string).
-- Update the `submit` handler to send `email` as a plain string (no `|| null`) and `service_category` as a string.
-- Restrict **Preferred Date** input to today or later via `min={todayISO}` on the `<input type="date">`.
+All changes are on `src/routes/_public.index.tsx` (no backend, no new routes).
 
-### Changes to `src/components/TimeSlotPicker.tsx` (and/or `src/lib/time-slots.ts`)
-- When the selected date is **today**, filter out any slot whose time has already passed (compare against `new Date()` in local time).
-- When the selected date is in the **past**, show no slots (the date input will already block this, but guard anyway).
-- Future dates: unchanged behavior.
+### 1. Trust strip under hero CTAs (matches first reference image)
 
-### Server-side validation (`src/lib/booking.functions.ts`)
-- Tighten the `inputValidator` Zod schema to match: `email` required + valid, `service_category` required non-empty. This keeps the API consistent with the form so direct POSTs can't bypass the new rules.
+Right under the "Book Appointment / Call Now / Get Directions" row in the hero, add a small block containing:
 
-### Out of scope
-- No DB schema change. `appointments.email` and `service_category` remain nullable in the DB (existing rows keep working); only new submissions through the form/API are required to include them.
-- Admin UI (`/soi/appointments`) is unchanged.
+- A row of 4 small overlapping avatar circles (initials P, S, A, J in pink/purple/amber/emerald) next to:
+  - 5 gold stars + **"4.7 ★ · 138+ Google reviews"** — the whole line is a link to the provided Google Reviews URL (opens in new tab).
+- A second small row: **"Follow us"** label + two pill buttons:
+  - Instagram → `https://www.instagram.com/soithreadingsalon/`
+  - Facebook → `https://www.facebook.com/people/SOI-Threading-Salon/61590260705927/`
+  - Each opens in a new tab (`target="_blank" rel="noopener noreferrer"`).
 
-### Notes
-- "Future only" for time uses the visitor's local clock — same basis the picker already uses to render slots.
-- I'll read `TimeSlotPicker.tsx`, `src/lib/time-slots.ts`, and `src/lib/booking.functions.ts` before editing to match existing patterns.
+Styling reuses existing tokens (`glass-panel`, gold/blush palette) so it matches the salon's gold/cream theme rather than the purple of the reference — the reference is for layout only.
+
+### 2. Reviews carousel section (matches second reference image)
+
+Replace the existing single-Instagram "Follow our journey" section with a new **"Trusted by Thousands Across Wayne, NJ"** section placed after the Loyalty Card:
+
+- Eyebrow: "What Clients Say"
+- Title: "Trusted by Thousands Across Wayne, NJ"
+- Subtitle: "Real reviews from real clients who keep coming back — and send their friends."
+- Stat row: ★★★★★ 4.7  |  Google logo 138+ Google Reviews  |  15+ Years in Wayne, NJ
+- Horizontally scrollable strip of ~6 review cards (snap scroll, hidden scrollbar, edge fade masks on left/right). Each card: 5 stars, quote, reviewer name, service · time-ago, "Verified" pill. Reviews are hardcoded from the reference image (Priya M., Sara L., Divya K., Maria G., Jennifer T., plus one more) so we ship real-looking content without a Google API.
+- CTA button below: **"Read all 138+ reviews on Google ↗"** linking to the provided Google search URL (new tab).
+- A smaller "Follow us on Instagram / Facebook" pill row beneath the CTA so the social links remain near the reviews too.
+
+### 3. Technical notes
+
+- Pure presentational change in one file; no new dependencies.
+- New `lucide-react` icons: `Facebook` (Instagram already imported). Google "G" logo rendered as a small inline SVG (multi-color) since lucide has no branded Google mark.
+- Carousel = `overflow-x-auto snap-x snap-mandatory` with `scrollbar-hide` utility (already in Tailwind via existing styles; if missing I'll add a tiny inline `style` block to hide the scrollbar).
+- All external links: `target="_blank" rel="noopener noreferrer"`.
+- No changes to routing, SEO head, or data fetching.
