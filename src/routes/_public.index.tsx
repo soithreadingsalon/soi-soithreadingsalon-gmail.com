@@ -162,6 +162,32 @@ function HomePage() {
             <div className="mt-6 md:mt-8 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold-deep">
               <span>Threading</span><span>·</span><span>Waxing</span><span>·</span><span>Facials</span><span>·</span><span>Hair Care</span><span>·</span><span>Henna</span>
             </div>
+
+            {/* Trust strip: avatars + Google rating + socials */}
+            <div className="mt-6 md:mt-8 flex flex-col gap-4">
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 group w-fit"
+                aria-label="Read 138+ Google reviews for SOI Threading Salon"
+              >
+                <div className="flex -space-x-2">
+                  {REVIEW_AVATARS.map((a) => (
+                    <span key={a.initial} className={`${a.bg} h-9 w-9 rounded-full ring-2 ring-background flex items-center justify-center text-white text-xs font-bold shadow-soft`}>
+                      {a.initial}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex flex-col">
+                  <GoldStars />
+                  <span className="text-sm font-semibold text-foreground mt-0.5 group-hover:text-gold transition-colors">
+                    4.7 <Star className="inline h-3.5 w-3.5 fill-current -mt-0.5" /> · 138+ Google reviews
+                  </span>
+                </div>
+              </a>
+              <SocialPills />
+            </div>
           </div>
 
           <div className="relative animate-fade-up mt-2 lg:mt-0" style={{ animationDelay: "0.15s" }}>
