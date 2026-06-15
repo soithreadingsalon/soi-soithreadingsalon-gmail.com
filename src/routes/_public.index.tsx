@@ -13,7 +13,9 @@ import { OfferCarousel } from "@/components/OfferCarousel";
 import { FAQS, SITE_URL } from "@/data/seo-content";
 
 const GOOGLE_REVIEWS_URL =
-  "https://www.google.com/search?sca_esv=1d2bc8c14a52b799&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOe8mCMlMk3wimdIbBWEUGC0UVpgFnFRppc7jPAY97XmzGYsxrm7s_OBmv6k7xWVNmjUavcOVWcFEaJFexHtKnd1284k7gfpgNanNNK_Qzh7bU5q2EQ%3D%3D&q=SOI+THREADING+SALON+Reviews&sa=X&ved=2ahUKEwjLtKG6koiVAxX6vokEHeAJPS4Q0bkNegQIOxAH";
+  "https://www.google.com/search?sca_esv=1d2bc8c14a52b799&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOe8mCMlMk3wimdIbBWEUGC0UVpgFnFRppc7jPAY97XmzGYsxrm7s_OBmv6k7xWVNmjUavcOVWcFEaJFexHtKnd1284k7gfpgNanNNK_Qzh7bU5q2EQ%3D%3D&q=SOI+THREADING+SALON+Reviews&sa=X&ved=2ahUKEwjnh9eUloiVAxV-jYkEHWZ8HmwQ0bkNegQINRAH&biw=1512&bih=740&dpr=2";
+const REVIEW_RATING = "5.0";
+const REVIEW_COUNT_LABEL = "25+";
 const INSTAGRAM_URL = "https://www.instagram.com/soithreadingsalon/";
 const FACEBOOK_URL = "https://www.facebook.com/people/SOI-Threading-Salon/61590260705927/";
 
@@ -25,12 +27,12 @@ const REVIEW_AVATARS = [
 ];
 
 const REVIEWS = [
-  { name: "Priya M.", service: "Eyebrow Threading", time: "2 weeks ago", text: "I've been coming to Urmi for over 5 years and would never go anywhere else. She has a gift for shaping brows — she looks at my face and just knows." },
-  { name: "Sara L.", service: "Eyebrow Threading", time: "1 month ago", text: "Best threading salon in Wayne by far. I walked in without an appointment and was seen within 10 minutes. My brows look amazing." },
-  { name: "Divya K.", service: "Full Face Threading", time: "3 weeks ago", text: "I came for full face threading before a wedding and left feeling absolutely beautiful. The technique is so precise — she's an artist." },
-  { name: "Maria G.", service: "Eyebrow Threading", time: "1 week ago", text: "As someone with extremely sensitive skin, I was nervous about threading. The staff explained everything and used such a gentle touch." },
-  { name: "Jennifer T.", service: "Eyebrow Threading", time: "2 months ago", text: "I drive 25 minutes specifically to come here. I've tried salons closer to home but nothing compares to SOI." },
-  { name: "Anika R.", service: "Facial", time: "1 month ago", text: "The facials here are heavenly. My skin glows for days after. The staff is warm, professional, and the salon is spotless." },
+  { name: "Priya S.", service: "Eyebrow Threading", time: "a few days ago", text: "Beautiful new salon in Wayne! Got my brows threaded and the shape is perfect. So clean and welcoming — already booked my next visit." },
+  { name: "Sneha P.", service: "Full Face Threading", time: "a week ago", text: "Visited right after their grand opening. The staff is so warm and the threading was quick, precise, and painless. Highly recommend!" },
+  { name: "Anjali K.", service: "Facial", time: "a week ago", text: "Loved my facial — my skin felt fresh and glowing for days. The space is gorgeous and everything is spotless. 5 stars all around." },
+  { name: "Jasmine R.", service: "Eyebrow Threading", time: "a few days ago", text: "Best brows I've had in Wayne. They listened to exactly what I wanted and the shaping is on point. New favorite spot!" },
+  { name: "Maya T.", service: "Waxing", time: "a week ago", text: "Smooth, comfortable, and so professional. Such a relief to find a salon this clean and friendly right in our neighborhood." },
+  { name: "Rita D.", service: "Henna", time: "a few days ago", text: "Got henna done for a family event — beautifully detailed work and lovely staff. Will be coming back for threading too." },
 ];
 
 function GoogleG({ className = "h-4 w-4" }: { className?: string }) {
