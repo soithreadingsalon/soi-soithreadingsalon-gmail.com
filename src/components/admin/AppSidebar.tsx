@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   Calendar,
+  Archive,
   MessageSquare,
   Scissors,
   Tag,
@@ -28,7 +29,7 @@ import { Logo } from "@/components/Logo";
 import { supabase } from "@/integrations/supabase/client";
 
 type NavItem = {
-  to: "/soi/dashboard" | "/soi/appointments" | "/soi/inquiries" | "/soi/services" | "/soi/offers" | "/soi/gallery" | "/soi/settings";
+  to: "/soi/dashboard" | "/soi/appointments" | "/soi/appointments-backup" | "/soi/inquiries" | "/soi/services" | "/soi/offers" | "/soi/gallery" | "/soi/settings";
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   badgeKey?: "today" | "unread";
@@ -40,6 +41,7 @@ const GROUPS: { label: string; items: NavItem[] }[] = [
     label: "Operations",
     items: [
       { to: "/soi/appointments", label: "Appointments", icon: Calendar, badgeKey: "today" },
+      { to: "/soi/appointments-backup", label: "Deleted (Backup)", icon: Archive },
       { to: "/soi/inquiries", label: "Inquiries", icon: MessageSquare, badgeKey: "unread" },
     ],
   },
