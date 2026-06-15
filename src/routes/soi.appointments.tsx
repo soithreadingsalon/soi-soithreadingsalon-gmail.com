@@ -6,6 +6,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { AdminPage } from "@/components/AdminPage";
 import { supabase } from "@/integrations/supabase/client";
 import { syncAppointmentToCalendar, deleteCalendarEvent } from "@/lib/calendar.functions";
+import { softDeleteAppointment } from "@/lib/appointments.functions";
 
 export const Route = createFileRoute("/soi/appointments")({ component: AdminAppointments });
 
@@ -38,6 +39,7 @@ function AdminAppointments() {
   const [drawer, setDrawer] = useState<Row | null>(null);
   const syncFn = useServerFn(syncAppointmentToCalendar);
   const delEventFn = useServerFn(deleteCalendarEvent);
+  const softDeleteFn = useServerFn(softDeleteAppointment);
 
   const load = () =>
     supabase.from("appointments").select("*").order("created_at", { ascending: false }).then(({ data }) => setRows((data as Row[]) ?? []));
@@ -110,11 +112,16 @@ function AdminAppointments() {
     await supabase.from("appointments").update({ internal_notes }).eq("id", id);
   }
   async function del(id: string) {
-    if (!confirm("Delete this appointment?")) return;
+    if (!confirm("Delete this appointment? It will be moved to the backup and can be restored at any time.")) return;
     try { await delEventFn({ data: { appointmentId: id } }); } catch { /* ignore */ }
-    await supabase.from("appointments").delete().eq("id", id);
-    toast.success("Deleted");
-    setDrawer(null);
+    try {
+      await softDeleteFn({ data: { id } });
+      toast.success("Moved to backup");
+      setDrawer(null);
+    } catch (e) {
+      console.error(e);
+      toast.error(e instanceof Error ? e.message : "Could not delete");
+    }
   }
 
   return (
