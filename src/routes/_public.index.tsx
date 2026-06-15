@@ -236,8 +236,8 @@ function HomePage() {
         </div>
       </section>
 
-      {/* REVIEWS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+      {/* REVIEWS — auto-scrolling carousel */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 overflow-hidden">
         <SectionHeading
           eyebrow="What Clients Say"
           title="Loved by Our Wayne, NJ Community"
@@ -259,12 +259,16 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="relative">
-          <div className="reviews-scroller flex gap-4 md:gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
-            {REVIEWS.map((r) => (
+        <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
+          {/* Fade masks on edges */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 z-10 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 z-10 bg-gradient-to-l from-background to-transparent" />
+
+          <div className="reviews-track flex gap-4 md:gap-5 hover:[animation-play-state:paused]">
+            {[...REVIEWS, ...REVIEWS].map((r, idx) => (
               <article
-                key={r.name}
-                className="snap-start shrink-0 w-[85%] sm:w-[340px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
+                key={`${r.name}-${idx}`}
+                className="shrink-0 w-[85%] sm:w-[340px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
               >
                 <div className="flex items-center gap-3">
                   <span className={`${r.bg} h-10 w-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0`}>
@@ -299,7 +303,19 @@ function HomePage() {
           <SocialPills size="md" />
         </div>
 
-        <style>{`.reviews-scroller::-webkit-scrollbar { display: none; } .reviews-scroller { scrollbar-width: none; }`}</style>
+        <style>{`
+          @keyframes scroll-reviews {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .reviews-track {
+            animation: scroll-reviews 60s linear infinite;
+            width: max-content;
+          }
+          .reviews-track:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
       </section>
 
       {/* FEATURES */}
