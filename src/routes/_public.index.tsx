@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Phone, MapPin, Clock, Sparkles, Flower2, Leaf, ShieldCheck, Star, ArrowRight, Instagram } from "lucide-react";
+import { Phone, MapPin, Clock, Sparkles, Flower2, Leaf, ShieldCheck, Star, ArrowRight, Instagram, Facebook, ArrowUpRight } from "lucide-react";
 import heroImg from "@/assets/hero-salon.jpg";
 import threadingImg from "@/assets/service-threading.jpg";
 import facialImg from "@/assets/service-facial.jpg";
@@ -11,6 +11,63 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { OfferCarousel } from "@/components/OfferCarousel";
 import { FAQS, SITE_URL } from "@/data/seo-content";
+
+const GOOGLE_REVIEWS_URL =
+  "https://www.google.com/search?sca_esv=1d2bc8c14a52b799&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOe8mCMlMk3wimdIbBWEUGC0UVpgFnFRppc7jPAY97XmzGYsxrm7s_OBmv6k7xWVNmjUavcOVWcFEaJFexHtKnd1284k7gfpgNanNNK_Qzh7bU5q2EQ%3D%3D&q=SOI+THREADING+SALON+Reviews&sa=X&ved=2ahUKEwjLtKG6koiVAxX6vokEHeAJPS4Q0bkNegQIOxAH";
+const INSTAGRAM_URL = "https://www.instagram.com/soithreadingsalon/";
+const FACEBOOK_URL = "https://www.facebook.com/people/SOI-Threading-Salon/61590260705927/";
+
+const REVIEW_AVATARS = [
+  { initial: "P", bg: "bg-pink-400" },
+  { initial: "S", bg: "bg-violet-400" },
+  { initial: "A", bg: "bg-amber-400" },
+  { initial: "J", bg: "bg-emerald-400" },
+];
+
+const REVIEWS = [
+  { name: "Priya M.", service: "Eyebrow Threading", time: "2 weeks ago", text: "I've been coming to Urmi for over 5 years and would never go anywhere else. She has a gift for shaping brows — she looks at my face and just knows." },
+  { name: "Sara L.", service: "Eyebrow Threading", time: "1 month ago", text: "Best threading salon in Wayne by far. I walked in without an appointment and was seen within 10 minutes. My brows look amazing." },
+  { name: "Divya K.", service: "Full Face Threading", time: "3 weeks ago", text: "I came for full face threading before a wedding and left feeling absolutely beautiful. The technique is so precise — she's an artist." },
+  { name: "Maria G.", service: "Eyebrow Threading", time: "1 week ago", text: "As someone with extremely sensitive skin, I was nervous about threading. The staff explained everything and used such a gentle touch." },
+  { name: "Jennifer T.", service: "Eyebrow Threading", time: "2 months ago", text: "I drive 25 minutes specifically to come here. I've tried salons closer to home but nothing compares to SOI." },
+  { name: "Anika R.", service: "Facial", time: "1 month ago", text: "The facials here are heavenly. My skin glows for days after. The staff is warm, professional, and the salon is spotless." },
+];
+
+function GoogleG({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
+      <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z" />
+      <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.6 8.3 6.3 14.7z" />
+      <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.4-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.2-8l-6.5 5C9.5 39.7 16.2 44 24 44z" />
+      <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.6l6.2 5.2C40.9 35.2 44 30 44 24c0-1.2-.1-2.4-.4-3.5z" />
+    </svg>
+  );
+}
+
+function GoldStars({ size = "h-4 w-4" }: { size?: string }) {
+  return (
+    <div className="flex">
+      {[...Array(5)].map((_, i) => (
+        <Star key={i} className={`${size} fill-[var(--gold)] text-[var(--gold)]`} />
+      ))}
+    </div>
+  );
+}
+
+function SocialPills({ size = "sm" }: { size?: "sm" | "md" }) {
+  const pad = size === "md" ? "px-5 py-2.5 text-sm" : "px-4 py-2 text-xs";
+  return (
+    <div className="inline-flex flex-wrap items-center gap-2">
+      <span className="text-xs text-muted-foreground mr-1">Follow us</span>
+      <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 ${pad} rounded-full bg-card border border-border hover:border-[var(--gold)] font-semibold transition-colors`}>
+        <Instagram className="h-4 w-4 text-gold" /> Instagram
+      </a>
+      <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 ${pad} rounded-full bg-card border border-border hover:border-[var(--gold)] font-semibold transition-colors`}>
+        <Facebook className="h-4 w-4 text-gold" /> Facebook
+      </a>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/_public/")({
   head: () => ({
