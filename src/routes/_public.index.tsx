@@ -222,6 +222,67 @@ function HomePage() {
         </div>
       </section>
 
+      {/* REVIEWS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <SectionHeading
+          eyebrow="What Clients Say"
+          title="Loved by Our Wayne, NJ Community"
+          subtitle="Real reviews from real clients at our brand-new Wayne salon."
+        />
+
+        <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 mb-8 text-sm">
+          <div className="inline-flex items-center gap-2">
+            <GoldStars />
+            <span className="font-semibold text-foreground">{REVIEW_RATING}</span>
+          </div>
+          <div className="hidden md:block h-5 w-px bg-border" />
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold transition-colors">
+            <GoogleG /> <span className="font-semibold">{REVIEW_COUNT_LABEL} Google Reviews</span>
+          </a>
+          <div className="hidden md:block h-5 w-px bg-border" />
+          <div className="inline-flex items-center gap-2 text-foreground">
+            <Sparkles className="h-4 w-4 text-gold" /> <span className="font-semibold">Now Open in Wayne, NJ</span>
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="reviews-scroller flex gap-4 md:gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+            {REVIEWS.map((r) => (
+              <article
+                key={r.name}
+                className="snap-start shrink-0 w-[85%] sm:w-[340px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
+              >
+                <GoldStars />
+                <p className="mt-3 text-sm leading-relaxed text-foreground/90 flex-1">“{r.text}”</p>
+                <div className="mt-4 pt-4 border-t border-border flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-serif text-base text-foreground">{r.name}</p>
+                    <p className="text-xs text-muted-foreground truncate">{r.service} · {r.time}</p>
+                  </div>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
+                    <GoogleG className="h-3 w-3" /> Verified
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center mt-8 flex flex-col items-center gap-5">
+          <a
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold"
+          >
+            <GoogleG className="h-4 w-4" /> Read all {REVIEW_COUNT_LABEL} reviews on Google <ArrowUpRight className="h-4 w-4" />
+          </a>
+          <SocialPills size="md" />
+        </div>
+
+        <style>{`.reviews-scroller::-webkit-scrollbar { display: none; } .reviews-scroller { scrollbar-width: none; }`}</style>
+      </section>
+
       {/* FEATURES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         <SectionHeading eyebrow="Why SOI" title="A Salon Inspired by Beauty & Tradition" subtitle="Where timeless Indian artistry meets modern luxury salon care." />
@@ -322,67 +383,6 @@ function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
-
-      {/* REVIEWS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-        <SectionHeading
-          eyebrow="What Clients Say"
-          title="Trusted by Thousands Across Wayne, NJ"
-          subtitle="Real reviews from real clients who keep coming back — and send their friends."
-        />
-
-        <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 mb-8 text-sm">
-          <div className="inline-flex items-center gap-2">
-            <GoldStars />
-            <span className="font-semibold text-foreground">4.7</span>
-          </div>
-          <div className="hidden md:block h-5 w-px bg-border" />
-          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold transition-colors">
-            <GoogleG /> <span className="font-semibold">138+ Google Reviews</span>
-          </a>
-          <div className="hidden md:block h-5 w-px bg-border" />
-          <div className="inline-flex items-center gap-2 text-foreground">
-            <Sparkles className="h-4 w-4 text-gold" /> <span className="font-semibold">15+ Years in Wayne, NJ</span>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="reviews-scroller flex gap-4 md:gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
-            {REVIEWS.map((r) => (
-              <article
-                key={r.name}
-                className="snap-start shrink-0 w-[85%] sm:w-[340px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
-              >
-                <GoldStars />
-                <p className="mt-3 text-sm leading-relaxed text-foreground/90 flex-1">“{r.text}”</p>
-                <div className="mt-4 pt-4 border-t border-border flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="font-serif text-base text-foreground">{r.name}</p>
-                    <p className="text-xs text-muted-foreground truncate">{r.service} · {r.time}</p>
-                  </div>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
-                    <GoogleG className="h-3 w-3" /> Verified
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="text-center mt-8 flex flex-col items-center gap-5">
-          <a
-            href={GOOGLE_REVIEWS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold"
-          >
-            <GoogleG className="h-4 w-4" /> Read all 138+ reviews on Google <ArrowUpRight className="h-4 w-4" />
-          </a>
-          <SocialPills size="md" />
-        </div>
-
-        <style>{`.reviews-scroller::-webkit-scrollbar { display: none; } .reviews-scroller { scrollbar-width: none; }`}</style>
       </section>
 
       {/* LOCATION */}
