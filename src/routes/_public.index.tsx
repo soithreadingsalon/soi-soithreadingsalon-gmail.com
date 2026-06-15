@@ -266,13 +266,18 @@ function HomePage() {
                 key={r.name}
                 className="snap-start shrink-0 w-[85%] sm:w-[340px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
               >
-                <GoldStars />
-                <p className="mt-3 text-sm leading-relaxed text-foreground/90 flex-1">“{r.text}”</p>
-                <div className="mt-4 pt-4 border-t border-border flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="font-serif text-base text-foreground">{r.name}</p>
-                    <p className="text-xs text-muted-foreground truncate">{r.service} · {r.time}</p>
+                <div className="flex items-center gap-3">
+                  <span className={`${r.bg} h-10 w-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0`}>
+                    {r.initial}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-serif text-base text-foreground truncate">{r.name}</p>
+                    <GoldStars size="h-3.5 w-3.5" />
                   </div>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-foreground/90 flex-1">“{r.text}”</p>
+                <div className="mt-4 pt-4 border-t border-border flex items-center justify-between gap-3">
+                  <p className="text-xs text-muted-foreground truncate">{r.service} · {r.time}</p>
                   <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
                     <GoogleG className="h-3 w-3" /> Verified
                   </span>
