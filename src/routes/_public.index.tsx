@@ -13,7 +13,9 @@ import { OfferCarousel } from "@/components/OfferCarousel";
 import { FAQS, SITE_URL } from "@/data/seo-content";
 
 const GOOGLE_REVIEWS_URL =
-  "https://www.google.com/search?sca_esv=1d2bc8c14a52b799&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOe8mCMlMk3wimdIbBWEUGC0UVpgFnFRppc7jPAY97XmzGYsxrm7s_OBmv6k7xWVNmjUavcOVWcFEaJFexHtKnd1284k7gfpgNanNNK_Qzh7bU5q2EQ%3D%3D&q=SOI+THREADING+SALON+Reviews&sa=X&ved=2ahUKEwjLtKG6koiVAxX6vokEHeAJPS4Q0bkNegQIOxAH";
+  "https://www.google.com/search?sca_esv=1d2bc8c14a52b799&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOe8mCMlMk3wimdIbBWEUGC0UVpgFnFRppc7jPAY97XmzGYsxrm7s_OBmv6k7xWVNmjUavcOVWcFEaJFexHtKnd1284k7gfpgNanNNK_Qzh7bU5q2EQ%3D%3D&q=SOI+THREADING+SALON+Reviews&sa=X&ved=2ahUKEwjnh9eUloiVAxV-jYkEHWZ8HmwQ0bkNegQINRAH&biw=1512&bih=740&dpr=2";
+const REVIEW_RATING = "5.0";
+const REVIEW_COUNT_LABEL = "25+";
 const INSTAGRAM_URL = "https://www.instagram.com/soithreadingsalon/";
 const FACEBOOK_URL = "https://www.facebook.com/people/SOI-Threading-Salon/61590260705927/";
 
@@ -25,12 +27,12 @@ const REVIEW_AVATARS = [
 ];
 
 const REVIEWS = [
-  { name: "Priya M.", service: "Eyebrow Threading", time: "2 weeks ago", text: "I've been coming to Urmi for over 5 years and would never go anywhere else. She has a gift for shaping brows — she looks at my face and just knows." },
-  { name: "Sara L.", service: "Eyebrow Threading", time: "1 month ago", text: "Best threading salon in Wayne by far. I walked in without an appointment and was seen within 10 minutes. My brows look amazing." },
-  { name: "Divya K.", service: "Full Face Threading", time: "3 weeks ago", text: "I came for full face threading before a wedding and left feeling absolutely beautiful. The technique is so precise — she's an artist." },
-  { name: "Maria G.", service: "Eyebrow Threading", time: "1 week ago", text: "As someone with extremely sensitive skin, I was nervous about threading. The staff explained everything and used such a gentle touch." },
-  { name: "Jennifer T.", service: "Eyebrow Threading", time: "2 months ago", text: "I drive 25 minutes specifically to come here. I've tried salons closer to home but nothing compares to SOI." },
-  { name: "Anika R.", service: "Facial", time: "1 month ago", text: "The facials here are heavenly. My skin glows for days after. The staff is warm, professional, and the salon is spotless." },
+  { name: "Priya S.", service: "Eyebrow Threading", time: "a few days ago", text: "Beautiful new salon in Wayne! Got my brows threaded and the shape is perfect. So clean and welcoming — already booked my next visit." },
+  { name: "Sneha P.", service: "Full Face Threading", time: "a week ago", text: "Visited right after their grand opening. The staff is so warm and the threading was quick, precise, and painless. Highly recommend!" },
+  { name: "Anjali K.", service: "Facial", time: "a week ago", text: "Loved my facial — my skin felt fresh and glowing for days. The space is gorgeous and everything is spotless. 5 stars all around." },
+  { name: "Jasmine R.", service: "Eyebrow Threading", time: "a few days ago", text: "Best brows I've had in Wayne. They listened to exactly what I wanted and the shaping is on point. New favorite spot!" },
+  { name: "Maya T.", service: "Waxing", time: "a week ago", text: "Smooth, comfortable, and so professional. Such a relief to find a salon this clean and friendly right in our neighborhood." },
+  { name: "Rita D.", service: "Henna", time: "a few days ago", text: "Got henna done for a family event — beautifully detailed work and lovely staff. Will be coming back for threading too." },
 ];
 
 function GoogleG({ className = "h-4 w-4" }: { className?: string }) {
@@ -182,7 +184,7 @@ function HomePage() {
                 <div className="flex flex-col">
                   <GoldStars />
                   <span className="text-sm font-semibold text-foreground mt-0.5 group-hover:text-gold transition-colors">
-                    4.7 <Star className="inline h-3.5 w-3.5 fill-current -mt-0.5" /> · 138+ Google reviews
+                    {REVIEW_RATING} <Star className="inline h-3.5 w-3.5 fill-current -mt-0.5" /> · {REVIEW_COUNT_LABEL} Google reviews
                   </span>
                 </div>
               </a>
@@ -218,6 +220,67 @@ function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* REVIEWS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <SectionHeading
+          eyebrow="What Clients Say"
+          title="Loved by Our Wayne, NJ Community"
+          subtitle="Real reviews from real clients at our brand-new Wayne salon."
+        />
+
+        <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 mb-8 text-sm">
+          <div className="inline-flex items-center gap-2">
+            <GoldStars />
+            <span className="font-semibold text-foreground">{REVIEW_RATING}</span>
+          </div>
+          <div className="hidden md:block h-5 w-px bg-border" />
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold transition-colors">
+            <GoogleG /> <span className="font-semibold">{REVIEW_COUNT_LABEL} Google Reviews</span>
+          </a>
+          <div className="hidden md:block h-5 w-px bg-border" />
+          <div className="inline-flex items-center gap-2 text-foreground">
+            <Sparkles className="h-4 w-4 text-gold" /> <span className="font-semibold">Now Open in Wayne, NJ</span>
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="reviews-scroller flex gap-4 md:gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+            {REVIEWS.map((r) => (
+              <article
+                key={r.name}
+                className="snap-start shrink-0 w-[85%] sm:w-[340px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
+              >
+                <GoldStars />
+                <p className="mt-3 text-sm leading-relaxed text-foreground/90 flex-1">“{r.text}”</p>
+                <div className="mt-4 pt-4 border-t border-border flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-serif text-base text-foreground">{r.name}</p>
+                    <p className="text-xs text-muted-foreground truncate">{r.service} · {r.time}</p>
+                  </div>
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
+                    <GoogleG className="h-3 w-3" /> Verified
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center mt-8 flex flex-col items-center gap-5">
+          <a
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold"
+          >
+            <GoogleG className="h-4 w-4" /> Read all {REVIEW_COUNT_LABEL} reviews on Google <ArrowUpRight className="h-4 w-4" />
+          </a>
+          <SocialPills size="md" />
+        </div>
+
+        <style>{`.reviews-scroller::-webkit-scrollbar { display: none; } .reviews-scroller { scrollbar-width: none; }`}</style>
       </section>
 
       {/* FEATURES */}
@@ -320,67 +383,6 @@ function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
-
-      {/* REVIEWS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
-        <SectionHeading
-          eyebrow="What Clients Say"
-          title="Trusted by Thousands Across Wayne, NJ"
-          subtitle="Real reviews from real clients who keep coming back — and send their friends."
-        />
-
-        <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 mb-8 text-sm">
-          <div className="inline-flex items-center gap-2">
-            <GoldStars />
-            <span className="font-semibold text-foreground">4.7</span>
-          </div>
-          <div className="hidden md:block h-5 w-px bg-border" />
-          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold transition-colors">
-            <GoogleG /> <span className="font-semibold">138+ Google Reviews</span>
-          </a>
-          <div className="hidden md:block h-5 w-px bg-border" />
-          <div className="inline-flex items-center gap-2 text-foreground">
-            <Sparkles className="h-4 w-4 text-gold" /> <span className="font-semibold">15+ Years in Wayne, NJ</span>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="reviews-scroller flex gap-4 md:gap-5 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
-            {REVIEWS.map((r) => (
-              <article
-                key={r.name}
-                className="snap-start shrink-0 w-[85%] sm:w-[340px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
-              >
-                <GoldStars />
-                <p className="mt-3 text-sm leading-relaxed text-foreground/90 flex-1">“{r.text}”</p>
-                <div className="mt-4 pt-4 border-t border-border flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="font-serif text-base text-foreground">{r.name}</p>
-                    <p className="text-xs text-muted-foreground truncate">{r.service} · {r.time}</p>
-                  </div>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
-                    <GoogleG className="h-3 w-3" /> Verified
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="text-center mt-8 flex flex-col items-center gap-5">
-          <a
-            href={GOOGLE_REVIEWS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold"
-          >
-            <GoogleG className="h-4 w-4" /> Read all 138+ reviews on Google <ArrowUpRight className="h-4 w-4" />
-          </a>
-          <SocialPills size="md" />
-        </div>
-
-        <style>{`.reviews-scroller::-webkit-scrollbar { display: none; } .reviews-scroller { scrollbar-width: none; }`}</style>
       </section>
 
       {/* LOCATION */}
