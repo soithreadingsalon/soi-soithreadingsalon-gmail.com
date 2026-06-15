@@ -329,10 +329,11 @@ function ServicesPage() {
           {bookingDone ? (
             <div className="text-center py-6">
               <CheckCircle2 className="h-14 w-14 text-gold mx-auto mb-3" />
-              <DialogTitle className="font-serif text-2xl">Thank you!</DialogTitle>
-              <DialogDescription className="text-muted-foreground mt-2 mb-5">
-                Your appointment request has been received. SOI Threading Salon will contact you to confirm.
+              <DialogTitle className="font-serif text-2xl">Thank you for choosing SOI Threading Salon!</DialogTitle>
+              <DialogDescription className="text-muted-foreground mt-2 mb-1">
+                Your appointment details have been received for your requested date and time. We look forward to welcoming you soon.
               </DialogDescription>
+              <p className="text-xs text-muted-foreground mb-5">Disclaimer: Appointments are managed based on staff availability and salon schedule.</p>
               <a href="tel:5513013894" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold btn-gold">
                 <Phone className="h-4 w-4" /> Call 551-301-3894
               </a>
