@@ -44,7 +44,7 @@ function priceNumber(p: string) {
 const bookingSchema = z.object({
   full_name: z.string().trim().min(1, "Name is required").max(100),
   phone: z.string().trim().min(7, "Valid phone required").max(30),
-  email: z.string().trim().email("Valid email is required").max(255),
+  email: z.string().trim().email("Valid email").max(255).optional().or(z.literal("")),
   preferred_date: z.string().optional().or(z.literal("")),
   preferred_time: z.string().max(40).optional().or(z.literal("")),
   notes: z.string().max(1000).optional().or(z.literal("")),
@@ -129,7 +129,7 @@ function ServicesPage() {
         data: {
           full_name: form.full_name,
           phone: form.phone,
-          email: form.email,
+          email: form.email || null,
           service_category: cats || "Other",
           service: serviceNames || null,
           preferred_date: form.preferred_date || null,
@@ -366,7 +366,7 @@ function ServicesPage() {
                   <Field label="Full Name *"><input required value={form.full_name} onChange={handle("full_name")} className="svc-input" /></Field>
                   <Field label="Phone *"><input required value={form.phone} onChange={handle("phone")} className="svc-input" /></Field>
                 </div>
-                <Field label="Email *"><input type="email" required value={form.email} onChange={handle("email")} className="svc-input" /></Field>
+                <Field label="Email"><input type="email" value={form.email} onChange={handle("email")} className="svc-input" /></Field>
                 <div className="grid sm:grid-cols-2 gap-3">
                   <Field label="Preferred Date"><input type="date" min={new Date().toISOString().slice(0,10)} value={form.preferred_date} onChange={handle("preferred_date")} className="svc-input" /></Field>
                   <Field label="Preferred Time">
