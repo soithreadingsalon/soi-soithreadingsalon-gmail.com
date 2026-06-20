@@ -334,8 +334,8 @@ function ServicesPage() {
                 Your appointment details have been received for your requested date and time. We look forward to welcoming you soon.
               </DialogDescription>
               <p className="text-xs text-muted-foreground mb-5">Disclaimer: Appointments are managed based on staff availability and salon schedule.</p>
-              <a href="tel:5513013894" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold btn-gold">
-                <Phone className="h-4 w-4" /> Call 551-301-3894
+              <a href="tel:9733218374" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold btn-gold">
+                <Phone className="h-4 w-4" /> Call (973) 321-8374
               </a>
             </div>
           ) : (

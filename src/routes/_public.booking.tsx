@@ -13,9 +13,9 @@ export const Route = createFileRoute("/_public/booking")({
   head: () => ({
     meta: [
       { title: "Book an Appointment | SOI Threading Salon, Wayne, NJ" },
-      { name: "description", content: "Request your appointment at SOI Threading Salon in Wayne, NJ. Threading, waxing, facials, hair care, henna, eyelash and men's grooming. Call 551-301-3894." },
+      { name: "description", content: "Request your appointment at SOI Threading Salon in Wayne, NJ. Threading, waxing, facials, hair care, henna, eyelash and men's grooming. Call (973) 321-8374 or 551-301-3894." },
       { property: "og:title", content: "Book an Appointment | SOI Threading Salon" },
-      { property: "og:description", content: "Request your beauty appointment online or call 551-301-3894." },
+      { property: "og:description", content: "Request your beauty appointment online or call (973) 321-8374." },
       { property: "og:url", content: `${SITE_URL}/booking` },
       { name: "robots", content: "index, follow" },
     ],
@@ -83,7 +83,10 @@ function BookingPage() {
           <h1 className="font-serif text-3xl mb-3">Thank you for choosing SOI Threading Salon!</h1>
           <p className="text-muted-foreground mb-2">Your appointment details have been received for your requested date and time. We look forward to welcoming you soon.</p>
           <p className="text-xs text-muted-foreground mb-6">Disclaimer: Appointments are managed based on staff availability and salon schedule.</p>
-          <a href="tel:5513013894" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold btn-gold">
+          <a href="tel:9733218374" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold btn-gold">
+            <Phone className="h-4 w-4" /> Call (973) 321-8374
+          </a>
+          <a href="tel:5513013894" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold">
             <Phone className="h-4 w-4" /> Call 551-301-3894
           </a>
         </div>
