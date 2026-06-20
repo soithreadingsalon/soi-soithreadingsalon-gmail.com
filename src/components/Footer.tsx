@@ -24,6 +24,7 @@ export function Footer() {
           <h4 className="font-serif text-xl mb-4 text-gold-light">Visit Us</h4>
           <ul className="space-y-3 text-sm">
             <li className="flex gap-3"><MapPin className="h-4 w-4 mt-0.5 text-gold-light shrink-0" /><span>180 Hamburg Turnpk,<br />Wayne, NJ 07470</span></li>
+            <li><a href="tel:9733218374" className="flex gap-3 hover:text-gold-light"><Phone className="h-4 w-4 mt-0.5 text-gold-light" />(973) 321-8374</a></li>
             <li><a href="tel:5513013894" className="flex gap-3 hover:text-gold-light"><Phone className="h-4 w-4 mt-0.5 text-gold-light" />551-301-3894</a></li>
             <li><a href="mailto:soithreadingsalon@gmail.com" className="flex gap-3 hover:text-gold-light break-all"><Mail className="h-4 w-4 mt-0.5 text-gold-light" />soithreadingsalon@gmail.com</a></li>
             <li><a href="https://instagram.com/SOITHREADINGSALON" target="_blank" rel="noopener noreferrer" className="flex gap-3 hover:text-gold-light"><Instagram className="h-4 w-4 mt-0.5 text-gold-light" />@SOITHREADINGSALON</a></li>

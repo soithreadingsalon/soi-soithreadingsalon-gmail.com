@@ -16,7 +16,7 @@ export function LandingPage({ content }: { content: LandingContent }) {
     provider: {
       "@type": "BeautySalon",
       name: "SOI Threading Salon",
-      telephone: "+1-551-301-3894",
+      telephone: "+1-973-321-8374",
       url: SITE_URL,
       address: {
         "@type": "PostalAddress",
@@ -52,8 +52,8 @@ export function LandingPage({ content }: { content: LandingContent }) {
               <Link to="/booking" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold">
                 <Calendar className="h-4 w-4" /> Book Appointment <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href="tel:5513013894" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold hover:bg-[var(--gold)]/5">
-                <Phone className="h-4 w-4" /> Call 551-301-3894
+              <a href="tel:9733218374" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold hover:bg-[var(--gold)]/5">
+                <Phone className="h-4 w-4" /> Call (973) 321-8374
               </a>
             </div>
           </div>
@@ -117,10 +117,10 @@ export function LandingPage({ content }: { content: LandingContent }) {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         <div className="rounded-[2rem] gradient-cream gold-border shadow-lift p-8 md:p-12 text-center relative overflow-hidden">
           <h2 className="font-serif text-3xl md:text-5xl mb-3">Ready to visit SOI Threading Salon?</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto mb-6">180 Hamburg Turnpk, Wayne, NJ 07470 · Call 551-301-3894 · Open 7 days a week.</p>
+          <p className="text-muted-foreground max-w-xl mx-auto mb-6">180 Hamburg Turnpk, Wayne, NJ 07470 · Call (973) 321-8374 or 551-301-3894 · Open 7 days a week.</p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link to="/booking" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold"><Calendar className="h-4 w-4" /> Book Appointment</Link>
-            <a href="tel:5513013894" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold"><Phone className="h-4 w-4" /> Call Now</a>
+            <a href="tel:9733218374" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold"><Phone className="h-4 w-4" /> Call Now</a>
             <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold"><MapPin className="h-4 w-4" /> Contact Us</Link>
           </div>
           <p className="mt-5 text-xs text-muted-foreground inline-flex items-center gap-2"><Clock className="h-3 w-3" /> Mon–Fri 10am–7pm · Sat 10am–6pm · Sun Closed</p>

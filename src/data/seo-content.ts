@@ -16,7 +16,7 @@ export const FAQS = [
   { q: "Does SOI Threading Salon offer facials?", a: "Yes. SOI Threading Salon offers mini facial, acne facial, gold facial, oxygen facial, Casmara Gold, teenage facial, and skin care services." },
   { q: "Does SOI Threading Salon offer eyelash services?", a: "Yes. SOI Threading Salon offers eyelash lifting and eyelash extension services." },
   { q: "Does SOI Threading Salon offer men's grooming services?", a: "Yes. SOI Threading Salon offers men's eyebrow threading, nose hair removal, blackhead removal, ear wax, back wax, and chest wax services." },
-  { q: "How can I book an appointment?", a: "Customers can call 551-301-3894 or submit an appointment request through the website." },
+  { q: "How can I book an appointment?", a: "Customers can call (973) 321-8374 or 551-301-3894, or submit an appointment request through the website." },
   { q: "What are the salon hours?", a: "SOI Threading Salon is open Monday to Friday from 10:00 AM to 7:00 PM and Saturday from 10:00 AM to 6:00 PM. Closed on Sunday." },
 ];
 
@@ -75,7 +75,7 @@ export const LANDING_PAGES: Record<string, LandingContent> = {
       "Whether you're after a clean upper lip, smooth legs, or a full Brazilian, every waxing service at SOI is performed in a private, hygienic space. Single-use applicators, fresh wax for every client, and meticulous attention to skin care before and after treatment.",
       "Our most-requested services include Brazilian waxing, full leg waxing, underarms waxing, and the popular full body wax for clients preparing for a special occasion or simply maintaining a smooth routine. Pair waxing with one of our facials for a complete refresh.",
       "We welcome customers from Wayne, Totowa, Little Falls, Woodland Park, Paterson, Haledon, Pompton Lakes, Clifton, Lincoln Park, Pompton Plains, Franklin Lakes, Oakland, and the rest of Passaic County. We're known across North Jersey for being a clean, professional waxing salon Wayne NJ residents trust.",
-      "First-time waxing client? We'll walk you through everything, what to expect, aftercare, and how to keep skin smooth between visits. Book online or call 551-301-3894.",
+      "First-time waxing client? We'll walk you through everything, what to expect, aftercare, and how to keep skin smooth between visits. Book online or call (973) 321-8374.",
     ],
     pricing: [
       { label: "Full Face Waxing", price: "$40" },
@@ -102,7 +102,7 @@ export const LANDING_PAGES: Record<string, LandingContent> = {
       "Each facial begins with a brief consultation so we can match the treatment to your skin type and concerns. We address dullness, congestion, fine lines, breakouts, and uneven tone using premium professional products and gentle, expert technique.",
       "Our most-loved facials include the Acne Facial for clarifying problem skin, the Gold Facial for a luminous finish, the Oxygen Facial for instant freshness, the Casmara Gold for a deeply nourishing experience, and the Teenage Facial designed for younger skin starting their skin care journey.",
       "We're known as a top facial salon Wayne NJ clients return to month after month. We welcome regulars from Wayne, Totowa, Little Falls, Woodland Park, Paterson, Haledon, Pompton Lakes, Clifton, and across Passaic County.",
-      "Pair any facial with eyebrow threading or hair care for a complete refresh in a single visit. Call 551-301-3894 or request an appointment online.",
+      "Pair any facial with eyebrow threading or hair care for a complete refresh in a single visit. Call (973) 321-8374 or request an appointment online.",
     ],
     pricing: [
       { label: "Mini Facial", price: "$45" },
@@ -126,7 +126,7 @@ export const LANDING_PAGES: Record<string, LandingContent> = {
       "Henna is a natural plant-based dye traditionally used to create intricate body art for weddings, festivals, and special occasions. Our henna designs are made with fresh, all-natural henna paste, never any chemicals, dyes, or 'black henna' substitutes that can irritate the skin.",
       "Whether you'd like a small ankle design, a finger or wrist accent, or a full hand mehndi, we'll design something that matches your style. Walk-ins are welcome for simple designs; larger pieces and bridal henna should be booked in advance.",
       "Clients come to us for henna from Wayne, Totowa, Little Falls, Paterson, Clifton, Pompton Lakes, Woodland Park, Haledon, and across Passaic County. We're proud to be the henna Wayne NJ destination for natural mehndi artistry.",
-      "Looking for a unique gift or want to host a small henna party? Call us at 551-301-3894 to discuss options.",
+      "Looking for a unique gift or want to host a small henna party? Call us at (973) 321-8374 or 551-301-3894 to discuss options.",
     ],
     pricing: [
       { label: "Simple Henna Tattoo", price: "$15 & up" },
@@ -194,7 +194,7 @@ export const LANDING_PAGES: Record<string, LandingContent> = {
       "Eyelash lifting is the perfect low-maintenance enhancement: we curl your natural lashes from the base, lifting and lengthening them for results that last 6–8 weeks. No extensions, no glue, just your own lashes, beautifully lifted.",
       "Eyelash extensions add length and volume by attaching individual synthetic lashes to your natural ones. The result is a defined, wide-awake look that's perfect for everyday wear or special events.",
       "Both services are performed in a calm, comfortable setting using premium products. We serve clients across Wayne, Totowa, Little Falls, Paterson, Clifton, Pompton Lakes, Pompton Plains, Franklin Lakes, and Passaic County.",
-      "Pair lash work with eyebrow threading for a complete eye-area refresh. Call 551-301-3894 to book.",
+      "Pair lash work with eyebrow threading for a complete eye-area refresh. Call (973) 321-8374 to book.",
     ],
     pricing: [
       { label: "Eyelash Lifting", price: "$75" },
@@ -214,7 +214,7 @@ export const LANDING_PAGES: Record<string, LandingContent> = {
       "Men's eyebrow threading is one of our most popular services, a fast, precise way to clean up brows, remove the unibrow, and shape without taking away the natural masculine line. We also offer nose hair removal, ear wax, blackhead removal, and full facial cleanups.",
       "For body grooming, we handle back wax, chest wax, full back, and other targeted areas in a private, hygienic setting. New to waxing? We'll walk you through the process and aftercare.",
       "We're a trusted men's eyebrow threading Wayne NJ destination for clients across Wayne, Totowa, Little Falls, Paterson, Clifton, Pompton Lakes, Pompton Plains, Fairfield, Lincoln Park, and Passaic County.",
-      "Call 551-301-3894 or book online for fast, no-fuss appointments.",
+      "Call (973) 321-8374 or 551-301-3894, or book online for fast, no-fuss appointments.",
     ],
     pricing: [
       { label: "Men's Eyebrow Threading", price: "$11" },

@@ -59,7 +59,7 @@ function AiBusinessSummary() {
     "@id": `${SITE_URL}/#business`,
     name: "SOI Threading Salon",
     url: SITE_URL,
-    telephone: "+1-551-301-3894",
+    telephone: "+1-973-321-8374",
     email: "soithreadingsalon@gmail.com",
     priceRange: "$$",
     address: { "@type": "PostalAddress", streetAddress: "180 Hamburg Turnpk", addressLocality: "Wayne", addressRegion: "NJ", postalCode: "07470", addressCountry: "US" },
@@ -89,6 +89,7 @@ function AiBusinessSummary() {
             <h2 className="font-serif text-2xl mb-2">Contact</h2>
             <ul className="text-sm space-y-2">
               <li className="flex gap-2"><MapPin className="h-4 w-4 text-gold" /> 180 Hamburg Turnpk, Wayne, NJ 07470</li>
+              <li className="flex gap-2"><Phone className="h-4 w-4 text-gold" /> <a href="tel:9733218374" className="hover:text-gold font-semibold">(973) 321-8374</a></li>
               <li className="flex gap-2"><Phone className="h-4 w-4 text-gold" /> <a href="tel:5513013894" className="hover:text-gold">551-301-3894</a></li>
               <li className="flex gap-2"><Mail className="h-4 w-4 text-gold" /> <a href="mailto:soithreadingsalon@gmail.com" className="hover:text-gold break-all">soithreadingsalon@gmail.com</a></li>
               <li className="flex gap-2"><Instagram className="h-4 w-4 text-gold" /> <a href="https://instagram.com/SOITHREADINGSALON" className="hover:text-gold">@SOITHREADINGSALON</a></li>
@@ -120,7 +121,7 @@ function AiBusinessSummary() {
 
           <div>
             <h2 className="font-serif text-2xl mb-2">Booking</h2>
-            <p className="text-sm text-muted-foreground">Call <a href="tel:5513013894" className="text-gold font-semibold">551-301-3894</a> or submit an appointment request through the website.</p>
+            <p className="text-sm text-muted-foreground">Call <a href="tel:9733218374" className="text-gold font-semibold">(973) 321-8374</a> or <a href="tel:5513013894" className="text-gold">551-301-3894</a> or submit an appointment request through the website.</p>
           </div>
 
           <div>

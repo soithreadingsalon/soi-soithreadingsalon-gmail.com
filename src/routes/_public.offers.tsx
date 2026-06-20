@@ -83,7 +83,7 @@ function OffersPage() {
                   {o.expires_on ? `Valid through ${new Date(o.expires_on).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}` : "Limited time"}
                 </p>
                 <div className="mt-3 md:mt-4 flex flex-wrap gap-2">
-                  <a href="tel:5513013894" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold btn-gold">
+                  <a href="tel:9733218374" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold btn-gold">
                     <Phone className="h-3.5 w-3.5" /> Call to Redeem
                   </a>
                   <button onClick={() => setActive(o)} className="inline-flex items-center px-5 py-2.5 rounded-full text-xs font-semibold border border-[var(--gold)] text-gold">
@@ -111,8 +111,8 @@ function OffersPage() {
             <div className="ornament-divider my-4"><span className="text-xs">✦</span></div>
             {active.terms && <p className="text-xs text-muted-foreground">{active.terms}</p>}
             {active.expires_on && <p className="text-xs text-gold mt-2">Valid through {new Date(active.expires_on).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>}
-            <a href="tel:5513013894" className="mt-5 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold btn-gold">
-              <Phone className="h-4 w-4" /> Call 551-301-3894
+            <a href="tel:9733218374" className="mt-5 inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold btn-gold">
+              <Phone className="h-4 w-4" /> Call (973) 321-8374
             </a>
           </div>
         </div>

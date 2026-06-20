@@ -167,8 +167,8 @@ function HomePage() {
               <Link to="/booking" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold">
                 Book Appointment <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href="tel:5513013894" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold hover:bg-[var(--gold)]/5 transition-colors">
-                <Phone className="h-4 w-4" /> Call Now
+              <a href="tel:9733218374" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold hover:bg-[var(--gold)]/5 transition-colors">
+                <Phone className="h-4 w-4" /> Call (973) 321-8374
               </a>
               <a href="https://maps.google.com/?q=180+Hamburg+Turnpk+Wayne+NJ+07470" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold text-foreground hover:text-gold">
                 <MapPin className="h-4 w-4" /> Get Directions
@@ -216,7 +216,10 @@ function HomePage() {
               <p className="font-script text-2xl text-gold mb-1">Visit Us</p>
               <p className="font-serif text-sm text-foreground/90 leading-snug">180 Hamburg Turnpk<br />Wayne, NJ 07470</p>
               <div className="my-3 h-px bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
-              <a href="tel:5513013894" className="flex items-center gap-2 text-sm font-semibold text-gold">
+              <a href="tel:9733218374" className="flex items-center gap-2 text-sm font-semibold text-gold">
+                <Phone className="h-4 w-4" /> (973) 321-8374
+              </a>
+              <a href="tel:5513013894" className="mt-1 flex items-center gap-2 text-sm font-medium text-gold/80">
                 <Phone className="h-4 w-4" /> 551-301-3894
               </a>
               <p className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
