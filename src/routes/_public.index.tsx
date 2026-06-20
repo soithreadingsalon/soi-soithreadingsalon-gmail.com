@@ -104,7 +104,7 @@ export const Route = createFileRoute("/_public/")({
 });
 
 const SERVICES = [
-  { name: "Threading", desc: "Precision shaping for perfectly defined brows.", img: threadingImg, from: "$6", to: "/services" as const },
+  { name: "Threading", desc: "Precision shaping for perfectly defined brows.", img: threadingImg, from: "$10", to: "/services" as const },
   { name: "Facials", desc: "Glow-restoring rituals for every skin type.", img: facialImg, from: "$20", to: "/services" as const },
   { name: "Waxing", desc: "Smooth, comfortable, long-lasting results.", img: waxingImg, from: "$15", to: "/services" as const },
   { name: "Hair Care", desc: "Scalp massage, henna color, lash treatments.", img: haircareImg, from: "$30", to: "/services" as const },

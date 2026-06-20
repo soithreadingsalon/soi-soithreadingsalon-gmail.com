@@ -55,7 +55,7 @@ export const LANDING_PAGES: Record<string, LandingContent> = {
     pricing: [
       { label: "Eyebrow Threading", price: "$10" },
       { label: "Men's Eyebrow Threading", price: "$11" },
-      { label: "Upper Lip Threading", price: "$6" },
+      { label: "Upper Lip Threading", price: "$10" },
       { label: "Chin Threading", price: "$8" },
       { label: "Sideburns Threading", price: "$15" },
       { label: "Full Face Threading", price: "$35" },
@@ -151,7 +151,7 @@ export const LANDING_PAGES: Record<string, LandingContent> = {
     pricing: [
       { label: "Eyebrow Threading", price: "$10" },
       { label: "Men's Eyebrow Threading", price: "$11" },
-      { label: "Upper Lip Threading", price: "$6" },
+      { label: "Upper Lip Threading", price: "$10" },
       { label: "Chin Threading", price: "$8" },
       { label: "Sideburns", price: "$15" },
       { label: "Full Face Threading", price: "$35" },
