@@ -164,7 +164,7 @@ function AdminAppointments() {
                 </button>
                 <div className="flex flex-wrap gap-2 items-start justify-end">
                   <a href={`tel:${phoneDigits}`} className="p-2 rounded-full border border-border hover:text-gold" title="Call"><Phone className="h-4 w-4" /></a>
-                  <a href={`https://wa.me/1${phoneDigits}`} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full border border-border hover:text-gold" title="WhatsApp"><MessageCircle className="h-4 w-4" /></a>
+                  <a href={`https://web.whatsapp.com/send?phone=1${phoneDigits}`} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full border border-border hover:text-gold" title="WhatsApp"><MessageCircle className="h-4 w-4" /></a>
                   {r.email && <a href={`mailto:${r.email}`} className="p-2 rounded-full border border-border hover:text-gold" title="Email"><Mail className="h-4 w-4" /></a>}
                   <button onClick={() => manualSync(r.id)} className="p-2 rounded-full border border-border hover:text-gold" title="Sync to Calendar"><CalendarIcon className="h-4 w-4" /></button>
                   <select value={r.status} onChange={(e) => setStatus(r.id, e.target.value)} className="px-3 py-1.5 rounded-full bg-card border border-border text-xs">

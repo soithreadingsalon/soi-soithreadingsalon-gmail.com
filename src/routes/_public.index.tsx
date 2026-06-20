@@ -228,7 +228,7 @@ function HomePage() {
                 <Phone className="h-4 w-4" /> 551-301-3894
               </a>
               <a
-                href="https://wa.me/15513013894"
+                href="https://web.whatsapp.com/send?phone=15513013894"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-[#128C7E] hover:text-[#25D366]"
