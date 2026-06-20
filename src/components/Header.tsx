@@ -61,7 +61,7 @@ export function Header() {
             to="/booking"
             className="hidden sm:inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold btn-gold shrink-0"
           >
-            Book
+            Book Appointment
           </Link>
           <WhatsAppButton
             label=""
