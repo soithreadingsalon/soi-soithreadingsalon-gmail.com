@@ -33,9 +33,6 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-3 group" onClick={() => setOpen(false)}>
           <Logo className="h-10 md:h-12 w-auto transition-transform group-hover:scale-105" />
-          <span className="hidden sm:flex flex-col leading-tight">
-            <span className="font-script text-gold text-xl">Style of India</span>
-          </span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
