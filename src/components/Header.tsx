@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Logo } from "./Logo";
+import { WhatsAppButton } from "./WhatsAppButton";
 
 const NAV = [
   { to: "/" as const, label: "Home" },
@@ -73,6 +74,10 @@ export function Header() {
           >
             Book Appointment
           </Link>
+          <WhatsAppButton
+            label="WhatsApp"
+            className="hidden md:inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold bg-[#25D366] text-white hover:bg-[#1ebe5b] transition-colors shadow-soft"
+          />
           <button
             onClick={() => setOpen(!open)}
             className="lg:hidden p-2 text-foreground"
@@ -103,6 +108,10 @@ export function Header() {
             >
               Book Appointment
             </Link>
+            <WhatsAppButton
+              label="WhatsApp 551-301-3894"
+              className="mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-center text-sm font-semibold bg-[#25D366] text-white"
+            />
             <a href="tel:9733218374" className="mt-2 px-5 py-3 rounded-full text-center text-sm font-semibold btn-gold">
               Call (973) 321-8374
             </a>
