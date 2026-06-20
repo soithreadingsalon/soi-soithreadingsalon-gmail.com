@@ -52,13 +52,21 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a
-            href="tel:5513013894"
-            className="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-[var(--gold)]"
-          >
-            <Phone className="h-4 w-4" />
-            551-301-3894
-          </a>
+          <div className="hidden sm:flex items-center gap-3">
+            <a
+              href="tel:9733218374"
+              className="inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-[var(--gold)]"
+            >
+              <Phone className="h-4 w-4" />
+              (973) 321-8374
+            </a>
+            <a
+              href="tel:5513013894"
+              className="inline-flex items-center gap-2 text-sm font-medium text-gold/80 hover:text-[var(--gold)]"
+            >
+              551-301-3894
+            </a>
+          </div>
           <Link
             to="/booking"
             className="hidden md:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold btn-gold"
@@ -95,6 +103,9 @@ export function Header() {
             >
               Book Appointment
             </Link>
+            <a href="tel:9733218374" className="mt-2 px-5 py-3 rounded-full text-center text-sm font-semibold btn-gold">
+              Call (973) 321-8374
+            </a>
             <a href="tel:5513013894" className="mt-2 px-5 py-3 rounded-full text-center text-sm font-semibold border border-[var(--gold)] text-gold">
               Call 551-301-3894
             </a>
