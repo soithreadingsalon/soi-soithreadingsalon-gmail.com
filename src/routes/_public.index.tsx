@@ -11,6 +11,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { OfferCarousel } from "@/components/OfferCarousel";
 import { FAQS, SITE_URL } from "@/data/seo-content";
+import { WhatsAppButton, WhatsAppIcon } from "@/components/WhatsAppButton";
 
 const GOOGLE_REVIEWS_URL =
   "https://www.google.com/search?sca_esv=1d2bc8c14a52b799&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOe8mCMlMk3wimdIbBWEUGC0UVpgFnFRppc7jPAY97XmzGYsxrm7s_OBmv6k7xWVNmjUavcOVWcFEaJFexHtKnd1284k7gfpgNanNNK_Qzh7bU5q2EQ%3D%3D&q=SOI+THREADING+SALON+Reviews&sa=X&ved=2ahUKEwjnh9eUloiVAxV-jYkEHWZ8HmwQ0bkNegQINRAH&biw=1512&bih=740&dpr=2";
@@ -167,6 +168,10 @@ function HomePage() {
               <Link to="/booking" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold">
                 Book Appointment <ArrowRight className="h-4 w-4" />
               </Link>
+              <WhatsAppButton
+                label="WhatsApp 551-301-3894"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold bg-[#25D366] text-white hover:bg-[#1ebe5b] transition-colors shadow-soft"
+              />
               <a href="tel:9733218374" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border border-[var(--gold)] text-gold hover:bg-[var(--gold)]/5 transition-colors">
                 <Phone className="h-4 w-4" /> Call (973) 321-8374
               </a>
@@ -221,6 +226,15 @@ function HomePage() {
               </a>
               <a href="tel:5513013894" className="mt-1 flex items-center gap-2 text-sm font-medium text-gold/80">
                 <Phone className="h-4 w-4" /> 551-301-3894
+              </a>
+              <a
+                href="https://wa.me/15513013894"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-[#128C7E] hover:text-[#25D366]"
+                aria-label="Chat with us on WhatsApp"
+              >
+                <WhatsAppIcon className="h-4 w-4" /> WhatsApp Us
               </a>
               <p className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
                 <Clock className="h-3.5 w-3.5" /> Today: {todayHours}
