@@ -21,7 +21,7 @@ export const Route = createFileRoute("/_public/ai-business-summary")({
 const SERVICES = [
   ["Eyebrow Threading", "$10"],
   ["Men's Eyebrow Threading", "$11"],
-  ["Upper Lip Threading", "$6"],
+  ["Upper Lip Threading", "$10"],
   ["Chin Threading", "$8"],
   ["Full Face Threading", "$35"],
   ["Full Face with Neck Threading", "$40"],
