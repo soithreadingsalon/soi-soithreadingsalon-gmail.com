@@ -96,7 +96,7 @@ function AdminInquiries() {
                     {r.read ? <MailOpen className="h-3.5 w-3.5" /> : <Mail className="h-3.5 w-3.5" />} {r.read ? "Read" : "Unread"}
                   </button>
                   {phoneDigits && <a href={`tel:${phoneDigits}`} className="p-2 rounded-full border border-border" title="Call"><Phone className="h-4 w-4" /></a>}
-                  {phoneDigits && <a href={`https://web.whatsapp.com/send?phone=1${phoneDigits}`} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full border border-border" title="WhatsApp"><MessageCircle className="h-4 w-4" /></a>}
+                  {phoneDigits && <a href={`https://wa.me/1${phoneDigits}`} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full border border-border" title="WhatsApp"><MessageCircle className="h-4 w-4" /></a>}
                   <button onClick={() => convertToBooking(r)} className="text-xs inline-flex items-center gap-1 px-3 py-1.5 rounded-full btn-gold font-semibold"><ArrowRight className="h-3.5 w-3.5" /> To Booking</button>
                   <button onClick={() => del(r.id)} className="p-2 hover:text-destructive"><Trash2 className="h-4 w-4" /></button>
                   <p className="text-xs text-muted-foreground">{new Date(r.created_at).toLocaleDateString()}</p>

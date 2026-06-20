@@ -3,7 +3,7 @@ import { WhatsAppIcon } from "./WhatsAppButton";
 export function WhatsAppFloatingButton() {
   return (
     <a
-      href="https://web.whatsapp.com/send?phone=15513013894&text=Hi%20SOI%20Threading%20Salon%2C%20I%27d%20like%20to%20book%20an%20appointment."
+      href="https://wa.me/15513013894?text=Hi%20SOI%20Threading%20Salon%2C%20I%27d%20like%20to%20book%20an%20appointment."
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with SOI Threading Salon on WhatsApp at 551-301-3894"

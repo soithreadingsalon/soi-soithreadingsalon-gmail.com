@@ -90,7 +90,7 @@ function BookingPage() {
             <Phone className="h-4 w-4" /> Call 551-301-3894
           </a>
           <a
-            href="https://web.whatsapp.com/send?phone=15513013894&text=Hi%20SOI%20Threading%20Salon%2C%20I%27d%20like%20to%20book%20an%20appointment."
+            href="https://wa.me/15513013894?text=Hi%20SOI%20Threading%20Salon%2C%20I%27d%20like%20to%20book%20an%20appointment."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-[#25D366] text-white hover:bg-[#1ebe5b]"
