@@ -52,35 +52,27 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-3">
-            <a
-              href="tel:9733218374"
-              className="inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-[var(--gold)]"
-            >
-              <Phone className="h-4 w-4" />
-              (973) 321-8374
-            </a>
-            <a
-              href="tel:5513013894"
-              className="inline-flex items-center gap-2 text-sm font-medium text-gold/80 hover:text-[var(--gold)]"
-            >
-              551-301-3894
-            </a>
-          </div>
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <a
+            href="tel:9733218374"
+            className="hidden sm:inline-flex items-center gap-2 text-sm font-medium text-gold hover:text-[var(--gold)] shrink-0"
+          >
+            <Phone className="h-4 w-4 shrink-0" />
+            <span className="hidden md:inline">(973) 321-8374</span>
+          </a>
           <Link
             to="/booking"
-            className="hidden md:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-semibold btn-gold"
+            className="hidden sm:inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold btn-gold shrink-0"
           >
-            Book Appointment
+            Book
           </Link>
           <WhatsAppButton
-            label="WhatsApp"
-            className="hidden md:inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold bg-[#25D366] text-white hover:bg-[#1ebe5b] transition-colors shadow-soft"
+            label=""
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-semibold bg-[#25D366] text-white hover:bg-[#1ebe5b] transition-colors shadow-soft shrink-0"
           />
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 text-foreground"
+            className="lg:hidden p-2 text-foreground shrink-0"
             aria-label="Menu"
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -114,9 +106,6 @@ export function Header() {
             />
             <a href="tel:9733218374" className="mt-2 px-5 py-3 rounded-full text-center text-sm font-semibold btn-gold">
               Call (973) 321-8374
-            </a>
-            <a href="tel:5513013894" className="mt-2 px-5 py-3 rounded-full text-center text-sm font-semibold border border-[var(--gold)] text-gold">
-              Call 551-301-3894
             </a>
           </nav>
         </div>
