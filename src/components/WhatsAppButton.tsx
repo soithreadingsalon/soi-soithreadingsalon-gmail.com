@@ -31,7 +31,7 @@ export function WhatsAppButton({
   message = DEFAULT_MESSAGE,
   showIcon = true,
 }: Props) {
-  const href = `https://web.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
+  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   return (
     <a
       href={href}
@@ -48,4 +48,4 @@ export function WhatsAppButton({
 }
 
 export const WHATSAPP_DISPLAY = "551-301-3894";
-export const WHATSAPP_HREF = `https://web.whatsapp.com/send?phone=${WHATSAPP_NUMBER}`;
+export const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}`;

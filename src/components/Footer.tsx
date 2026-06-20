@@ -28,7 +28,7 @@ export function Footer() {
             <li><a href="tel:5513013894" className="flex gap-3 hover:text-gold-light"><Phone className="h-4 w-4 mt-0.5 text-gold-light" />551-301-3894</a></li>
             <li>
               <a
-                href="https://web.whatsapp.com/send?phone=15513013894"
+                href="https://wa.me/15513013894"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex gap-3 hover:text-gold-light"
