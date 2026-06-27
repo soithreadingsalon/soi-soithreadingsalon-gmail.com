@@ -16,6 +16,26 @@ const DEFAULT_SETTINGS: Settings = {
   hours_sunday: "Closed",
 };
 
+// Salon timezone (Wayne, NJ = America/New_York). All "today" and "now"
+// comparisons must be evaluated in EST/EDT regardless of the visitor's
+// device timezone.
+function getEstNow(): { todayISO: string; nowMin: number } {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "00";
+  const todayISO = `${get("year")}-${get("month")}-${get("day")}`;
+  const h = parseInt(get("hour"), 10);
+  const m = parseInt(get("minute"), 10);
+  return { todayISO, nowMin: (h % 24) * 60 + m };
+}
+
 export function TimeSlotPicker({
   date,
   value,
@@ -83,11 +103,9 @@ export function TimeSlotPicker({
     if (!date) return [];
     const hrs = pickHoursForDate(date, settings.hours_weekday, settings.hours_saturday, settings.hours_sunday);
     const all = generateSlots(hrs, 30);
-    const todayISO = new Date().toISOString().slice(0, 10);
+    const { todayISO, nowMin } = getEstNow();
     if (date < todayISO) return [];
     if (date !== todayISO) return all;
-    const now = new Date();
-    const nowMin = now.getHours() * 60 + now.getMinutes();
     return all.filter((label) => {
       const t = to24h(label);
       if (!t) return true;
@@ -107,7 +125,7 @@ export function TimeSlotPicker({
   if (slots.length === 0) {
     const d = new Date(date + "T12:00:00");
     const dayName = d.toLocaleDateString("en-US", { weekday: "long" });
-    const todayISO = new Date().toISOString().slice(0, 10);
+    const { todayISO } = getEstNow();
     const isPast = date < todayISO;
     const isToday = date === todayISO;
     const hrs = pickHoursForDate(date, settings.hours_weekday, settings.hours_saturday, settings.hours_sunday);
