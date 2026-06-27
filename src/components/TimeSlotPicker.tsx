@@ -105,9 +105,23 @@ export function TimeSlotPicker({
   }
 
   if (slots.length === 0) {
+    const d = new Date(date + "T12:00:00");
+    const dayName = d.toLocaleDateString("en-US", { weekday: "long" });
+    const todayISO = new Date().toISOString().slice(0, 10);
+    const isPast = date < todayISO;
+    const isToday = date === todayISO;
+    const hrs = pickHoursForDate(date, settings.hours_weekday, settings.hours_saturday, settings.hours_sunday);
+    const closed = /closed/i.test(hrs);
+    const msg = isPast
+      ? "Please pick a future date."
+      : closed
+      ? `We're closed on ${dayName}s. Please pick another day.`
+      : isToday
+      ? "No more time slots available today. Please pick another date."
+      : `No available times on this ${dayName}. Please pick another date.`;
     return (
       <div className={`text-xs text-muted-foreground italic px-3 py-2.5 rounded-xl bg-muted/30 ${className || ""}`}>
-        Closed on this day, please pick another date
+        {msg}
       </div>
     );
   }
