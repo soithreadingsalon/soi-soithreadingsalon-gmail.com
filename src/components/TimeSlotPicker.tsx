@@ -83,11 +83,9 @@ export function TimeSlotPicker({
     if (!date) return [];
     const hrs = pickHoursForDate(date, settings.hours_weekday, settings.hours_saturday, settings.hours_sunday);
     const all = generateSlots(hrs, 30);
-    const todayISO = new Date().toISOString().slice(0, 10);
+    const { todayISO, nowMin } = getEstNow();
     if (date < todayISO) return [];
     if (date !== todayISO) return all;
-    const now = new Date();
-    const nowMin = now.getHours() * 60 + now.getMinutes();
     return all.filter((label) => {
       const t = to24h(label);
       if (!t) return true;
@@ -107,7 +105,7 @@ export function TimeSlotPicker({
   if (slots.length === 0) {
     const d = new Date(date + "T12:00:00");
     const dayName = d.toLocaleDateString("en-US", { weekday: "long" });
-    const todayISO = new Date().toISOString().slice(0, 10);
+    const { todayISO } = getEstNow();
     const isPast = date < todayISO;
     const isToday = date === todayISO;
     const hrs = pickHoursForDate(date, settings.hours_weekday, settings.hours_saturday, settings.hours_sunday);
