@@ -75,13 +75,16 @@ export function TimeSlotPicker({
   useEffect(() => {
     if (!date) { setTaken(new Set()); return; }
     supabase
-      .from("appointments")
-      .select("preferred_time,status")
-      .eq("preferred_date", date)
-      .then(({ data }) => {
+      .rpc("get_taken_slots", { _date: date })
+      .then(({ data, error }) => {
+        if (error) {
+          console.error("[TimeSlotPicker] taken slots load failed", error);
+          setTaken(new Set());
+          return;
+        }
         const s = new Set<string>();
-        (data || []).forEach((r: { preferred_time: string | null; status: string }) => {
-          if (r.preferred_time && r.status !== "cancelled" && r.status !== "no_show") s.add(r.preferred_time);
+        (data || []).forEach((r: { preferred_time: string | null }) => {
+          if (r.preferred_time) s.add(r.preferred_time);
         });
         setTaken(s);
       });
@@ -99,7 +102,7 @@ export function TimeSlotPicker({
     return () => { cancelled = true; };
   }, [date, fetchBusy]);
 
-  const slots = useMemo(() => {
+  const allSlots = useMemo(() => {
     if (!date) return [];
     const hrs = pickHoursForDate(date, settings.hours_weekday, settings.hours_saturday, settings.hours_sunday);
     const all = generateSlots(hrs, 30);
@@ -113,6 +116,12 @@ export function TimeSlotPicker({
       return h * 60 + m > nowMin;
     });
   }, [settings, date]);
+
+  // Hide times that are already booked or blocked on the salon calendar.
+  const slots = useMemo(
+    () => allSlots.filter((s) => !taken.has(s) && !calendarBusy.has(s)),
+    [allSlots, taken, calendarBusy],
+  );
 
   if (!date) {
     return (
@@ -147,14 +156,9 @@ export function TimeSlotPicker({
   return (
     <select value={value} onChange={(e) => onChange(e.target.value)} className={className}>
       <option value="">Select a time…</option>
-      {slots.map((s) => {
-        const isTaken = taken.has(s) || calendarBusy.has(s);
-        return (
-          <option key={s} value={s} disabled={isTaken}>
-            {s}{isTaken ? ", booked" : ""}
-          </option>
-        );
-      })}
+      {slots.map((s) => (
+        <option key={s} value={s}>{s}</option>
+      ))}
     </select>
   );
 }

@@ -402,6 +402,12 @@ export type Database = {
           hours_weekday: string
         }[]
       }
+      get_taken_slots: {
+        Args: { _date: string }
+        Returns: {
+          preferred_time: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
