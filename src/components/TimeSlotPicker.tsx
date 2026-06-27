@@ -16,6 +16,26 @@ const DEFAULT_SETTINGS: Settings = {
   hours_sunday: "Closed",
 };
 
+// Salon timezone (Wayne, NJ = America/New_York). All "today" and "now"
+// comparisons must be evaluated in EST/EDT regardless of the visitor's
+// device timezone.
+function getEstNow(): { todayISO: string; nowMin: number } {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(new Date());
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? "00";
+  const todayISO = `${get("year")}-${get("month")}-${get("day")}`;
+  const h = parseInt(get("hour"), 10);
+  const m = parseInt(get("minute"), 10);
+  return { todayISO, nowMin: (h % 24) * 60 + m };
+}
+
 export function TimeSlotPicker({
   date,
   value,
