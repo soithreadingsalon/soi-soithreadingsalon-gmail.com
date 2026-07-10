@@ -15,7 +15,7 @@ import { WhatsAppButton, WhatsAppIcon } from "@/components/WhatsAppButton";
 import { getGoogleReviews, type GoogleReview } from "@/lib/reviews.functions";
 
 const GOOGLE_REVIEWS_URL =
-  "https://www.google.com/search?sca_esv=1d2bc8c14a52b799&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOe8mCMlMk3wimdIbBWEUGC0UVpgFnFRppc7jPAY97XmzGYsxrm7s_OBmv6k7xWVNmjUavcOVWcFEaJFexHtKnd1284k7gfpgNanNNK_Qzh7bU5q2EQ%3D%3D&q=SOI+THREADING+SALON+Reviews&sa=X&ved=2ahUKEwjnh9eUloiVAxV-jYkEHWZ8HmwQ0bkNegQINRAH&biw=1512&bih=740&dpr=2";
+  "https://search.google.com/local/reviews?placeid=ChIJFWU6oxf9wokRmpTavWu8g9s";
 const DEFAULT_REVIEW_RATING = "5.0";
 const DEFAULT_REVIEW_COUNT_LABEL = "50+";
 const INSTAGRAM_URL = "https://www.instagram.com/soithreadingsalon/";
