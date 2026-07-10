@@ -16,7 +16,7 @@ import { WhatsAppButton, WhatsAppIcon } from "@/components/WhatsAppButton";
 const GOOGLE_REVIEWS_URL =
   "https://www.google.com/search?sca_esv=1d2bc8c14a52b799&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOe8mCMlMk3wimdIbBWEUGC0UVpgFnFRppc7jPAY97XmzGYsxrm7s_OBmv6k7xWVNmjUavcOVWcFEaJFexHtKnd1284k7gfpgNanNNK_Qzh7bU5q2EQ%3D%3D&q=SOI+THREADING+SALON+Reviews&sa=X&ved=2ahUKEwjnh9eUloiVAxV-jYkEHWZ8HmwQ0bkNegQINRAH&biw=1512&bih=740&dpr=2";
 const REVIEW_RATING = "5.0";
-const REVIEW_COUNT_LABEL = "25+";
+const REVIEW_COUNT_LABEL = "50+";
 const INSTAGRAM_URL = "https://www.instagram.com/soithreadingsalon/";
 const FACEBOOK_URL = "https://www.facebook.com/people/SOI-Threading-Salon/61590260705927/";
 
@@ -191,7 +191,7 @@ function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 group w-fit"
-                aria-label="Read 138+ Google reviews for SOI Threading Salon"
+                aria-label="Read 50+ Google reviews for SOI Threading Salon"
               >
                 <div className="flex -space-x-2">
                   {REVIEW_AVATARS.map((a) => (
