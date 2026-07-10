@@ -12,11 +12,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { OfferCarousel } from "@/components/OfferCarousel";
 import { FAQS, SITE_URL } from "@/data/seo-content";
 import { WhatsAppButton, WhatsAppIcon } from "@/components/WhatsAppButton";
+import { getGoogleReviews, type GoogleReview } from "@/lib/reviews.functions";
 
 const GOOGLE_REVIEWS_URL =
   "https://www.google.com/search?sca_esv=1d2bc8c14a52b799&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOe8mCMlMk3wimdIbBWEUGC0UVpgFnFRppc7jPAY97XmzGYsxrm7s_OBmv6k7xWVNmjUavcOVWcFEaJFexHtKnd1284k7gfpgNanNNK_Qzh7bU5q2EQ%3D%3D&q=SOI+THREADING+SALON+Reviews&sa=X&ved=2ahUKEwjnh9eUloiVAxV-jYkEHWZ8HmwQ0bkNegQINRAH&biw=1512&bih=740&dpr=2";
-const REVIEW_RATING = "5.0";
-const REVIEW_COUNT_LABEL = "50+";
+const DEFAULT_REVIEW_RATING = "5.0";
+const DEFAULT_REVIEW_COUNT_LABEL = "50+";
 const INSTAGRAM_URL = "https://www.instagram.com/soithreadingsalon/";
 const FACEBOOK_URL = "https://www.facebook.com/people/SOI-Threading-Salon/61590260705927/";
 
@@ -121,6 +122,9 @@ const FEATURES = [
 
 function HomePage() {
   const [todayHours, setTodayHours] = useState("10:00 AM – 7:00 PM");
+  const [liveReviews, setLiveReviews] = useState<GoogleReview[]>([]);
+  const [liveRating, setLiveRating] = useState<string>(DEFAULT_REVIEW_RATING);
+  const [liveCountLabel, setLiveCountLabel] = useState<string>(DEFAULT_REVIEW_COUNT_LABEL);
 
   useEffect(() => {
     const day = new Date().getDay();
@@ -136,6 +140,28 @@ function HomePage() {
       if (data) setOffers(data);
     });
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    getGoogleReviews()
+      .then((res) => {
+        if (cancelled) return;
+        if (res.reviews.length > 0) setLiveReviews(res.reviews);
+        if (typeof res.rating === "number") setLiveRating(res.rating.toFixed(1));
+        if (typeof res.userRatingCount === "number" && res.userRatingCount > 0) {
+          setLiveCountLabel(`${res.userRatingCount}+`);
+        }
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
+  // Live Google reviews first, then curated fallback reviews (dedup by name).
+  const displayedReviews = (() => {
+    const seen = new Set(liveReviews.map((r) => r.name.toLowerCase()));
+    const extras = REVIEWS.filter((r) => !seen.has(r.name.toLowerCase()));
+    return [...liveReviews, ...extras];
+  })();
 
   const faqLd = {
     "@context": "https://schema.org",
@@ -203,7 +229,7 @@ function HomePage() {
                 <div className="flex flex-col">
                   <GoldStars />
                   <span className="text-sm font-semibold text-foreground mt-0.5 group-hover:text-gold transition-colors">
-                    {REVIEW_RATING} <Star className="inline h-3.5 w-3.5 fill-current -mt-0.5" /> · {REVIEW_COUNT_LABEL} Google reviews
+                    {liveRating} <Star className="inline h-3.5 w-3.5 fill-current -mt-0.5" /> · {liveCountLabel} Google reviews
                   </span>
                 </div>
               </a>
@@ -264,11 +290,11 @@ function HomePage() {
         <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 mb-8 text-sm">
           <div className="inline-flex items-center gap-2">
             <GoldStars />
-            <span className="font-semibold text-foreground">{REVIEW_RATING}</span>
+            <span className="font-semibold text-foreground">{liveRating}</span>
           </div>
           <div className="hidden md:block h-5 w-px bg-border" />
           <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold transition-colors">
-            <GoogleG /> <span className="font-semibold">{REVIEW_COUNT_LABEL} Google Reviews</span>
+            <GoogleG /> <span className="font-semibold">{liveCountLabel} Google Reviews</span>
           </a>
           <div className="hidden md:block h-5 w-px bg-border" />
           <div className="inline-flex items-center gap-2 text-foreground">
@@ -282,7 +308,7 @@ function HomePage() {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 z-10 bg-gradient-to-l from-background to-transparent" />
 
           <div className="reviews-track flex gap-4 md:gap-5 hover:[animation-play-state:paused]">
-            {[...REVIEWS, ...REVIEWS].map((r, idx) => (
+            {[...displayedReviews, ...displayedReviews].map((r, idx) => (
               <article
                 key={`${r.name}-${idx}`}
                 className="shrink-0 w-[85%] sm:w-[340px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
@@ -315,7 +341,7 @@ function HomePage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold btn-gold"
           >
-            <GoogleG className="h-4 w-4" /> Read all {REVIEW_COUNT_LABEL} reviews on Google <ArrowUpRight className="h-4 w-4" />
+            <GoogleG className="h-4 w-4" /> Read all {liveCountLabel} reviews on Google <ArrowUpRight className="h-4 w-4" />
           </a>
           <SocialPills size="md" />
         </div>
