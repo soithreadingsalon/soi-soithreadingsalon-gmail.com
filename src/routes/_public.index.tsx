@@ -149,7 +149,7 @@ function HomePage() {
         if (res.reviews.length > 0) setLiveReviews(res.reviews);
         if (typeof res.rating === "number") setLiveRating(res.rating.toFixed(1));
         if (typeof res.userRatingCount === "number" && res.userRatingCount > 0) {
-          setLiveCountLabel(`${res.userRatingCount}+`);
+          setLiveCountLabel(String(res.userRatingCount));
         }
       })
       .catch(() => {});
