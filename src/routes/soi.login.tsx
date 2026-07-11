@@ -6,19 +6,36 @@ import { Logo } from "@/components/Logo";
 import { signInAdmin, useAdminAuth } from "@/lib/admin-auth";
 
 export const Route = createFileRoute("/soi/login")({
+  validateSearch: (s: Record<string, unknown>) => ({
+    next: typeof s.next === "string" ? s.next : "",
+  }),
   component: AdminLogin,
 });
+
+function safeNext(next: string): string | null {
+  if (!next) return null;
+  // Only allow same-origin relative paths.
+  if (!next.startsWith("/") || next.startsWith("//")) return null;
+  return next;
+}
 
 function AdminLogin() {
   const navigate = useNavigate();
   const { status } = useAdminAuth();
+  const { next } = Route.useSearch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    if (status === "authenticated") navigate({ to: "/soi/dashboard" });
-  }, [status, navigate]);
+    if (status !== "authenticated") return;
+    const dest = safeNext(next);
+    if (dest) {
+      window.location.href = dest;
+    } else {
+      navigate({ to: "/soi/dashboard" });
+    }
+  }, [status, next, navigate]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
