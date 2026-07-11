@@ -66,7 +66,7 @@ function buildConfirmationEmail(opts: {
         <tr><td style="padding:32px 40px 8px;">
           <h1 style="margin:0 0 8px;font-family:Georgia,serif;font-size:24px;color:#3a342e;font-weight:normal;">Thank you, ${escapeHtml(name)}.</h1>
           <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#5a5348;">
-            We've received your appointment request and will confirm shortly. Here are the details you shared:
+            We've received your appointment request and this is confirmation of your appointment. We look forward to seeing you at the store. Here are the details you shared:
           </p>
         </td></tr>
         <tr><td style="padding:0 40px 24px;">
