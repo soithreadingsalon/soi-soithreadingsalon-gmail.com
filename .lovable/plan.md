@@ -1,36 +1,44 @@
-## Plan: Google Reviews + Social CTAs on Home Page
+## Goal
+1. Send customers a **branded HTML confirmation email** (matching SOI's gold/dark theme) when they book.
+2. Send a **SMS confirmation** to the phone number entered.
+3. Add a **consent note** at the bottom of the booking form.
 
-All changes are on `src/routes/_public.index.tsx` (no backend, no new routes).
+## Free service choices
 
-### 1. Trust strip under hero CTAs (matches first reference image)
+- **Email — Gmail connector (already connected, free).** SOI's Gmail is already wired up in `src/lib/inquiries.functions.ts`. No new secret, no cost. We'll swap the plain-text body used for admin notifications for a full branded HTML email when sending to the customer.
+- **SMS — Twilio (free trial credit, ~$15).** There is no permanently-free SMS provider for US numbers; every reliable carrier gateway charges per message. Twilio's free trial covers hundreds of confirmations and its gateway is already documented in Lovable. When the trial runs out the salon tops up (pay-as-you-go, ~$0.008/SMS). Requires:
+  - Connecting the **Twilio** connector (`standard_connectors--connect`) — provides `TWILIO_API_KEY`.
+  - One secret: `TWILIO_FROM_NUMBER` (the Twilio phone number to send from).
+  - I'll flag this cost tradeoff clearly; if the salon prefers zero-cost, we can skip SMS and keep email only.
 
-Right under the "Book Appointment / Call Now / Get Directions" row in the hero, add a small block containing:
+## Changes
 
-- A row of 4 small overlapping avatar circles (initials P, S, A, J in pink/purple/amber/emerald) next to:
-  - 5 gold stars + **"4.7 ★ · 138+ Google reviews"** — the whole line is a link to the provided Google Reviews URL (opens in new tab).
-- A second small row: **"Follow us"** label + two pill buttons:
-  - Instagram → `https://www.instagram.com/soithreadingsalon/`
-  - Facebook → `https://www.facebook.com/people/SOI-Threading-Salon/61590260705927/`
-  - Each opens in a new tab (`target="_blank" rel="noopener noreferrer"`).
+### 1. `src/lib/booking.functions.ts`
+After a successful `appointments` insert, in parallel with the POS push:
+- **Customer email** (if `email` present + valid): send branded HTML email via Gmail gateway.
+  - Subject: `Your appointment request at SOI Threading Salon`
+  - HTML body themed to match the site: dark background `#0b0b0d`, gold accent `#c9a961`, serif heading (Playfair-style web-safe fallback: Georgia), rounded card, logo header, appointment summary table (service, date, time, notes), salon contact block (phone, WhatsApp, address), footer.
+  - Reply-To set to the salon's Gmail so replies land in their inbox.
+  - Header sanitization (strip CR/LF, cap length) — same helpers as inquiries.
+- **Customer SMS** (if Twilio secrets available): POST to Twilio `/Messages.json` via connector gateway.
+  - Body: `Hi {name}, we received your appointment request at SOI Threading Salon for {date} at {time}. We'll confirm shortly. Call (973) 321-8374 with questions. Reply STOP to opt out.`
+  - Normalize phone to E.164 (US default: prepend `+1` if 10 digits, else pass through with `+`).
+- Both wrapped in try/catch — failures logged, booking still succeeds.
 
-Styling reuses existing tokens (`glass-panel`, gold/blush palette) so it matches the salon's gold/cream theme rather than the purple of the reference — the reference is for layout only.
+### 2. `src/routes/_public.booking.tsx`
+- Add a small consent note above the submit button:
+  > *By submitting, you agree that SOI Threading Salon may contact you by email, phone, and SMS regarding your appointment and occasional promotions. Message and data rates may apply. Reply STOP to opt out of SMS.*
+- Styled muted / small text, same rounded card, no new colors.
+- No checkbox — implicit consent on submit (standard for booking forms). Can switch to a required checkbox if preferred.
 
-### 2. Reviews carousel section (matches second reference image)
+### 3. Secrets / connectors setup (in build)
+- Connect Twilio connector → `TWILIO_API_KEY` env var populated.
+- Add secret `TWILIO_FROM_NUMBER` (E.164, e.g. `+15551234567`).
 
-Replace the existing single-Instagram "Follow our journey" section with a new **"Trusted by Thousands Across Wayne, NJ"** section placed after the Loyalty Card:
+## Out of scope
+- No template scaffolding via `email_domain--*` tools (would require custom sender domain + DNS). Gmail sending stays as-is since it's already working for inquiries.
+- No admin/staff notification changes (existing POS + inquiries flows untouched).
+- No unsubscribe DB / suppression list — Gmail replies + SMS "STOP" handled by Twilio automatically.
 
-- Eyebrow: "What Clients Say"
-- Title: "Trusted by Thousands Across Wayne, NJ"
-- Subtitle: "Real reviews from real clients who keep coming back — and send their friends."
-- Stat row: ★★★★★ 4.7  |  Google logo 138+ Google Reviews  |  15+ Years in Wayne, NJ
-- Horizontally scrollable strip of ~6 review cards (snap scroll, hidden scrollbar, edge fade masks on left/right). Each card: 5 stars, quote, reviewer name, service · time-ago, "Verified" pill. Reviews are hardcoded from the reference image (Priya M., Sara L., Divya K., Maria G., Jennifer T., plus one more) so we ship real-looking content without a Google API.
-- CTA button below: **"Read all 138+ reviews on Google ↗"** linking to the provided Google search URL (new tab).
-- A smaller "Follow us on Instagram / Facebook" pill row beneath the CTA so the social links remain near the reviews too.
-
-### 3. Technical notes
-
-- Pure presentational change in one file; no new dependencies.
-- New `lucide-react` icons: `Facebook` (Instagram already imported). Google "G" logo rendered as a small inline SVG (multi-color) since lucide has no branded Google mark.
-- Carousel = `overflow-x-auto snap-x snap-mandatory` with `scrollbar-hide` utility (already in Tailwind via existing styles; if missing I'll add a tiny inline `style` block to hide the scrollbar).
-- All external links: `target="_blank" rel="noopener noreferrer"`.
-- No changes to routing, SEO head, or data fetching.
+## Question before I build
+Should I proceed with **Twilio for SMS** (free trial → tiny per-message cost after) — or skip SMS entirely and do email-only? There is no fully-free SMS option that's reliable for US mobile numbers.
