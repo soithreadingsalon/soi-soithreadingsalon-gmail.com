@@ -159,7 +159,7 @@ function AdminAppointments() {
                   </div>
                   <p className="text-sm text-muted-foreground mt-1">{[r.service_category, r.service].filter(Boolean).join(" · ") || "-"}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    {r.preferred_date && new Date(r.preferred_date + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })} {r.preferred_time && `· ${r.preferred_time}`}
+                    {r.preferred_date && new Date(r.preferred_date + "T12:00:00").toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })} {r.preferred_time && `· ${r.preferred_time}`}
                   </p>
                 </button>
                 <div className="flex flex-wrap gap-2 items-start justify-end">
@@ -188,7 +188,7 @@ function AdminAppointments() {
               {drawer.email && <p><strong>Email:</strong> {drawer.email}</p>}
               {drawer.service_category && <p><strong>Category:</strong> {drawer.service_category}</p>}
               {drawer.service && <p><strong>Service:</strong> {drawer.service}</p>}
-              {drawer.preferred_date && <p><strong>Date:</strong> {new Date(drawer.preferred_date + "T12:00:00").toLocaleDateString()}</p>}
+              {drawer.preferred_date && <p><strong>Date:</strong> {new Date(drawer.preferred_date + "T12:00:00").toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })}</p>}
               {drawer.preferred_time && <p><strong>Time:</strong> {drawer.preferred_time}</p>}
               {drawer.notes && <p className="mt-2 p-3 bg-card rounded-xl"><strong className="block mb-1">Customer notes:</strong>{drawer.notes}</p>}
             </div>

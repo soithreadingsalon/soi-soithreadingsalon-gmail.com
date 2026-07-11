@@ -71,7 +71,7 @@ function AppointmentsBackup() {
                     {[r.service_category, r.service].filter(Boolean).join(" · ") || "-"}
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    {r.preferred_date} {r.preferred_time && `· ${r.preferred_time}`}
+                    {r.preferred_date && new Date(r.preferred_date + "T12:00:00").toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" })} {r.preferred_time && `· ${r.preferred_time}`}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     Deleted {new Date(r.deleted_at).toLocaleString()}
