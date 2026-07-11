@@ -136,6 +136,12 @@ function BookingPage() {
           </Field>
         </div>
         <Field label="Notes"><textarea rows={4} value={form.notes} onChange={handle("notes")} className="input" placeholder="Anything we should know?" /></Field>
+        <p className="text-xs text-muted-foreground leading-relaxed pt-1">
+          By submitting this form, you agree that SOI Threading Salon may contact you by
+          email and phone regarding your appointment and occasional promotions. Message and
+          data rates may apply. You can opt out at any time by replying to any email or
+          calling the salon.
+        </p>
         <button type="submit" disabled={submitting} className="w-full px-6 py-3.5 rounded-full text-sm font-semibold btn-gold disabled:opacity-60">
           {submitting ? "Submitting…" : "Request Appointment"}
         </button>
