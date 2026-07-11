@@ -38,32 +38,34 @@ function buildConfirmationEmail(opts: {
   time: string;
   notes: string;
   salonPhone: string;
+  whatsappPhone: string;
   salonEmail: string;
   salonAddress: string;
   siteUrl: string;
 }) {
   const {
     salonName, name, service, category, dateHuman, time,
-    notes, salonPhone, salonEmail, salonAddress, siteUrl,
+    notes, salonPhone, whatsappPhone, salonEmail, salonAddress, siteUrl,
   } = opts;
+  const waDigits = whatsappPhone.replace(/[^\d]/g, "");
   const row = (label: string, value: string) => `
     <tr>
-      <td style="padding:10px 0;border-bottom:1px solid #2a2a2e;color:#a1a1aa;font-size:12px;text-transform:uppercase;letter-spacing:1px;width:38%;">${escapeHtml(label)}</td>
-      <td style="padding:10px 0;border-bottom:1px solid #2a2a2e;color:#f5f5f7;font-size:15px;">${escapeHtml(value)}</td>
+      <td style="padding:10px 0;border-bottom:1px solid #ece4d1;color:#8a7f6a;font-size:12px;text-transform:uppercase;letter-spacing:1px;width:38%;">${escapeHtml(label)}</td>
+      <td style="padding:10px 0;border-bottom:1px solid #ece4d1;color:#3a342e;font-size:15px;">${escapeHtml(value)}</td>
     </tr>`;
   return `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Appointment Request Received</title></head>
-<body style="margin:0;padding:0;background:#0b0b0d;font-family:Georgia,'Times New Roman',serif;color:#f5f5f7;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0b0b0d;padding:32px 12px;">
+<body style="margin:0;padding:0;background:#fdfbf5;font-family:Georgia,'Times New Roman',serif;color:#3a342e;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fdfbf5;padding:32px 12px;">
     <tr><td align="center">
-      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#131316;border:1px solid #c9a961;border-radius:20px;overflow:hidden;">
-        <tr><td style="padding:36px 40px 24px;text-align:center;border-bottom:1px solid #2a2a2e;">
-          <div style="font-family:Georgia,serif;font-size:28px;letter-spacing:2px;color:#c9a961;font-weight:normal;">${escapeHtml(salonName)}</div>
-          <div style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#a1a1aa;margin-top:6px;">Wayne, New Jersey</div>
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border:1px solid #c9a961;border-radius:20px;overflow:hidden;">
+        <tr><td style="padding:36px 40px 24px;text-align:center;border-bottom:1px solid #ece4d1;background:#faf5e8;">
+          <div style="font-family:Georgia,serif;font-size:28px;letter-spacing:2px;color:#b08d2f;font-weight:normal;">${escapeHtml(salonName)}</div>
+          <div style="font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#8a7f6a;margin-top:6px;">Wayne, New Jersey</div>
         </td></tr>
         <tr><td style="padding:32px 40px 8px;">
-          <h1 style="margin:0 0 8px;font-family:Georgia,serif;font-size:24px;color:#f5f5f7;font-weight:normal;">Thank you, ${escapeHtml(name)}.</h1>
-          <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#d4d4d8;">
+          <h1 style="margin:0 0 8px;font-family:Georgia,serif;font-size:24px;color:#3a342e;font-weight:normal;">Thank you, ${escapeHtml(name)}.</h1>
+          <p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#5a5348;">
             We've received your appointment request and will confirm shortly. Here are the details you shared:
           </p>
         </td></tr>
@@ -77,19 +79,20 @@ function buildConfirmationEmail(opts: {
           </table>
         </td></tr>
         <tr><td style="padding:8px 40px 32px;">
-          <div style="background:#0b0b0d;border:1px solid #2a2a2e;border-radius:14px;padding:20px;font-family:Arial,sans-serif;">
-            <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c9a961;margin-bottom:10px;">Need to change something?</div>
-            <div style="font-size:14px;line-height:1.7;color:#d4d4d8;">
-              Call <a href="tel:${escapeHtml(salonPhone.replace(/[^\d+]/g,''))}" style="color:#c9a961;text-decoration:none;">${escapeHtml(salonPhone)}</a><br/>
-              Email <a href="mailto:${escapeHtml(salonEmail)}" style="color:#c9a961;text-decoration:none;">${escapeHtml(salonEmail)}</a><br/>
-              Visit <a href="${escapeHtml(siteUrl)}" style="color:#c9a961;text-decoration:none;">${escapeHtml(siteUrl.replace(/^https?:\/\//,''))}</a>
+          <div style="background:#faf5e8;border:1px solid #ece4d1;border-radius:14px;padding:20px;font-family:Arial,sans-serif;">
+            <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#b08d2f;margin-bottom:10px;">Need to change something?</div>
+            <div style="font-size:14px;line-height:1.7;color:#5a5348;">
+              Call <a href="tel:${escapeHtml(salonPhone.replace(/[^\d+]/g,''))}" style="color:#b08d2f;text-decoration:none;">${escapeHtml(salonPhone)}</a><br/>
+              WhatsApp <a href="https://wa.me/1${escapeHtml(waDigits)}" style="color:#b08d2f;text-decoration:none;">${escapeHtml(whatsappPhone)}</a><br/>
+              Email <a href="mailto:${escapeHtml(salonEmail)}" style="color:#b08d2f;text-decoration:none;">${escapeHtml(salonEmail)}</a><br/>
+              Visit <a href="${escapeHtml(siteUrl)}" style="color:#b08d2f;text-decoration:none;">${escapeHtml(siteUrl.replace(/^https?:\/\//,''))}</a>
             </div>
           </div>
         </td></tr>
-        <tr><td style="padding:20px 40px 32px;text-align:center;border-top:1px solid #2a2a2e;background:#0f0f12;">
-          <div style="font-family:Georgia,serif;font-size:14px;color:#c9a961;letter-spacing:1px;">${escapeHtml(salonName)}</div>
-          <div style="font-family:Arial,sans-serif;font-size:12px;color:#71717a;margin-top:6px;">${escapeHtml(salonAddress)}</div>
-          <div style="font-family:Arial,sans-serif;font-size:11px;color:#52525b;margin-top:14px;line-height:1.6;">
+        <tr><td style="padding:20px 40px 32px;text-align:center;border-top:1px solid #ece4d1;background:#faf5e8;">
+          <div style="font-family:Georgia,serif;font-size:14px;color:#b08d2f;letter-spacing:1px;">${escapeHtml(salonName)}</div>
+          <div style="font-family:Arial,sans-serif;font-size:12px;color:#8a7f6a;margin-top:6px;">${escapeHtml(salonAddress)}</div>
+          <div style="font-family:Arial,sans-serif;font-size:11px;color:#8a7f6a;margin-top:14px;line-height:1.6;">
             You're receiving this because you requested an appointment on our website.<br/>
             Appointments are confirmed based on staff availability and salon schedule.
           </div>
@@ -118,7 +121,8 @@ async function sendCustomerConfirmationEmail(appt: InsertedAppt) {
       .maybeSingle();
     const salonName = settings?.salon_name || "SOI Threading Salon";
     const salonEmail = settings?.email || "soithreadingsalon@gmail.com";
-    const salonPhone = settings?.phone || "(973) 321-8374";
+    const salonPhone = "(973) 321-8374";
+    const whatsappPhone = "(551) 301-3894";
     const salonAddress = settings?.address || "Wayne, NJ";
     const siteUrl = "https://soithreadingandsalon.com";
 
@@ -132,6 +136,7 @@ async function sendCustomerConfirmationEmail(appt: InsertedAppt) {
       time: stripCRLF(appt.preferred_time, 40),
       notes: stripCRLF(appt.notes, 500),
       salonPhone,
+      whatsappPhone,
       salonEmail,
       salonAddress,
       siteUrl,
@@ -148,7 +153,7 @@ async function sendCustomerConfirmationEmail(appt: InsertedAppt) {
       `Time: ${appt.preferred_time || "To be confirmed"}`,
       appt.notes ? `Notes: ${appt.notes}` : null,
       ``,
-      `Questions? Call ${salonPhone} or reply to this email.`,
+      `Questions? Call ${salonPhone} or WhatsApp ${whatsappPhone}.`,
       ``,
       `— ${salonName}`,
     ].filter(Boolean).join("\r\n");
