@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SoiRouteImport } from './routes/soi'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as SoiIndexRouteImport } from './routes/soi.index'
 import { Route as PublicIndexRouteImport } from './routes/_public.index'
@@ -37,12 +38,20 @@ import { Route as PublicBookingRouteImport } from './routes/_public.booking'
 import { Route as PublicBeautySalonWayneNjRouteImport } from './routes/_public.beauty-salon-wayne-nj'
 import { Route as PublicAiBusinessSummaryRouteImport } from './routes/_public.ai-business-summary'
 import { Route as PublicAboutRouteImport } from './routes/_public.about'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as ApiPublicPosAppointmentsRouteImport } from './routes/api/public/pos.appointments'
 
 const SoiRoute = SoiRouteImport.update({
   id: '/soi',
   path: '/soi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PublicRoute = PublicRouteImport.update({
@@ -184,11 +193,29 @@ const PublicAboutRoute = PublicAboutRouteImport.update({
   path: '/about',
   getParentRoute: () => PublicRoute,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
   id: '/api/public/track',
   path: '/api/public/track',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicPosAppointmentsRoute =
   ApiPublicPosAppointmentsRouteImport.update({
     id: '/api/public/pos/appointments',
@@ -198,7 +225,10 @@ const ApiPublicPosAppointmentsRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
+  '/mcp': typeof McpRoute
   '/soi': typeof SoiRouteWithChildren
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/about': typeof PublicAboutRoute
   '/ai-business-summary': typeof PublicAiBusinessSummaryRoute
   '/beauty-salon-wayne-nj': typeof PublicBeautySalonWayneNjRoute
@@ -224,10 +254,14 @@ export interface FileRoutesByFullPath {
   '/soi/services': typeof SoiServicesRoute
   '/soi/settings': typeof SoiSettingsRoute
   '/soi/': typeof SoiIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/api/public/pos/appointments': typeof ApiPublicPosAppointmentsRoute
 }
 export interface FileRoutesByTo {
+  '/mcp': typeof McpRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/about': typeof PublicAboutRoute
   '/ai-business-summary': typeof PublicAiBusinessSummaryRoute
   '/beauty-salon-wayne-nj': typeof PublicBeautySalonWayneNjRoute
@@ -254,13 +288,17 @@ export interface FileRoutesByTo {
   '/soi/settings': typeof SoiSettingsRoute
   '/': typeof PublicIndexRoute
   '/soi': typeof SoiIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/api/public/pos/appointments': typeof ApiPublicPosAppointmentsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_public': typeof PublicRouteWithChildren
+  '/mcp': typeof McpRoute
   '/soi': typeof SoiRouteWithChildren
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/_public/about': typeof PublicAboutRoute
   '/_public/ai-business-summary': typeof PublicAiBusinessSummaryRoute
   '/_public/beauty-salon-wayne-nj': typeof PublicBeautySalonWayneNjRoute
@@ -287,6 +325,7 @@ export interface FileRoutesById {
   '/soi/settings': typeof SoiSettingsRoute
   '/_public/': typeof PublicIndexRoute
   '/soi/': typeof SoiIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/api/public/pos/appointments': typeof ApiPublicPosAppointmentsRoute
 }
@@ -294,7 +333,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/mcp'
     | '/soi'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/about'
     | '/ai-business-summary'
     | '/beauty-salon-wayne-nj'
@@ -320,10 +362,14 @@ export interface FileRouteTypes {
     | '/soi/services'
     | '/soi/settings'
     | '/soi/'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/track'
     | '/api/public/pos/appointments'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/mcp'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/about'
     | '/ai-business-summary'
     | '/beauty-salon-wayne-nj'
@@ -350,12 +396,16 @@ export interface FileRouteTypes {
     | '/soi/settings'
     | '/'
     | '/soi'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/track'
     | '/api/public/pos/appointments'
   id:
     | '__root__'
     | '/_public'
+    | '/mcp'
     | '/soi'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/_public/about'
     | '/_public/ai-business-summary'
     | '/_public/beauty-salon-wayne-nj'
@@ -382,13 +432,18 @@ export interface FileRouteTypes {
     | '/soi/settings'
     | '/_public/'
     | '/soi/'
+    | '/.mcp/invoke-tool/$tool'
     | '/api/public/track'
     | '/api/public/pos/appointments'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   PublicRoute: typeof PublicRouteWithChildren
+  McpRoute: typeof McpRoute
   SoiRoute: typeof SoiRouteWithChildren
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicTrackRoute: typeof ApiPublicTrackRoute
   ApiPublicPosAppointmentsRoute: typeof ApiPublicPosAppointmentsRoute
 }
@@ -400,6 +455,13 @@ declare module '@tanstack/react-router' {
       path: '/soi'
       fullPath: '/soi'
       preLoaderRoute: typeof SoiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_public': {
@@ -591,11 +653,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicAboutRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/track': {
       id: '/api/public/track'
       path: '/api/public/track'
       fullPath: '/api/public/track'
       preLoaderRoute: typeof ApiPublicTrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/pos/appointments': {
@@ -679,7 +762,12 @@ const SoiRouteWithChildren = SoiRoute._addFileChildren(SoiRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   PublicRoute: PublicRouteWithChildren,
+  McpRoute: McpRoute,
   SoiRoute: SoiRouteWithChildren,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicTrackRoute: ApiPublicTrackRoute,
   ApiPublicPosAppointmentsRoute: ApiPublicPosAppointmentsRoute,
 }
