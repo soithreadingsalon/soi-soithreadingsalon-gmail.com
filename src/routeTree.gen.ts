@@ -42,6 +42,7 @@ import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } fr
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as ApiPublicPosAppointmentsRouteImport } from './routes/api/public/pos.appointments'
 
 const SoiRoute = SoiRouteImport.update({
@@ -216,6 +217,11 @@ const Char91DotmcpChar93InvokeToolToolRoute =
     path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicPosAppointmentsRoute =
   ApiPublicPosAppointmentsRouteImport.update({
     id: '/api/public/pos/appointments',
@@ -254,6 +260,7 @@ export interface FileRoutesByFullPath {
   '/soi/services': typeof SoiServicesRoute
   '/soi/settings': typeof SoiSettingsRoute
   '/soi/': typeof SoiIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/api/public/pos/appointments': typeof ApiPublicPosAppointmentsRoute
@@ -288,6 +295,7 @@ export interface FileRoutesByTo {
   '/soi/settings': typeof SoiSettingsRoute
   '/': typeof PublicIndexRoute
   '/soi': typeof SoiIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/api/public/pos/appointments': typeof ApiPublicPosAppointmentsRoute
@@ -325,6 +333,7 @@ export interface FileRoutesById {
   '/soi/settings': typeof SoiSettingsRoute
   '/_public/': typeof PublicIndexRoute
   '/soi/': typeof SoiIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/track': typeof ApiPublicTrackRoute
   '/api/public/pos/appointments': typeof ApiPublicPosAppointmentsRoute
@@ -362,6 +371,7 @@ export interface FileRouteTypes {
     | '/soi/services'
     | '/soi/settings'
     | '/soi/'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/track'
     | '/api/public/pos/appointments'
@@ -396,6 +406,7 @@ export interface FileRouteTypes {
     | '/soi/settings'
     | '/'
     | '/soi'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/track'
     | '/api/public/pos/appointments'
@@ -432,6 +443,7 @@ export interface FileRouteTypes {
     | '/soi/settings'
     | '/_public/'
     | '/soi/'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/track'
     | '/api/public/pos/appointments'
@@ -443,6 +455,7 @@ export interface RootRouteChildren {
   SoiRoute: typeof SoiRouteWithChildren
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicTrackRoute: typeof ApiPublicTrackRoute
   ApiPublicPosAppointmentsRoute: typeof ApiPublicPosAppointmentsRoute
@@ -681,6 +694,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/pos/appointments': {
       id: '/api/public/pos/appointments'
       path: '/api/public/pos/appointments'
@@ -767,6 +787,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicTrackRoute: ApiPublicTrackRoute,
   ApiPublicPosAppointmentsRoute: ApiPublicPosAppointmentsRoute,
