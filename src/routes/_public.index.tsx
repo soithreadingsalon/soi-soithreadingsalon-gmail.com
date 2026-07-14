@@ -91,21 +91,15 @@ function SocialPills({ size = "sm" }: { size?: "sm" | "md" }) {
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [showCenter, setShowCenter] = useState(true);
   const hideTimer = useRef<number | null>(null);
 
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    v.muted = false;
-    v.play()
-      .then(() => setIsMuted(false))
-      .catch(() => {
-        v.muted = true;
-        setIsMuted(true);
-        v.play().catch(() => {});
-      });
+    v.muted = true;
+    v.play().catch(() => {});
   }, []);
 
   const scheduleHide = () => {
@@ -139,6 +133,7 @@ function HeroVideo() {
           ref={videoRef}
           src={heroVideo.url}
           poster={heroImg}
+          muted
           loop
           playsInline
           preload="metadata"
