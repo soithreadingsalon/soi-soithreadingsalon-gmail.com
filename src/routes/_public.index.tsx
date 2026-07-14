@@ -134,7 +134,7 @@ function HeroVideo() {
       onMouseEnter={() => setShowCenter(true)}
       onMouseLeave={() => { if (isPlaying) scheduleHide(); }}
     >
-      <div className="relative w-full rounded-[1.75rem] overflow-hidden">
+      <div className="relative w-full aspect-video rounded-[1.75rem] overflow-hidden">
         <video
           ref={videoRef}
           src={heroVideo.url}
@@ -147,7 +147,7 @@ function HeroVideo() {
           onPause={() => { setIsPlaying(false); setShowCenter(true); }}
           onVolumeChange={() => { const v = videoRef.current; if (v) setIsMuted(v.muted); }}
           aria-label="SOI Threading Salon, expert threading, facials, waxing, hair care and henna"
-          className="block w-full h-auto cursor-pointer"
+          className="absolute inset-0 w-full h-full object-cover cursor-pointer"
         />
 
         {/* Center Play/Pause */}
@@ -165,7 +165,8 @@ function HeroVideo() {
           type="button"
           onClick={toggleMute}
           aria-label={isMuted ? "Unmute video" : "Mute video"}
-          className="absolute bottom-3 right-3 h-10 w-10 rounded-full btn-gold flex items-center justify-center shadow-soft"
+          className="absolute h-10 w-10 rounded-full btn-gold flex items-center justify-center shadow-soft"
+          style={{ bottom: 12, right: 12, left: "auto", top: "auto" }}
         >
           {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
         </button>
