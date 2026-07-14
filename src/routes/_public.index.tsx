@@ -361,14 +361,14 @@ function HomePage() {
 
         <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">
           {/* Fade masks on edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 z-10 bg-gradient-to-r from-background to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 z-10 bg-gradient-to-l from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-6 sm:w-10 lg:w-16 z-10 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-6 sm:w-10 lg:w-16 z-10 bg-gradient-to-l from-background to-transparent" />
 
-          <div className="reviews-track flex gap-4 md:gap-5 hover:[animation-play-state:paused]">
+          <div className="reviews-track flex gap-3 md:gap-5 hover:[animation-play-state:paused]">
             {[...displayedReviews, ...displayedReviews].map((r, idx) => (
               <article
                 key={`${r.name}-${idx}`}
-                className="shrink-0 w-[85%] sm:w-[340px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
+                className="shrink-0 w-[78vw] max-w-[320px] sm:w-[320px] md:w-[340px] min-h-[220px] glass-panel gold-border rounded-2xl p-5 flex flex-col"
               >
                 <div className="flex items-center gap-3">
                   <span className={`${r.bg} h-10 w-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0`}>
@@ -379,9 +379,9 @@ function HomePage() {
                     <GoldStars size="h-3.5 w-3.5" />
                   </div>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-foreground/90 flex-1">“{r.text}”</p>
+                <p className="mt-3 text-sm leading-relaxed text-foreground/90 flex-1 break-words">“{r.text}”</p>
                 <div className="mt-4 pt-4 border-t border-border flex items-center justify-between gap-3">
-                  <p className="text-xs text-muted-foreground truncate">{r.service} · {r.time}</p>
+                  <p className="text-xs text-muted-foreground line-clamp-1 min-w-0">{r.service} · {r.time}</p>
                   <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
                     <GoogleG className="h-3 w-3" /> Verified
                   </span>
