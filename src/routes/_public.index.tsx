@@ -261,18 +261,6 @@ function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-      {/* ANNOUNCEMENT BAR */}
-      <div className="w-full bg-gradient-to-r from-[var(--gold)] to-[var(--gold-deep)] text-white">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-xs sm:text-sm">
-          <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
-          <p className="font-medium">
-            Walk-ins are always welcome. No appointment is needed, but advance bookings are available for your convenience.
-          </p>
-          <Link to="/booking" className="inline-flex items-center gap-1 font-semibold underline underline-offset-2 hover:opacity-90">
-            Book now <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-        </div>
-      </div>
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
