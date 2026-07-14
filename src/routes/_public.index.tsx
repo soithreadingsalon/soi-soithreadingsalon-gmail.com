@@ -12,7 +12,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { OfferCarousel } from "@/components/OfferCarousel";
 import { FAQS, SITE_URL } from "@/data/seo-content";
-import { WhatsAppButton, WhatsAppIcon } from "@/components/WhatsAppButton";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { getGoogleReviews, type GoogleReview } from "@/lib/reviews.functions";
 
 const GOOGLE_REVIEWS_URL =
