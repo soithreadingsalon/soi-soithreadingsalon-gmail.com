@@ -88,6 +88,92 @@ function SocialPills({ size = "sm" }: { size?: "sm" | "md" }) {
   );
 }
 
+function HeroVideo() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showCenter, setShowCenter] = useState(true);
+  const hideTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = false;
+    v.play()
+      .then(() => setIsMuted(false))
+      .catch(() => {
+        v.muted = true;
+        setIsMuted(true);
+        v.play().catch(() => {});
+      });
+  }, []);
+
+  const scheduleHide = () => {
+    if (hideTimer.current) window.clearTimeout(hideTimer.current);
+    hideTimer.current = window.setTimeout(() => setShowCenter(false), 1500);
+  };
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) v.play().catch(() => {});
+    else v.pause();
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setIsMuted(v.muted);
+  };
+
+  return (
+    <div
+      className="relative rounded-[2rem] overflow-hidden shadow-lift gold-border p-1 bg-[var(--champagne)]"
+      onMouseEnter={() => setShowCenter(true)}
+      onMouseLeave={() => { if (isPlaying) scheduleHide(); }}
+    >
+      <div className="relative aspect-[4/3] lg:aspect-[5/4] w-full rounded-[1.75rem] overflow-hidden bg-[var(--ivory)]">
+        <video
+          ref={videoRef}
+          src={heroVideo.url}
+          poster={heroImg}
+          loop
+          playsInline
+          preload="metadata"
+          onClick={togglePlay}
+          onPlay={() => { setIsPlaying(true); scheduleHide(); }}
+          onPause={() => { setIsPlaying(false); setShowCenter(true); }}
+          onVolumeChange={() => { const v = videoRef.current; if (v) setIsMuted(v.muted); }}
+          aria-label="SOI Threading Salon, expert threading, facials, waxing, hair care and henna"
+          className="absolute inset-0 w-full h-full object-contain cursor-pointer"
+        />
+
+        {/* Center Play/Pause */}
+        <button
+          type="button"
+          onClick={togglePlay}
+          aria-label={isPlaying ? "Pause video" : "Play video"}
+          className={`absolute inset-0 m-auto h-16 w-16 lg:h-20 lg:w-20 rounded-full btn-gold flex items-center justify-center shadow-lift transition-opacity duration-300 ${showCenter || !isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        >
+          {isPlaying ? <Pause className="h-7 w-7" /> : <Play className="h-7 w-7 ml-1" />}
+        </button>
+
+        {/* Bottom-right Mute */}
+        <button
+          type="button"
+          onClick={toggleMute}
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
+          className="absolute bottom-3 right-3 h-10 w-10 rounded-full btn-gold flex items-center justify-center shadow-soft"
+        >
+          {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export const Route = createFileRoute("/_public/")({
   head: () => ({
     meta: [
