@@ -1,6 +1,5 @@
 import { Outlet } from "@tanstack/react-router";
-import { Link } from "@tanstack/react-router";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { PageTracker } from "./PageTracker";
@@ -15,9 +14,6 @@ export function PublicLayout() {
           <p className="font-medium truncate">
             Walk-ins are always welcome. No appointment is needed, but advance bookings are available for your convenience.
           </p>
-          <Link to="/booking" className="inline-flex items-center gap-1 font-semibold underline underline-offset-2 hover:opacity-90 shrink-0">
-            Book now <ArrowRight className="h-3 w-3" />
-          </Link>
         </div>
       </div>
       <Header />
