@@ -1,15 +1,25 @@
-## Replace hero image with uploaded video and reposition Visit Us card
+## Hero video adjustments on the home page
 
-**File:** `src/routes/_public.index.tsx`
+All changes in `src/routes/_public.index.tsx` only.
 
-- Upload the video to Lovable Assets CDN:
-  - `lovable-assets create --file /mnt/user-uploads/WhatsApp_Video_2026-07-13_at_21.20.07.mp4 --filename hero-salon.mp4 > src/assets/hero-salon.mp4.asset.json`
-- Import the pointer JSON at the top of the file alongside the existing `heroImg` import.
-- Replace the `<img src={heroImg} ...>` (line 242) with an autoplaying, not muted, looping, playsInline `<video>` using the same dimensions, rounded corners, and gold border wrapper. Keep the existing hero image as a `poster` fallback so LCP still renders instantly.
-- Move the "Visit Us" floating card so it no longer overlaps the video body:
-  - Change positioning from `-left-4 lg:-left-12 bottom-6 lg:bottom-12` (over the video) to `left-1/2 -translate-x-1/2 -bottom-8 lg:-bottom-10` on mobile/tablet, and on `lg:` place it just outside/under-right of the video (`lg:left-auto lg:right-0 lg:translate-x-0 lg:-bottom-14`), so the card sits under the corner rather than covering the subject.
-  - Add `max-w-[260px]` and slightly reduce padding to keep it compact.
-  - Add bottom margin (`mb-16 lg:mb-20`) to the video wrapper so the card doesn't overflow into the next section.
-- Keep the top-right "Trusted in Wayne" badge unchanged.
+### 1. Show the full video (no cropping)
+- Switch the video to `object-contain` inside a fixed-aspect wrapper (`aspect-[4/3]` mobile, `lg:aspect-[5/4]`) with a soft cream background behind any letterboxed edges, kept inside the existing gold border.
+- Keep the current `heroImg` as `poster`.
 
-No backend or business logic changes.
+### 2. Pin "Visit Us" to the bottom-right
+- Reposition the floating card to `absolute right-0 -bottom-10 lg:-bottom-14` (drop the mobile centering), keep `max-w-[260px]` so it sits neatly at the video's bottom-right on every breakpoint.
+
+### 3. Custom video controls (no native `controls` bar)
+- **Center Play / Pause button** — large circular gold button absolutely centered over the video. Shows `Play` when paused, `Pause` when playing. Fades out ~1.5s after playback starts, fades back in on hover or when paused. Clicking anywhere on the video also toggles play/pause.
+- **Bottom Mute / Unmute button** — small circular gold button pinned to `bottom-3 right-3` inside the video frame (Visit Us card sits below, outside the frame). Shows `Volume2` when unmuted, `VolumeX` when muted.
+- State via `useState` (`isPlaying`, `isMuted`) + `useRef` to the `<video>`; wire `onPlay` / `onPause` / `onVolumeChange` so icons stay in sync.
+
+### 4. Start unmuted
+- Render the `<video>` with `autoPlay loop playsInline` and **no `muted` attribute**; initial `isMuted` state = `false`.
+- In a `useEffect` on mount, call `videoRef.current.play()`. Browsers block unmuted autoplay, so wrap in a `.catch()`: if it rejects, fall back to setting `video.muted = true`, update `isMuted` state, and retry `play()` — so playback still starts and the user can click Unmute.
+- Net effect: on browsers that allow it, the video starts with sound. On strict browsers (Chrome/Safari/iOS default), it starts muted with the unmute button clearly visible — no broken/paused hero.
+
+### Files touched
+- `src/routes/_public.index.tsx`
+
+No backend or business-logic changes. Icons come from existing `lucide-react` (`Play`, `Pause`, `Volume2`, `VolumeX`).
