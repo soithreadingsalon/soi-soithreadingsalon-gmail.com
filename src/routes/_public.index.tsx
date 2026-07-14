@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Phone, MapPin, Clock, Sparkles, Flower2, Leaf, ShieldCheck, Star, ArrowRight, Instagram, Facebook, ArrowUpRight } from "lucide-react";
 import heroImg from "@/assets/hero-salon.jpg";
+import heroVideo from "@/assets/hero-salon.mp4.asset.json";
 import threadingImg from "@/assets/service-threading.jpg";
 import facialImg from "@/assets/service-facial.jpg";
 import waxingImg from "@/assets/service-waxing.jpg";
