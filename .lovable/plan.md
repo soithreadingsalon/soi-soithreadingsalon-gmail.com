@@ -1,25 +1,33 @@
-## Hero video adjustments on the home page
+## Home page hero video + announcement bar
 
-All changes in `src/routes/_public.index.tsx` only.
+All changes in `src/routes/_public.index.tsx`. Plus one memory file so the "Visit Us" card can be restored later.
 
-### 1. Show the full video (no cropping)
-- Switch the video to `object-contain` inside a fixed-aspect wrapper (`aspect-[4/3]` mobile, `lg:aspect-[5/4]`) with a soft cream background behind any letterboxed edges, kept inside the existing gold border.
-- Keep the current `heroImg` as `poster`.
+### 1. Remove the "Visit Us" floating card
+- Delete the `<div className="absolute right-0 -bottom-12 …">Visit Us …</div>` block (currently ~lines 330–353) that sits over the hero video.
+- Also drop the `mb-20 lg:mb-24` spacer on the video's parent wrapper (line 327) since that space existed only to make room for the card. Keep the animation/`relative` classes.
 
-### 2. Pin "Visit Us" to the bottom-right
-- Reposition the floating card to `absolute right-0 -bottom-10 lg:-bottom-14` (drop the mobile centering), keep `max-w-[260px]` so it sits neatly at the video's bottom-right on every breakpoint.
+### 2. Save "Visit Us" content to memory for future restoration
+- Create `mem://features/hero-visit-us-card.md` (type: feature) containing the exact JSX + copy (address, both phone numbers, WhatsApp link, "Today: {todayHours}" line, `glass-panel gold-border` styling, `absolute right-0 -bottom-12 lg:-bottom-14 max-w-[240px]` positioning) so it can be re-added on request.
+- Add a one-line reference in `mem://index.md` under Memories.
 
-### 3. Custom video controls (no native `controls` bar)
-- **Center Play / Pause button** — large circular gold button absolutely centered over the video. Shows `Play` when paused, `Pause` when playing. Fades out ~1.5s after playback starts, fades back in on hover or when paused. Clicking anywhere on the video also toggles play/pause.
-- **Bottom Mute / Unmute button** — small circular gold button pinned to `bottom-3 right-3` inside the video frame (Visit Us card sits below, outside the frame). Shows `Volume2` when unmuted, `VolumeX` when muted.
-- State via `useState` (`isPlaying`, `isMuted`) + `useRef` to the `<video>`; wire `onPlay` / `onPause` / `onVolumeChange` so icons stay in sync.
+### 3. Eliminate the white bars above/below the video
+- The bars come from `aspect-[4/3] lg:aspect-[5/4]` + `object-contain` letterboxing the video inside a fixed-ratio box. Change the inner wrapper in `HeroVideo` (line 137) so its height is driven by the video's own aspect ratio:
+  - Inner wrapper: `relative w-full rounded-[1.75rem] overflow-hidden` (drop `aspect-[4/3] lg:aspect-[5/4]` and `bg-[var(--ivory)]`).
+  - `<video>`: `block w-full h-auto cursor-pointer` (drop `absolute inset-0 h-full object-contain`).
+- Result: the gold border + rounded corners hug the video exactly; no cream/ivory strips top or bottom.
+- Play/Pause button stays `absolute inset-0 m-auto` (still centered over the video).
+- Mute button stays `absolute bottom-3 right-3` (bottom-right corner of the video).
 
-### 4. Start unmuted
-- Render the `<video>` with `autoPlay loop playsInline` and **no `muted` attribute**; initial `isMuted` state = `false`.
-- In a `useEffect` on mount, call `videoRef.current.play()`. Browsers block unmuted autoplay, so wrap in a `.catch()`: if it rejects, fall back to setting `video.muted = true`, update `isMuted` state, and retry `play()` — so playback still starts and the user can click Unmute.
-- Net effect: on browsers that allow it, the video starts with sound. On strict browsers (Chrome/Safari/iOS default), it starts muted with the unmute button clearly visible — no broken/paused hero.
+### 4. Add a top announcement bar on the home page
+- Insert a full-width one-liner at the very top of `HomePage`'s return, above the HERO `<section>`:
+  - Gold gradient background (`bg-gradient-to-r from-[var(--gold)] to-[var(--gold-deep)] text-white`) with subtle `Sparkles` icon.
+  - Text: **"Walk-ins are always welcome. No appointment is needed, but advance bookings are available for your convenience."**
+  - Centered, `text-xs sm:text-sm`, `py-2 px-4`, single line on desktop, wraps on very small screens.
+  - Inline CTA link "Book now →" pointing to `/booking`.
 
 ### Files touched
-- `src/routes/_public.index.tsx`
+- `src/routes/_public.index.tsx` (edit)
+- `mem://features/hero-visit-us-card.md` (new)
+- `mem://index.md` (new/update)
 
-No backend or business-logic changes. Icons come from existing `lucide-react` (`Play`, `Pause`, `Volume2`, `VolumeX`).
+No backend changes.
