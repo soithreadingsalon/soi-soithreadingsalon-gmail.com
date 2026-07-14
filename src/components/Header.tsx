@@ -26,7 +26,7 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+      className={`fixed top-10 inset-x-0 z-50 transition-all duration-500 ${
         scrolled ? "glass-panel shadow-soft" : "bg-transparent"
       }`}
     >
