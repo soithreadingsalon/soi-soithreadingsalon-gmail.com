@@ -155,7 +155,8 @@ function HeroVideo() {
           type="button"
           onClick={togglePlay}
           aria-label={isPlaying ? "Pause video" : "Play video"}
-          className={`absolute inset-0 m-auto h-16 w-16 lg:h-20 lg:w-20 rounded-full btn-gold flex items-center justify-center shadow-lift transition-opacity duration-300 ${showCenter || !isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+          style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, margin: "auto" }}
+          className={`h-16 w-16 lg:h-20 lg:w-20 rounded-full btn-gold flex items-center justify-center shadow-lift transition-opacity duration-300 ${showCenter || !isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         >
           {isPlaying ? <Pause className="h-7 w-7" /> : <Play className="h-7 w-7 ml-1" />}
         </button>
@@ -165,8 +166,8 @@ function HeroVideo() {
           type="button"
           onClick={toggleMute}
           aria-label={isMuted ? "Unmute video" : "Mute video"}
-          className="absolute h-10 w-10 rounded-full btn-gold flex items-center justify-center shadow-soft"
-          style={{ bottom: 12, right: 12, left: "auto", top: "auto" }}
+          className="h-10 w-10 rounded-full btn-gold flex items-center justify-center shadow-soft"
+          style={{ position: "absolute", bottom: 12, right: 12, left: "auto", top: "auto" }}
         >
           {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
         </button>
