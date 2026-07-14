@@ -238,13 +238,23 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative animate-fade-up mt-2 lg:mt-0" style={{ animationDelay: "0.15s" }}>
+          <div className="relative animate-fade-up mt-2 lg:mt-0 mb-16 lg:mb-20" style={{ animationDelay: "0.15s" }}>
             <div className="relative rounded-[2rem] overflow-hidden shadow-lift gold-border p-1">
-              <img src={heroImg} alt="SOI Threading Salon, expert threading, facials, waxing, hair care and henna" className="w-full h-[340px] sm:h-[420px] lg:h-[520px] object-cover rounded-[2rem]" width={1600} height={1200} fetchPriority="high" decoding="async" />
+              <video
+                src={heroVideo.url}
+                poster={heroImg}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="SOI Threading Salon, expert threading, facials, waxing, hair care and henna"
+                className="w-full h-[340px] sm:h-[420px] lg:h-[520px] object-cover rounded-[2rem]"
+              />
             </div>
 
-            {/* Floating info card */}
-            <div className="absolute -left-4 lg:-left-12 bottom-6 lg:bottom-12 glass-panel rounded-2xl p-5 shadow-lift max-w-[280px] animate-float gold-border">
+            {/* Floating info card — placed under the video corner so it doesn't cover it */}
+            <div className="absolute left-1/2 -translate-x-1/2 -bottom-12 lg:left-auto lg:right-2 lg:translate-x-0 lg:-bottom-14 glass-panel rounded-2xl p-4 shadow-lift max-w-[260px] w-[calc(100%-2rem)] sm:w-auto animate-float gold-border">
               <p className="font-script text-2xl text-gold mb-1">Visit Us</p>
               <p className="font-serif text-sm text-foreground/90 leading-snug">180 Hamburg Turnpk<br />Wayne, NJ 07470</p>
               <div className="my-3 h-px bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
