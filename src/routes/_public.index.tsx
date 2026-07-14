@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Phone, MapPin, Clock, Sparkles, Flower2, Leaf, ShieldCheck, Star, ArrowRight, Instagram, Facebook, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Phone, MapPin, Clock, Sparkles, Flower2, Leaf, ShieldCheck, Star, ArrowRight, Instagram, Facebook, ArrowUpRight, Play, Pause, Volume2, VolumeX } from "lucide-react";
 import heroImg from "@/assets/hero-salon.jpg";
 import heroVideo from "@/assets/hero-salon.mp4.asset.json";
 import threadingImg from "@/assets/service-threading.jpg";
@@ -84,6 +84,92 @@ function SocialPills({ size = "sm" }: { size?: "sm" | "md" }) {
       <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 ${pad} rounded-full bg-card border border-border hover:border-[var(--gold)] font-semibold transition-colors`}>
         <Facebook className="h-4 w-4 text-gold" /> Facebook
       </a>
+    </div>
+  );
+}
+
+function HeroVideo() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showCenter, setShowCenter] = useState(true);
+  const hideTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = false;
+    v.play()
+      .then(() => setIsMuted(false))
+      .catch(() => {
+        v.muted = true;
+        setIsMuted(true);
+        v.play().catch(() => {});
+      });
+  }, []);
+
+  const scheduleHide = () => {
+    if (hideTimer.current) window.clearTimeout(hideTimer.current);
+    hideTimer.current = window.setTimeout(() => setShowCenter(false), 1500);
+  };
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) v.play().catch(() => {});
+    else v.pause();
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setIsMuted(v.muted);
+  };
+
+  return (
+    <div
+      className="relative rounded-[2rem] overflow-hidden shadow-lift gold-border p-1 bg-[var(--champagne)]"
+      onMouseEnter={() => setShowCenter(true)}
+      onMouseLeave={() => { if (isPlaying) scheduleHide(); }}
+    >
+      <div className="relative aspect-[4/3] lg:aspect-[5/4] w-full rounded-[1.75rem] overflow-hidden bg-[var(--ivory)]">
+        <video
+          ref={videoRef}
+          src={heroVideo.url}
+          poster={heroImg}
+          loop
+          playsInline
+          preload="metadata"
+          onClick={togglePlay}
+          onPlay={() => { setIsPlaying(true); scheduleHide(); }}
+          onPause={() => { setIsPlaying(false); setShowCenter(true); }}
+          onVolumeChange={() => { const v = videoRef.current; if (v) setIsMuted(v.muted); }}
+          aria-label="SOI Threading Salon, expert threading, facials, waxing, hair care and henna"
+          className="absolute inset-0 w-full h-full object-contain cursor-pointer"
+        />
+
+        {/* Center Play/Pause */}
+        <button
+          type="button"
+          onClick={togglePlay}
+          aria-label={isPlaying ? "Pause video" : "Play video"}
+          className={`absolute inset-0 m-auto h-16 w-16 lg:h-20 lg:w-20 rounded-full btn-gold flex items-center justify-center shadow-lift transition-opacity duration-300 ${showCenter || !isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        >
+          {isPlaying ? <Pause className="h-7 w-7" /> : <Play className="h-7 w-7 ml-1" />}
+        </button>
+
+        {/* Bottom-right Mute */}
+        <button
+          type="button"
+          onClick={toggleMute}
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
+          className="absolute bottom-3 right-3 h-10 w-10 rounded-full btn-gold flex items-center justify-center shadow-soft"
+        >
+          {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+        </button>
+      </div>
     </div>
   );
 }
@@ -238,23 +324,11 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative animate-fade-up mt-2 lg:mt-0 mb-16 lg:mb-20" style={{ animationDelay: "0.15s" }}>
-            <div className="relative rounded-[2rem] overflow-hidden shadow-lift gold-border p-1">
-              <video
-                src={heroVideo.url}
-                poster={heroImg}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                aria-label="SOI Threading Salon, expert threading, facials, waxing, hair care and henna"
-                className="w-full h-[340px] sm:h-[420px] lg:h-[520px] object-cover rounded-[2rem]"
-              />
-            </div>
+          <div className="relative animate-fade-up mt-2 lg:mt-0 mb-20 lg:mb-24" style={{ animationDelay: "0.15s" }}>
+            <HeroVideo />
 
-            {/* Floating info card — placed under the video corner so it doesn't cover it */}
-            <div className="absolute left-1/2 -translate-x-1/2 -bottom-12 lg:left-auto lg:right-2 lg:translate-x-0 lg:-bottom-14 glass-panel rounded-2xl p-4 shadow-lift max-w-[260px] w-[calc(100%-2rem)] sm:w-auto animate-float gold-border">
+            {/* Floating info card — pinned to bottom-right, outside the video frame */}
+            <div className="absolute right-0 -bottom-12 lg:-bottom-14 glass-panel rounded-2xl p-4 shadow-lift max-w-[240px] w-[calc(100%-2rem)] sm:w-auto animate-float gold-border">
               <p className="font-script text-2xl text-gold mb-1">Visit Us</p>
               <p className="font-serif text-sm text-foreground/90 leading-snug">180 Hamburg Turnpk<br />Wayne, NJ 07470</p>
               <div className="my-3 h-px bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
