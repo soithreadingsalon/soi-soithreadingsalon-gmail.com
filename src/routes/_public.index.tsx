@@ -12,7 +12,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import { OfferCarousel } from "@/components/OfferCarousel";
 import { FAQS, SITE_URL } from "@/data/seo-content";
-import { WhatsAppButton, WhatsAppIcon } from "@/components/WhatsAppButton";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { getGoogleReviews, type GoogleReview } from "@/lib/reviews.functions";
 
 const GOOGLE_REVIEWS_URL =
@@ -134,7 +134,7 @@ function HeroVideo() {
       onMouseEnter={() => setShowCenter(true)}
       onMouseLeave={() => { if (isPlaying) scheduleHide(); }}
     >
-      <div className="relative aspect-[4/3] lg:aspect-[5/4] w-full rounded-[1.75rem] overflow-hidden bg-[var(--ivory)]">
+      <div className="relative w-full rounded-[1.75rem] overflow-hidden">
         <video
           ref={videoRef}
           src={heroVideo.url}
@@ -147,7 +147,7 @@ function HeroVideo() {
           onPause={() => { setIsPlaying(false); setShowCenter(true); }}
           onVolumeChange={() => { const v = videoRef.current; if (v) setIsMuted(v.muted); }}
           aria-label="SOI Threading Salon, expert threading, facials, waxing, hair care and henna"
-          className="absolute inset-0 w-full h-full object-contain cursor-pointer"
+          className="block w-full h-auto cursor-pointer"
         />
 
         {/* Center Play/Pause */}
@@ -259,6 +259,18 @@ function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      {/* ANNOUNCEMENT BAR */}
+      <div className="w-full bg-gradient-to-r from-[var(--gold)] to-[var(--gold-deep)] text-white">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center text-xs sm:text-sm">
+          <Sparkles className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <p className="font-medium">
+            Walk-ins are always welcome. No appointment is needed, but advance bookings are available for your convenience.
+          </p>
+          <Link to="/booking" className="inline-flex items-center gap-1 font-semibold underline underline-offset-2 hover:opacity-90">
+            Book now <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
@@ -324,33 +336,8 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="relative animate-fade-up mt-2 lg:mt-0 mb-20 lg:mb-24" style={{ animationDelay: "0.15s" }}>
+          <div className="relative animate-fade-up mt-2 lg:mt-0" style={{ animationDelay: "0.15s" }}>
             <HeroVideo />
-
-            {/* Floating info card — pinned to bottom-right, outside the video frame */}
-            <div className="absolute right-0 -bottom-12 lg:-bottom-14 glass-panel rounded-2xl p-4 shadow-lift max-w-[240px] w-[calc(100%-2rem)] sm:w-auto animate-float gold-border">
-              <p className="font-script text-2xl text-gold mb-1">Visit Us</p>
-              <p className="font-serif text-sm text-foreground/90 leading-snug">180 Hamburg Turnpk<br />Wayne, NJ 07470</p>
-              <div className="my-3 h-px bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
-              <a href="tel:9733218374" className="flex items-center gap-2 text-sm font-semibold text-gold">
-                <Phone className="h-4 w-4" /> (973) 321-8374
-              </a>
-              <a href="tel:5513013894" className="mt-1 flex items-center gap-2 text-sm font-medium text-gold/80">
-                <Phone className="h-4 w-4" /> 551-301-3894
-              </a>
-              <a
-                href="https://wa.me/15513013894"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-[#128C7E] hover:text-[#25D366]"
-                aria-label="Chat with us on WhatsApp"
-              >
-                <WhatsAppIcon className="h-4 w-4" /> WhatsApp Us
-              </a>
-              <p className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
-                <Clock className="h-3.5 w-3.5" /> Today: {todayHours}
-              </p>
-            </div>
 
             <div className="hidden md:block absolute -top-6 -right-6 glass-panel rounded-2xl p-4 shadow-soft animate-float" style={{ animationDelay: "1s" }}>
               <div className="flex items-center gap-2">
