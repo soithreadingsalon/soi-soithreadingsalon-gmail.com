@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { OfferCarousel } from "@/components/OfferCarousel";
 import { FAQS, SITE_URL } from "@/data/seo-content";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { LocalServiceLinks } from "@/components/LocalServiceLinks";
 import { getGoogleReviews, type GoogleReview } from "@/lib/reviews.functions";
 import { CURATED_REVIEWS } from "@/data/reviews-data";
 
@@ -517,6 +518,8 @@ function HomePage() {
           </a>
         </div>
       </section>
+
+      <LocalServiceLinks />
 
       {/* FAQ */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">

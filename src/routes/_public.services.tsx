@@ -10,6 +10,7 @@ import { SITE_URL } from "@/data/seo-content";
 import { useServerFn } from "@tanstack/react-start";
 import { submitBooking as submitBookingRequest } from "@/lib/booking.functions";
 import {
+import { LocalServiceLinks } from "@/components/LocalServiceLinks";
   Dialog,
   DialogContent,
   DialogHeader,
@@ -305,6 +306,8 @@ function ServicesPage() {
           </aside>
         </div>
       </section>
+
+      <LocalServiceLinks />
 
       {/* Mobile sticky bottom bar */}
       {selected.length > 0 && (
