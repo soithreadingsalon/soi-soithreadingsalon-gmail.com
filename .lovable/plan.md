@@ -1,46 +1,60 @@
-# Complete Google Search Console Setup
+# Improve rankings and links for soithreadingandsalon.com
 
-Your site is already verified and the sitemap is submitted. These are the remaining steps you do inside Google Search Console (https://search.google.com/search-console) to fully activate it.
+## Where things stand (from Semrush)
 
-## 1. Confirm properties
-- Open Search Console and confirm both properties are listed:
-  - `https://soithreadingandsalon.com`
-  - `https://www.soithreadingandsalon.com`
-- Set the apex (`https://soithreadingandsalon.com`) as your working property.
+- 36 organic keywords, ~171 visits/mo estimated. Almost all of it is brand traffic ("soi eyebrow", "soi threading", "soi brow"). Non-brand local terms bring in essentially nothing.
+- 9 referring domains, and nearly all are spam/PBN sites. Real local citations: close to zero.
+- The Wayne NJ landing pages already exist (threading, eyebrow threading, waxing, facials, henna, eyelash, men's grooming, beauty salon) and are in the sitemap, but none of them rank.
 
-## 2. Verify sitemap is processed
-- Go to **Indexing → Sitemaps**.
-- Confirm `sitemap.xml` shows status **Success** (may take a few hours after submission).
-- If it says "Couldn't fetch," click the row and re-submit.
+So the problem is not "missing pages". It is that the existing pages are thin on local proof, and nothing trustworthy links to the site.
 
-## 3. Request indexing for key pages
-- Use the **URL Inspection** tool (top search bar) for each priority URL:
-  - `/`
-  - `/services`
-  - `/booking`
-  - `/contact`
-  - `/eyebrow-threading-wayne-nj`
-  - `/waxing-wayne-nj`
-  - `/facials-wayne-nj`
-- For each: paste URL → **Request Indexing**.
+## Part 1: Make the existing local pages actually competitive
 
-## 4. Set international targeting & preferred domain
-- **Settings → Ownership verification**: confirm META tag is green.
-- Google no longer has a "preferred domain" setting; instead ensure the `www` version redirects to apex (already handled by hosting).
+Rather than adding new pages, deepen the ones already there. Priority order based on real search demand:
 
-## 5. Link Google Business Profile & Analytics (optional but recommended)
-- **Settings → Associations**: link your Google Business Profile ("SOI Threading Salon") so local search data flows in.
-- Link Google Analytics 4 if/when set up.
+| Page | Target queries | Volume signal |
+|---|---|---|
+| /eyebrow-threading-wayne-nj | threading salon near me, salon near me for eyebrows, eyebrow stylist near me | 1,000-2,900/mo each, KD 18 for the geo version |
+| /threading-salon-wayne-nj | indian salon near me, salons near me for threading | 2,900-4,400/mo |
+| /henna-wayne-nj | henna brows near me | 1,900/mo |
+| /waxing-wayne-nj, /facials-wayne-nj | service + Wayne/Passaic County terms | lower, but easy |
 
-## 6. Enable email alerts
-- **Settings → Users and permissions**: confirm your email is Owner.
-- **Settings → Preferences**: enable email notifications for coverage issues and manual actions.
+On each of those pages add:
 
-## 7. Monitor after 3–7 days
-- **Performance** report: check impressions/clicks for target keywords (threading, waxing, facials Wayne NJ).
-- **Pages** report: confirm all 16 sitemap URLs are indexed. Fix any listed under "Not indexed."
-- **Enhancements**: check FAQ and LocalBusiness structured data are detected without errors.
+- A price table for that service (real prices, the ones already on /services).
+- "How long it takes / what to expect" section written for a first-time client.
+- 3-4 Google reviews specific to that service, pulled from the reviews already loaded on the homepage.
+- Nearby-area mentions in the copy: Wayne, Totowa, Pompton Lakes, Haledon, Paterson, Little Falls, Passaic County.
+- Photos from the gallery with descriptive alt text.
+- A FAQ block with Q&A structured data for questions people actually ask about that service.
+- One clear booking action plus the WhatsApp number.
 
-## Notes
-- Nothing in the codebase needs to change for these steps — verification tag, sitemap, robots.txt, and structured data are already in place.
-- Initial indexing typically takes 3–14 days. Request-indexing speeds up priority pages but isn't a guarantee.
+Also: internal-link each service page from the homepage and from /services with descriptive anchor text, and cross-link related pages (threading -> henna brows, waxing -> facials).
+
+## Part 2: Fix the link profile
+
+No code can produce links, but these are the ones that matter for a local salon, in order:
+
+1. Google Business Profile: complete every field, add service list with prices, post weekly, keep asking for reviews. This is the single biggest local ranking factor and it is free.
+2. Core citations with identical name/address/phone: Apple Business Connect, Bing Places, Yelp, Nextdoor, Facebook, Instagram bio link, Yellow Pages, Foursquare.
+3. Local/community: Wayne Chamber of Commerce, Passaic County business directories, Wayne Patch and TAPinto Wayne business listings, local school or temple sponsorship pages.
+4. Niche directories: StyleSeat, Booksy, Vagaro, Fresha, Thumbtack, and Indian/South Asian community directories in North Jersey.
+5. Ignore the PBN links already pointing at the site. They are not helping, and disavowing is not worth the effort at this volume.
+
+I will build a `/locations` style hub or a printable citation checklist page only if you want it; the list above is something you or a staff member works through.
+
+## Part 3: Verify
+
+- Run a fresh SEO scan after the page changes ship, and confirm no new technical findings.
+- Re-check rankings for the target local terms in about 4-6 weeks with Semrush.
+
+## Technical notes
+
+- Page content lives in `src/data/seo-content.ts` (`LANDING_PAGES`) and renders through `src/components/LandingPage.tsx`. The richer sections (price table, FAQ, service-specific reviews, area list) require extending the content shape and the `LandingPage` component, then filling in per-page data.
+- FAQ structured data goes in each route's `head()` as JSON-LD, alongside the existing meta tags.
+- Google review data is already fetched by `src/lib/reviews.functions.ts`; service pages can reuse it rather than hardcoding.
+- `public/sitemap.xml` needs updated `lastmod` values once pages change.
+
+## Scope check
+
+Part 1 is the build work. Part 2 is off-platform and yours to execute. Tell me if you want me to start with the two highest-value pages (eyebrow threading and threading salon) rather than all eight at once.
