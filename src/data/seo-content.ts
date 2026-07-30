@@ -226,3 +226,178 @@ export const LANDING_PAGES: Record<string, LandingContent> = {
     ],
   },
 };
+export type LandingExtras = {
+  /** "What to expect" steps for a first-time client. */
+  expect: { title: string; body: string }[];
+  /** Service-specific FAQs, rendered above the sitewide FAQs. */
+  faqs: { q: string; a: string }[];
+  /** Keywords matched against curated Google review service lines. */
+  reviewKeywords: string[];
+  /** Related service pages to cross-link. */
+  related: { to: string; label: string; blurb: string }[];
+};
+
+export const LANDING_EXTRAS: Record<string, LandingExtras> = {
+  "eyebrow-threading-wayne-nj": {
+    expect: [
+      { title: "Consultation, 2 minutes", body: "We look at your natural brow line and talk through the shape you want, thinner, fuller, more arch, or just a clean-up of the existing shape." },
+      { title: "Threading, 10 to 15 minutes", body: "A fresh cotton thread removes hair row by row at the follicle. Most clients are in and out of the chair in under fifteen minutes." },
+      { title: "Soothing finish", body: "We apply a calming gel to reduce redness. Any pinkness usually settles within an hour." },
+      { title: "Aftercare", body: "Skip heavy makeup and sun exposure for a few hours. Most clients come back every three to four weeks to keep the shape crisp." },
+    ],
+    faqs: [
+      { q: "How much is eyebrow threading in Wayne, NJ?", a: "Eyebrow threading is $10 at SOI Threading Salon, 180 Hamburg Turnpk, Wayne, NJ. Men's eyebrow threading is $11." },
+      { q: "Does eyebrow threading hurt?", a: "Threading is quick and most clients describe it as a light stinging that stops as soon as the pass is done. It does not pull the skin the way waxing does, so it suits sensitive skin." },
+      { q: "How long does eyebrow threading last?", a: "Most clients get three to four weeks out of a threading appointment before regrowth is noticeable." },
+      { q: "Do I need an appointment for eyebrow threading?", a: "Walk-ins are always welcome. Booking ahead simply guarantees your time slot, especially on Saturdays." },
+      { q: "Is threading better than waxing for eyebrows?", a: "Threading gives a more precise line and does not lift the top layer of skin, which makes it a better fit for the delicate brow area and for anyone using retinol or acne treatments." },
+    ],
+    reviewKeywords: ["eyebrow", "brow", "threading"],
+    related: [
+      { to: "/threading-salon-wayne-nj", label: "Full threading menu", blurb: "Upper lip, chin, sideburns, and full face threading." },
+      { to: "/henna-wayne-nj", label: "Henna and brow art", blurb: "Natural mehndi designs by the same team." },
+      { to: "/eyelash-services-wayne-nj", label: "Lash lift and extensions", blurb: "Pair with brows for a full eye-area refresh." },
+    ],
+  },
+  "threading-salon-wayne-nj": {
+    expect: [
+      { title: "Pick your areas", body: "Eyebrows, upper lip, chin, sideburns, forehead, or the full face and neck package. Mix and match in one sitting." },
+      { title: "Fresh thread every time", body: "Every client gets a new, single-use cotton thread. Nothing is reused between appointments." },
+      { title: "Full face, 30 to 40 minutes", body: "A full face session is quick enough to fit into a lunch break and leaves skin smooth, not waxed-looking." },
+      { title: "Loyalty card", body: "Nine eyebrow visits and your tenth is on us. We track it for you at the desk." },
+    ],
+    faqs: [
+      { q: "What is the best threading salon in Wayne, NJ?", a: "SOI Threading Salon at 180 Hamburg Turnpk has a 5.0 rating across 50+ Google reviews from clients across Wayne and Passaic County." },
+      { q: "Do you offer full face threading?", a: "Yes. Full face threading is $35 and full face with neck is $40. Both include eyebrows, upper lip, chin, forehead, and sides." },
+      { q: "Is this an Indian threading salon?", a: "Yes. SOI Threading Salon is an Indian-owned salon in Wayne, NJ, using the traditional threading technique alongside modern waxing, facial, and lash services." },
+      { q: "Can men get threading here?", a: "Yes. Men's eyebrow threading is $11, and we also offer nose hair removal, ear wax, and back and chest waxing." },
+      { q: "What are your threading salon hours?", a: "Monday to Friday 10:00 AM to 7:00 PM, Saturday 10:00 AM to 6:00 PM, closed Sunday." },
+    ],
+    reviewKeywords: ["threading", "face"],
+    related: [
+      { to: "/eyebrow-threading-wayne-nj", label: "Eyebrow threading", blurb: "Our most-booked service, $10." },
+      { to: "/waxing-wayne-nj", label: "Waxing services", blurb: "Face, body, and Brazilian waxing." },
+      { to: "/beauty-salon-wayne-nj", label: "Full salon menu", blurb: "Facials, hair care, lashes, and henna." },
+    ],
+  },
+  "waxing-wayne-nj": {
+    expect: [
+      { title: "Patch check", body: "For first-time clients we check how your skin reacts before treating a larger area." },
+      { title: "Premium wax, single-use tools", body: "Applicators are never double-dipped, and wax is fresh for every client." },
+      { title: "Private room", body: "Bikini, Brazilian, and body waxing are done in a private, closed treatment space." },
+      { title: "Aftercare", body: "Avoid heat, swimming, and heavy exercise for 24 hours. We recommend gentle exfoliation from day three to keep ingrowns away." },
+    ],
+    faqs: [
+      { q: "How much is a Brazilian wax in Wayne, NJ?", a: "Brazilian waxing is $45 at SOI Threading Salon. Bikini line is $25 and underarms are $15." },
+      { q: "How long does hair need to be for waxing?", a: "About a quarter inch, roughly two weeks of growth, so the wax has something to grip." },
+      { q: "How often should I get waxed?", a: "Every four to six weeks keeps regrowth on the same cycle and makes each appointment more comfortable." },
+      { q: "Do you wax men?", a: "Yes. Back, chest, and full back waxing are on the men's grooming menu." },
+    ],
+    reviewKeywords: ["waxing", "wax"],
+    related: [
+      { to: "/facials-wayne-nj", label: "Facials and skin care", blurb: "Book with waxing for a complete refresh." },
+      { to: "/eyebrow-threading-wayne-nj", label: "Eyebrow threading", blurb: "Gentler than wax on the brow area." },
+      { to: "/mens-grooming-wayne-nj", label: "Men's grooming", blurb: "Back, chest, and ear waxing." },
+    ],
+  },
+  "facials-wayne-nj": {
+    expect: [
+      { title: "Skin consultation", body: "We look at your skin type and concerns, congestion, dullness, breakouts, or dryness, and match a facial to it." },
+      { title: "Cleanse, exfoliate, extract", body: "Deep cleansing and gentle extractions clear congestion without leaving skin raw." },
+      { title: "Mask and massage", body: "A treatment mask plus facial and shoulder massage. This is the part clients tell us they book for." },
+      { title: "Finish and advice", body: "Serum, moisturiser, and SPF, plus a simple home routine so results hold between visits." },
+    ],
+    faqs: [
+      { q: "How much is a facial in Wayne, NJ?", a: "Facials at SOI start at $45 for a mini facial. Acne and gold facials are $65, oxygen facial is $90, and Casmara Gold is $95." },
+      { q: "Which facial is best for acne?", a: "The Acne Facial at $65 is built for congested and breakout-prone skin, with deep cleansing and gentle extractions." },
+      { q: "How often should I get a facial?", a: "Every four to six weeks matches the skin's renewal cycle. Clients preparing for an event often book one to two weeks ahead." },
+      { q: "Do you offer facials for teenagers?", a: "Yes. The Teenage Facial is $45 and is designed for younger skin just starting a skin care routine." },
+    ],
+    reviewKeywords: ["facial"],
+    related: [
+      { to: "/waxing-wayne-nj", label: "Waxing services", blurb: "Common add-on before an event." },
+      { to: "/eyebrow-threading-wayne-nj", label: "Eyebrow threading", blurb: "Finish the look in the same visit." },
+      { to: "/beauty-salon-wayne-nj", label: "Full salon menu", blurb: "See everything we offer." },
+    ],
+  },
+  "henna-wayne-nj": {
+    expect: [
+      { title: "Choose a design", body: "Simple ankle or wrist accents, festival designs, or full hand bridal mehndi. Bring a reference photo if you have one." },
+      { title: "Natural paste only", body: "We use fresh, all-natural henna paste. No chemical black henna, which can burn or scar skin." },
+      { title: "Drying time", body: "Keep the paste on for four to six hours, longer for a deeper stain. Scrape, do not wash, it off." },
+      { title: "Colour development", body: "The stain darkens over 24 to 48 hours and typically lasts one to two weeks." },
+    ],
+    faqs: [
+      { q: "How much does henna cost in Wayne, NJ?", a: "Simple henna tattoos start at $15. Larger and bridal designs are quoted after we see the design." },
+      { q: "Do you do bridal mehndi?", a: "Yes. Bridal and party henna should be booked in advance so we can set aside enough time." },
+      { q: "Is your henna natural?", a: "Yes. We use only fresh plant-based henna paste and never black henna." },
+      { q: "How long does henna last?", a: "One to two weeks depending on placement and how often the area is washed." },
+    ],
+    reviewKeywords: ["henna"],
+    related: [
+      { to: "/eyebrow-threading-wayne-nj", label: "Eyebrow threading", blurb: "Popular with henna clients before events." },
+      { to: "/facials-wayne-nj", label: "Facials", blurb: "Book before a wedding or festival." },
+      { to: "/beauty-salon-wayne-nj", label: "Full salon menu", blurb: "Event-ready packages." },
+    ],
+  },
+  "beauty-salon-wayne-nj": {
+    expect: [
+      { title: "Walk in or book", body: "Walk-ins are always welcome. Booking online holds a specific time, which helps on Fridays and Saturdays." },
+      { title: "One visit, several services", body: "Threading, waxing, a facial, and lashes can all be done back to back so you only make one trip." },
+      { title: "Clean, calm space", body: "Single-use tools, private rooms for body services, and a salon designed to feel unhurried." },
+      { title: "Easy to find", body: "180 Hamburg Turnpk, Wayne, NJ 07470, next to the QuickChek, with parking at the door." },
+    ],
+    faqs: [
+      { q: "Where is SOI Threading Salon in Wayne, NJ?", a: "180 Hamburg Turnpk, Wayne, NJ 07470, next to the QuickChek, with free parking." },
+      { q: "Do you take walk-ins?", a: "Yes, walk-ins are always welcome. Appointments are available for convenience but are not required." },
+      { q: "What services does the salon offer?", a: "Threading, waxing, facials and skin care, hair care, henna, eyelash lifting and extensions, and men's grooming." },
+      { q: "What areas do you serve?", a: "Wayne plus Totowa, Little Falls, Woodland Park, Paterson, Haledon, Pompton Lakes, Clifton, Franklin Lakes, and the wider Passaic County area." },
+    ],
+    reviewKeywords: ["beauty", "threading", "facial", "haircut"],
+    related: [
+      { to: "/eyebrow-threading-wayne-nj", label: "Eyebrow threading", blurb: "$10, our signature service." },
+      { to: "/facials-wayne-nj", label: "Facials and skin care", blurb: "From mini facials to Casmara Gold." },
+      { to: "/waxing-wayne-nj", label: "Waxing services", blurb: "Face and body waxing." },
+    ],
+  },
+  "eyelash-services-wayne-nj": {
+    expect: [
+      { title: "Which service fits", body: "A lift enhances your own lashes. Extensions add length and volume. We help you pick based on your natural lash length." },
+      { title: "Lash lift, about 45 minutes", body: "Lashes are curled from the base and set. Results last six to eight weeks with no daily upkeep." },
+      { title: "Extensions, 60 to 90 minutes", body: "Individual lashes are applied one at a time for a defined, wide-awake look." },
+      { title: "Aftercare", body: "Keep lashes dry for 24 hours and avoid oil-based cleansers around the eye area." },
+    ],
+    faqs: [
+      { q: "How much is a lash lift in Wayne, NJ?", a: "Eyelash lifting is $75 and eyelash extensions start at $60 at SOI Threading Salon." },
+      { q: "How long does a lash lift last?", a: "Six to eight weeks, which is the natural growth cycle of your lashes." },
+      { q: "Lash lift or extensions, which should I get?", a: "A lift is best if you already have decent lash length and want low maintenance. Extensions are best when you want visible added length and volume." },
+      { q: "Can I get lashes and brows in one visit?", a: "Yes, and most clients do. Lash lift plus eyebrow threading is our most common pairing." },
+    ],
+    reviewKeywords: ["lash"],
+    related: [
+      { to: "/eyebrow-threading-wayne-nj", label: "Eyebrow threading", blurb: "The natural pairing with lash work." },
+      { to: "/facials-wayne-nj", label: "Facials", blurb: "Complete the pre-event routine." },
+      { to: "/beauty-salon-wayne-nj", label: "Full salon menu", blurb: "Everything under one roof." },
+    ],
+  },
+  "mens-grooming-wayne-nj": {
+    expect: [
+      { title: "Natural shape, not overdone", body: "Men's brow threading cleans up the unibrow and stray hair while keeping the natural masculine line." },
+      { title: "In and out fast", body: "A men's brow clean-up takes about ten minutes. Most clients come on the way to or from work." },
+      { title: "Body work in private", body: "Back and chest waxing is done in a closed treatment room with fresh wax and single-use applicators." },
+      { title: "First time?", body: "We explain the process and aftercare before we start. No pressure to add services you did not ask for." },
+    ],
+    faqs: [
+      { q: "How much is men's eyebrow threading in Wayne, NJ?", a: "Men's eyebrow threading is $11. Nose hair removal and ear wax are $10 each." },
+      { q: "Do you do back and chest waxing for men?", a: "Yes. Back wax is $45 and chest wax is $35." },
+      { q: "Will threading make my brows look thin?", a: "No. For men we only remove strays and the unibrow, keeping the natural thickness and line." },
+      { q: "Do I need an appointment?", a: "Walk-ins are welcome. Booking ahead is useful for longer services like back waxing." },
+    ],
+    reviewKeywords: ["threading", "wax"],
+    related: [
+      { to: "/eyebrow-threading-wayne-nj", label: "Eyebrow threading", blurb: "Full threading price list." },
+      { to: "/waxing-wayne-nj", label: "Waxing services", blurb: "Full body waxing menu." },
+      { to: "/beauty-salon-wayne-nj", label: "Full salon menu", blurb: "Everything the salon offers." },
+    ],
+  },
+};

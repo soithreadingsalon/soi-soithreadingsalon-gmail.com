@@ -16,6 +16,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { LocalServiceLinks } from "@/components/LocalServiceLinks";
 
 type Service = { id: string; category: string; name: string; price: string; description: string | null; featured: boolean; sort_order: number };
 
@@ -305,6 +306,8 @@ function ServicesPage() {
           </aside>
         </div>
       </section>
+
+      <LocalServiceLinks />
 
       {/* Mobile sticky bottom bar */}
       {selected.length > 0 && (
