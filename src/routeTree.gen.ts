@@ -9,45 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SoiRouteImport } from './routes/soi'
-import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PublicRouteImport } from './routes/_public'
-import { Route as SoiIndexRouteImport } from './routes/soi.index'
-import { Route as PublicIndexRouteImport } from './routes/_public.index'
-import { Route as SoiSettingsRouteImport } from './routes/soi.settings'
-import { Route as SoiServicesRouteImport } from './routes/soi.services'
-import { Route as SoiOffersRouteImport } from './routes/soi.offers'
-import { Route as SoiLoginRouteImport } from './routes/soi.login'
-import { Route as SoiInquiriesRouteImport } from './routes/soi.inquiries'
-import { Route as SoiGalleryRouteImport } from './routes/soi.gallery'
-import { Route as SoiDashboardRouteImport } from './routes/soi.dashboard'
-import { Route as SoiAppointmentsBackupRouteImport } from './routes/soi.appointments-backup'
-import { Route as SoiAppointmentsRouteImport } from './routes/soi.appointments'
-import { Route as PublicWaxingWayneNjRouteImport } from './routes/_public.waxing-wayne-nj'
-import { Route as PublicThreadingSalonWayneNjRouteImport } from './routes/_public.threading-salon-wayne-nj'
-import { Route as PublicServicesRouteImport } from './routes/_public.services'
-import { Route as PublicOffersRouteImport } from './routes/_public.offers'
-import { Route as PublicMensGroomingWayneNjRouteImport } from './routes/_public.mens-grooming-wayne-nj'
-import { Route as PublicHennaWayneNjRouteImport } from './routes/_public.henna-wayne-nj'
-import { Route as PublicGalleryRouteImport } from './routes/_public.gallery'
-import { Route as PublicFacialsWayneNjRouteImport } from './routes/_public.facials-wayne-nj'
-import { Route as PublicEyelashServicesWayneNjRouteImport } from './routes/_public.eyelash-services-wayne-nj'
-import { Route as PublicEyebrowThreadingWayneNjRouteImport } from './routes/_public.eyebrow-threading-wayne-nj'
-import { Route as PublicContactRouteImport } from './routes/_public.contact'
-import { Route as PublicBookingRouteImport } from './routes/_public.booking'
-import { Route as PublicBeautySalonWayneNjRouteImport } from './routes/_public.beauty-salon-wayne-nj'
-import { Route as PublicAiBusinessSummaryRouteImport } from './routes/_public.ai-business-summary'
-import { Route as PublicAboutRouteImport } from './routes/_public.about'
-import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as McpRouteImport } from './routes/mcp'
+import { Route as SoiRouteImport } from './routes/soi'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
-import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
-import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as PublicIndexRouteImport } from './routes/_public.index'
+import { Route as PublicAboutRouteImport } from './routes/_public.about'
+import { Route as PublicAiBusinessSummaryRouteImport } from './routes/_public.ai-business-summary'
+import { Route as PublicBeautySalonWayneNjRouteImport } from './routes/_public.beauty-salon-wayne-nj'
+import { Route as PublicBookingRouteImport } from './routes/_public.booking'
+import { Route as PublicContactRouteImport } from './routes/_public.contact'
+import { Route as PublicEyebrowThreadingWayneNjRouteImport } from './routes/_public.eyebrow-threading-wayne-nj'
+import { Route as PublicEyelashServicesWayneNjRouteImport } from './routes/_public.eyelash-services-wayne-nj'
+import { Route as PublicFacialsWayneNjRouteImport } from './routes/_public.facials-wayne-nj'
+import { Route as PublicGalleryRouteImport } from './routes/_public.gallery'
+import { Route as PublicHennaWayneNjRouteImport } from './routes/_public.henna-wayne-nj'
+import { Route as PublicMensGroomingWayneNjRouteImport } from './routes/_public.mens-grooming-wayne-nj'
+import { Route as PublicOffersRouteImport } from './routes/_public.offers'
+import { Route as PublicServicesRouteImport } from './routes/_public.services'
+import { Route as PublicThreadingSalonWayneNjRouteImport } from './routes/_public.threading-salon-wayne-nj'
+import { Route as PublicWaxingWayneNjRouteImport } from './routes/_public.waxing-wayne-nj'
+import { Route as SoiIndexRouteImport } from './routes/soi.index'
+import { Route as SoiAppointmentsRouteImport } from './routes/soi.appointments'
+import { Route as SoiAppointmentsBackupRouteImport } from './routes/soi.appointments-backup'
+import { Route as SoiDashboardRouteImport } from './routes/soi.dashboard'
+import { Route as SoiGalleryRouteImport } from './routes/soi.gallery'
+import { Route as SoiInquiriesRouteImport } from './routes/soi.inquiries'
+import { Route as SoiLoginRouteImport } from './routes/soi.login'
+import { Route as SoiOffersRouteImport } from './routes/soi.offers'
+import { Route as SoiServicesRouteImport } from './routes/soi.services'
+import { Route as SoiSettingsRouteImport } from './routes/soi.settings'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 import { Route as ApiPublicPosAppointmentsRouteImport } from './routes/api/public/pos.appointments'
 
-const SoiRoute = SoiRouteImport.update({
-  id: '/soi',
-  path: '/soi',
+const PublicRoute = PublicRouteImport.update({
+  id: '/_public',
   getParentRoute: () => rootRouteImport,
 } as any)
 const McpRoute = McpRouteImport.update({
@@ -55,127 +54,36 @@ const McpRoute = McpRouteImport.update({
   path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PublicRoute = PublicRouteImport.update({
-  id: '/_public',
+const SoiRoute = SoiRouteImport.update({
+  id: '/soi',
+  path: '/soi',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SoiIndexRoute = SoiIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => SoiRoute,
-} as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => PublicRoute,
 } as any)
-const SoiSettingsRoute = SoiSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => SoiRoute,
-} as any)
-const SoiServicesRoute = SoiServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => SoiRoute,
-} as any)
-const SoiOffersRoute = SoiOffersRouteImport.update({
-  id: '/offers',
-  path: '/offers',
-  getParentRoute: () => SoiRoute,
-} as any)
-const SoiLoginRoute = SoiLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => SoiRoute,
-} as any)
-const SoiInquiriesRoute = SoiInquiriesRouteImport.update({
-  id: '/inquiries',
-  path: '/inquiries',
-  getParentRoute: () => SoiRoute,
-} as any)
-const SoiGalleryRoute = SoiGalleryRouteImport.update({
-  id: '/gallery',
-  path: '/gallery',
-  getParentRoute: () => SoiRoute,
-} as any)
-const SoiDashboardRoute = SoiDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => SoiRoute,
-} as any)
-const SoiAppointmentsBackupRoute = SoiAppointmentsBackupRouteImport.update({
-  id: '/appointments-backup',
-  path: '/appointments-backup',
-  getParentRoute: () => SoiRoute,
-} as any)
-const SoiAppointmentsRoute = SoiAppointmentsRouteImport.update({
-  id: '/appointments',
-  path: '/appointments',
-  getParentRoute: () => SoiRoute,
-} as any)
-const PublicWaxingWayneNjRoute = PublicWaxingWayneNjRouteImport.update({
-  id: '/waxing-wayne-nj',
-  path: '/waxing-wayne-nj',
+const PublicAboutRoute = PublicAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => PublicRoute,
 } as any)
-const PublicThreadingSalonWayneNjRoute =
-  PublicThreadingSalonWayneNjRouteImport.update({
-    id: '/threading-salon-wayne-nj',
-    path: '/threading-salon-wayne-nj',
-    getParentRoute: () => PublicRoute,
-  } as any)
-const PublicServicesRoute = PublicServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => PublicRoute,
-} as any)
-const PublicOffersRoute = PublicOffersRouteImport.update({
-  id: '/offers',
-  path: '/offers',
-  getParentRoute: () => PublicRoute,
-} as any)
-const PublicMensGroomingWayneNjRoute =
-  PublicMensGroomingWayneNjRouteImport.update({
-    id: '/mens-grooming-wayne-nj',
-    path: '/mens-grooming-wayne-nj',
-    getParentRoute: () => PublicRoute,
-  } as any)
-const PublicHennaWayneNjRoute = PublicHennaWayneNjRouteImport.update({
-  id: '/henna-wayne-nj',
-  path: '/henna-wayne-nj',
-  getParentRoute: () => PublicRoute,
-} as any)
-const PublicGalleryRoute = PublicGalleryRouteImport.update({
-  id: '/gallery',
-  path: '/gallery',
-  getParentRoute: () => PublicRoute,
-} as any)
-const PublicFacialsWayneNjRoute = PublicFacialsWayneNjRouteImport.update({
-  id: '/facials-wayne-nj',
-  path: '/facials-wayne-nj',
-  getParentRoute: () => PublicRoute,
-} as any)
-const PublicEyelashServicesWayneNjRoute =
-  PublicEyelashServicesWayneNjRouteImport.update({
-    id: '/eyelash-services-wayne-nj',
-    path: '/eyelash-services-wayne-nj',
-    getParentRoute: () => PublicRoute,
-  } as any)
-const PublicEyebrowThreadingWayneNjRoute =
-  PublicEyebrowThreadingWayneNjRouteImport.update({
-    id: '/eyebrow-threading-wayne-nj',
-    path: '/eyebrow-threading-wayne-nj',
-    getParentRoute: () => PublicRoute,
-  } as any)
-const PublicContactRoute = PublicContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => PublicRoute,
-} as any)
-const PublicBookingRoute = PublicBookingRouteImport.update({
-  id: '/booking',
-  path: '/booking',
+const PublicAiBusinessSummaryRoute = PublicAiBusinessSummaryRouteImport.update({
+  id: '/ai-business-summary',
+  path: '/ai-business-summary',
   getParentRoute: () => PublicRoute,
 } as any)
 const PublicBeautySalonWayneNjRoute =
@@ -184,31 +92,123 @@ const PublicBeautySalonWayneNjRoute =
     path: '/beauty-salon-wayne-nj',
     getParentRoute: () => PublicRoute,
   } as any)
-const PublicAiBusinessSummaryRoute = PublicAiBusinessSummaryRouteImport.update({
-  id: '/ai-business-summary',
-  path: '/ai-business-summary',
+const PublicBookingRoute = PublicBookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
   getParentRoute: () => PublicRoute,
 } as any)
-const PublicAboutRoute = PublicAboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const PublicContactRoute = PublicContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => PublicRoute,
 } as any)
-const Char91DotwellKnownChar93OauthProtectedResourceRoute =
-  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
-    id: '/.well-known/oauth-protected-resource',
-    path: '/.well-known/oauth-protected-resource',
-    getParentRoute: () => rootRouteImport,
+const PublicEyebrowThreadingWayneNjRoute =
+  PublicEyebrowThreadingWayneNjRouteImport.update({
+    id: '/eyebrow-threading-wayne-nj',
+    path: '/eyebrow-threading-wayne-nj',
+    getParentRoute: () => PublicRoute,
   } as any)
-const Char91DotmcpChar93ListToolsRoute =
-  Char91DotmcpChar93ListToolsRouteImport.update({
-    id: '/.mcp/list-tools',
-    path: '/.mcp/list-tools',
-    getParentRoute: () => rootRouteImport,
+const PublicEyelashServicesWayneNjRoute =
+  PublicEyelashServicesWayneNjRouteImport.update({
+    id: '/eyelash-services-wayne-nj',
+    path: '/eyelash-services-wayne-nj',
+    getParentRoute: () => PublicRoute,
   } as any)
-const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
-  id: '/api/public/track',
-  path: '/api/public/track',
+const PublicFacialsWayneNjRoute = PublicFacialsWayneNjRouteImport.update({
+  id: '/facials-wayne-nj',
+  path: '/facials-wayne-nj',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicGalleryRoute = PublicGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicHennaWayneNjRoute = PublicHennaWayneNjRouteImport.update({
+  id: '/henna-wayne-nj',
+  path: '/henna-wayne-nj',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicMensGroomingWayneNjRoute =
+  PublicMensGroomingWayneNjRouteImport.update({
+    id: '/mens-grooming-wayne-nj',
+    path: '/mens-grooming-wayne-nj',
+    getParentRoute: () => PublicRoute,
+  } as any)
+const PublicOffersRoute = PublicOffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicServicesRoute = PublicServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicThreadingSalonWayneNjRoute =
+  PublicThreadingSalonWayneNjRouteImport.update({
+    id: '/threading-salon-wayne-nj',
+    path: '/threading-salon-wayne-nj',
+    getParentRoute: () => PublicRoute,
+  } as any)
+const PublicWaxingWayneNjRoute = PublicWaxingWayneNjRouteImport.update({
+  id: '/waxing-wayne-nj',
+  path: '/waxing-wayne-nj',
+  getParentRoute: () => PublicRoute,
+} as any)
+const SoiIndexRoute = SoiIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiAppointmentsRoute = SoiAppointmentsRouteImport.update({
+  id: '/appointments',
+  path: '/appointments',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiAppointmentsBackupRoute = SoiAppointmentsBackupRouteImport.update({
+  id: '/appointments-backup',
+  path: '/appointments-backup',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiDashboardRoute = SoiDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiGalleryRoute = SoiGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiInquiriesRoute = SoiInquiriesRouteImport.update({
+  id: '/inquiries',
+  path: '/inquiries',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiLoginRoute = SoiLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiOffersRoute = SoiOffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiServicesRoute = SoiServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => SoiRoute,
+} as any)
+const SoiSettingsRoute = SoiSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => SoiRoute,
+} as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
@@ -217,9 +217,9 @@ const Char91DotmcpChar93InvokeToolToolRoute =
     path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
-const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
-  id: '/.lovable/oauth/consent',
-  path: '/.lovable/oauth/consent',
+const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
+  id: '/api/public/track',
+  path: '/api/public/track',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicPosAppointmentsRoute =
@@ -463,11 +463,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/soi': {
-      id: '/soi'
-      path: '/soi'
-      fullPath: '/soi'
-      preLoaderRoute: typeof SoiRouteImport
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PublicRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mcp': {
@@ -477,200 +477,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_public': {
-      id: '/_public'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof PublicRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/soi/': {
-      id: '/soi/'
-      path: '/'
-      fullPath: '/soi/'
-      preLoaderRoute: typeof SoiIndexRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/_public/': {
-      id: '/_public/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof PublicIndexRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/soi/settings': {
-      id: '/soi/settings'
-      path: '/settings'
-      fullPath: '/soi/settings'
-      preLoaderRoute: typeof SoiSettingsRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/soi/services': {
-      id: '/soi/services'
-      path: '/services'
-      fullPath: '/soi/services'
-      preLoaderRoute: typeof SoiServicesRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/soi/offers': {
-      id: '/soi/offers'
-      path: '/offers'
-      fullPath: '/soi/offers'
-      preLoaderRoute: typeof SoiOffersRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/soi/login': {
-      id: '/soi/login'
-      path: '/login'
-      fullPath: '/soi/login'
-      preLoaderRoute: typeof SoiLoginRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/soi/inquiries': {
-      id: '/soi/inquiries'
-      path: '/inquiries'
-      fullPath: '/soi/inquiries'
-      preLoaderRoute: typeof SoiInquiriesRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/soi/gallery': {
-      id: '/soi/gallery'
-      path: '/gallery'
-      fullPath: '/soi/gallery'
-      preLoaderRoute: typeof SoiGalleryRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/soi/dashboard': {
-      id: '/soi/dashboard'
-      path: '/dashboard'
-      fullPath: '/soi/dashboard'
-      preLoaderRoute: typeof SoiDashboardRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/soi/appointments-backup': {
-      id: '/soi/appointments-backup'
-      path: '/appointments-backup'
-      fullPath: '/soi/appointments-backup'
-      preLoaderRoute: typeof SoiAppointmentsBackupRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/soi/appointments': {
-      id: '/soi/appointments'
-      path: '/appointments'
-      fullPath: '/soi/appointments'
-      preLoaderRoute: typeof SoiAppointmentsRouteImport
-      parentRoute: typeof SoiRoute
-    }
-    '/_public/waxing-wayne-nj': {
-      id: '/_public/waxing-wayne-nj'
-      path: '/waxing-wayne-nj'
-      fullPath: '/waxing-wayne-nj'
-      preLoaderRoute: typeof PublicWaxingWayneNjRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/threading-salon-wayne-nj': {
-      id: '/_public/threading-salon-wayne-nj'
-      path: '/threading-salon-wayne-nj'
-      fullPath: '/threading-salon-wayne-nj'
-      preLoaderRoute: typeof PublicThreadingSalonWayneNjRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/services': {
-      id: '/_public/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof PublicServicesRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/offers': {
-      id: '/_public/offers'
-      path: '/offers'
-      fullPath: '/offers'
-      preLoaderRoute: typeof PublicOffersRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/mens-grooming-wayne-nj': {
-      id: '/_public/mens-grooming-wayne-nj'
-      path: '/mens-grooming-wayne-nj'
-      fullPath: '/mens-grooming-wayne-nj'
-      preLoaderRoute: typeof PublicMensGroomingWayneNjRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/henna-wayne-nj': {
-      id: '/_public/henna-wayne-nj'
-      path: '/henna-wayne-nj'
-      fullPath: '/henna-wayne-nj'
-      preLoaderRoute: typeof PublicHennaWayneNjRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/gallery': {
-      id: '/_public/gallery'
-      path: '/gallery'
-      fullPath: '/gallery'
-      preLoaderRoute: typeof PublicGalleryRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/facials-wayne-nj': {
-      id: '/_public/facials-wayne-nj'
-      path: '/facials-wayne-nj'
-      fullPath: '/facials-wayne-nj'
-      preLoaderRoute: typeof PublicFacialsWayneNjRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/eyelash-services-wayne-nj': {
-      id: '/_public/eyelash-services-wayne-nj'
-      path: '/eyelash-services-wayne-nj'
-      fullPath: '/eyelash-services-wayne-nj'
-      preLoaderRoute: typeof PublicEyelashServicesWayneNjRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/eyebrow-threading-wayne-nj': {
-      id: '/_public/eyebrow-threading-wayne-nj'
-      path: '/eyebrow-threading-wayne-nj'
-      fullPath: '/eyebrow-threading-wayne-nj'
-      preLoaderRoute: typeof PublicEyebrowThreadingWayneNjRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/contact': {
-      id: '/_public/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof PublicContactRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/booking': {
-      id: '/_public/booking'
-      path: '/booking'
-      fullPath: '/booking'
-      preLoaderRoute: typeof PublicBookingRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/beauty-salon-wayne-nj': {
-      id: '/_public/beauty-salon-wayne-nj'
-      path: '/beauty-salon-wayne-nj'
-      fullPath: '/beauty-salon-wayne-nj'
-      preLoaderRoute: typeof PublicBeautySalonWayneNjRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/ai-business-summary': {
-      id: '/_public/ai-business-summary'
-      path: '/ai-business-summary'
-      fullPath: '/ai-business-summary'
-      preLoaderRoute: typeof PublicAiBusinessSummaryRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/_public/about': {
-      id: '/_public/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof PublicAboutRouteImport
-      parentRoute: typeof PublicRoute
-    }
-    '/.well-known/oauth-protected-resource': {
-      id: '/.well-known/oauth-protected-resource'
-      path: '/.well-known/oauth-protected-resource'
-      fullPath: '/.well-known/oauth-protected-resource'
-      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+    '/soi': {
+      id: '/soi'
+      path: '/soi'
+      fullPath: '/soi'
+      preLoaderRoute: typeof SoiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/list-tools': {
@@ -680,11 +491,200 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/track': {
-      id: '/api/public/track'
-      path: '/api/public/track'
-      fullPath: '/api/public/track'
-      preLoaderRoute: typeof ApiPublicTrackRouteImport
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_public/': {
+      id: '/_public/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof PublicIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/about': {
+      id: '/_public/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof PublicAboutRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/ai-business-summary': {
+      id: '/_public/ai-business-summary'
+      path: '/ai-business-summary'
+      fullPath: '/ai-business-summary'
+      preLoaderRoute: typeof PublicAiBusinessSummaryRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/beauty-salon-wayne-nj': {
+      id: '/_public/beauty-salon-wayne-nj'
+      path: '/beauty-salon-wayne-nj'
+      fullPath: '/beauty-salon-wayne-nj'
+      preLoaderRoute: typeof PublicBeautySalonWayneNjRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/booking': {
+      id: '/_public/booking'
+      path: '/booking'
+      fullPath: '/booking'
+      preLoaderRoute: typeof PublicBookingRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/contact': {
+      id: '/_public/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof PublicContactRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/eyebrow-threading-wayne-nj': {
+      id: '/_public/eyebrow-threading-wayne-nj'
+      path: '/eyebrow-threading-wayne-nj'
+      fullPath: '/eyebrow-threading-wayne-nj'
+      preLoaderRoute: typeof PublicEyebrowThreadingWayneNjRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/eyelash-services-wayne-nj': {
+      id: '/_public/eyelash-services-wayne-nj'
+      path: '/eyelash-services-wayne-nj'
+      fullPath: '/eyelash-services-wayne-nj'
+      preLoaderRoute: typeof PublicEyelashServicesWayneNjRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/facials-wayne-nj': {
+      id: '/_public/facials-wayne-nj'
+      path: '/facials-wayne-nj'
+      fullPath: '/facials-wayne-nj'
+      preLoaderRoute: typeof PublicFacialsWayneNjRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/gallery': {
+      id: '/_public/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof PublicGalleryRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/henna-wayne-nj': {
+      id: '/_public/henna-wayne-nj'
+      path: '/henna-wayne-nj'
+      fullPath: '/henna-wayne-nj'
+      preLoaderRoute: typeof PublicHennaWayneNjRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/mens-grooming-wayne-nj': {
+      id: '/_public/mens-grooming-wayne-nj'
+      path: '/mens-grooming-wayne-nj'
+      fullPath: '/mens-grooming-wayne-nj'
+      preLoaderRoute: typeof PublicMensGroomingWayneNjRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/offers': {
+      id: '/_public/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof PublicOffersRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/services': {
+      id: '/_public/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof PublicServicesRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/threading-salon-wayne-nj': {
+      id: '/_public/threading-salon-wayne-nj'
+      path: '/threading-salon-wayne-nj'
+      fullPath: '/threading-salon-wayne-nj'
+      preLoaderRoute: typeof PublicThreadingSalonWayneNjRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/waxing-wayne-nj': {
+      id: '/_public/waxing-wayne-nj'
+      path: '/waxing-wayne-nj'
+      fullPath: '/waxing-wayne-nj'
+      preLoaderRoute: typeof PublicWaxingWayneNjRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/soi/': {
+      id: '/soi/'
+      path: '/'
+      fullPath: '/soi/'
+      preLoaderRoute: typeof SoiIndexRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/appointments': {
+      id: '/soi/appointments'
+      path: '/appointments'
+      fullPath: '/soi/appointments'
+      preLoaderRoute: typeof SoiAppointmentsRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/appointments-backup': {
+      id: '/soi/appointments-backup'
+      path: '/appointments-backup'
+      fullPath: '/soi/appointments-backup'
+      preLoaderRoute: typeof SoiAppointmentsBackupRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/dashboard': {
+      id: '/soi/dashboard'
+      path: '/dashboard'
+      fullPath: '/soi/dashboard'
+      preLoaderRoute: typeof SoiDashboardRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/gallery': {
+      id: '/soi/gallery'
+      path: '/gallery'
+      fullPath: '/soi/gallery'
+      preLoaderRoute: typeof SoiGalleryRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/inquiries': {
+      id: '/soi/inquiries'
+      path: '/inquiries'
+      fullPath: '/soi/inquiries'
+      preLoaderRoute: typeof SoiInquiriesRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/login': {
+      id: '/soi/login'
+      path: '/login'
+      fullPath: '/soi/login'
+      preLoaderRoute: typeof SoiLoginRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/offers': {
+      id: '/soi/offers'
+      path: '/offers'
+      fullPath: '/soi/offers'
+      preLoaderRoute: typeof SoiOffersRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/services': {
+      id: '/soi/services'
+      path: '/services'
+      fullPath: '/soi/services'
+      preLoaderRoute: typeof SoiServicesRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/soi/settings': {
+      id: '/soi/settings'
+      path: '/settings'
+      fullPath: '/soi/settings'
+      preLoaderRoute: typeof SoiSettingsRouteImport
+      parentRoute: typeof SoiRoute
+    }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/invoke-tool/$tool': {
@@ -694,11 +694,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/.lovable/oauth/consent': {
-      id: '/.lovable/oauth/consent'
-      path: '/.lovable/oauth/consent'
-      fullPath: '/.lovable/oauth/consent'
-      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+    '/api/public/track': {
+      id: '/api/public/track'
+      path: '/api/public/track'
+      fullPath: '/api/public/track'
+      preLoaderRoute: typeof ApiPublicTrackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/pos/appointments': {
