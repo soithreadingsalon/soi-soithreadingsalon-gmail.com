@@ -10,13 +10,13 @@ import { SITE_URL } from "@/data/seo-content";
 import { useServerFn } from "@tanstack/react-start";
 import { submitBooking as submitBookingRequest } from "@/lib/booking.functions";
 import {
-import { LocalServiceLinks } from "@/components/LocalServiceLinks";
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { LocalServiceLinks } from "@/components/LocalServiceLinks";
 
 type Service = { id: string; category: string; name: string; price: string; description: string | null; featured: boolean; sort_order: number };
 
