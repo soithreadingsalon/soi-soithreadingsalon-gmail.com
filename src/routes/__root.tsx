@@ -33,6 +33,7 @@ export const Route = createRootRoute({
       { name: "keywords", content: "SOI Threading Salon, threading salon Wayne NJ, eyebrow threading Wayne NJ, eyebrow salon Wayne NJ, waxing salon Wayne NJ, facial salon Wayne NJ, beauty salon Wayne NJ, henna Wayne NJ, eyelash lifting Wayne NJ, Indian beauty salon Wayne NJ, hair care Wayne NJ, men eyebrow threading Wayne NJ, full face threading Wayne NJ, Brazilian waxing Wayne NJ, beauty services Wayne NJ" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "author", content: "SOI Threading Salon" },
+      { name: "klaviyo-site-ID", content: "UL5ZqH" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "SOI Threading Salon" },
       { property: "og:url", content: "https://www.soithreadingandsalon.com/" },
@@ -54,6 +55,14 @@ export const Route = createRootRoute({
       },
     ],
     scripts: [
+      {
+        children:
+          "!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return\"push\"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t=\"function\"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();",
+      },
+      {
+        async: true,
+        src: "https://static.klaviyo.com/onsite/js/UL5ZqH/klaviyo.js?company_id=UL5ZqH",
+      },
       {
         async: true,
         src: "https://www.googletagmanager.com/gtag/js?id=G-5MM3ZFDTG2",
