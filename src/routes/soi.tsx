@@ -17,10 +17,10 @@ function AdminLayout() {
 
   useEffect(() => {
     if (isLogin) return;
-    if (status === "unauthenticated") navigate({ to: "/soi/login" });
+    if (status === "unauthenticated") navigate({ to: "/soi/login", search: { next: "" } });
     if (status === "forbidden") {
       // Signed in but not an admin, sign them out and bounce to login.
-      signOutAdmin().then(() => navigate({ to: "/soi/login" }));
+      signOutAdmin().then(() => navigate({ to: "/soi/login", search: { next: "" } }));
     }
   }, [isLogin, status, navigate]);
 

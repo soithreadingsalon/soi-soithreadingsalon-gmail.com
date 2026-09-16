@@ -64,7 +64,7 @@ export function AdminTopbar() {
             <DropdownMenuItem asChild>
               <Link to="/soi/settings"><User className="h-4 w-4 mr-2" /> Settings</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={async () => { await signOutAdmin(); navigate({ to: "/soi/login" }); }}>
+            <DropdownMenuItem onClick={async () => { await signOutAdmin(); navigate({ to: "/soi/login", search: { next: "" } }); }}>
               <LogOut className="h-4 w-4 mr-2" /> Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
