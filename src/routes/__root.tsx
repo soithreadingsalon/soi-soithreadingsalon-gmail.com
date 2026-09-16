@@ -33,6 +33,7 @@ export const Route = createRootRoute({
       { name: "keywords", content: "SOI Threading Salon, threading salon Wayne NJ, eyebrow threading Wayne NJ, eyebrow salon Wayne NJ, waxing salon Wayne NJ, facial salon Wayne NJ, beauty salon Wayne NJ, henna Wayne NJ, eyelash lifting Wayne NJ, Indian beauty salon Wayne NJ, hair care Wayne NJ, men eyebrow threading Wayne NJ, full face threading Wayne NJ, Brazilian waxing Wayne NJ, beauty services Wayne NJ" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "author", content: "SOI Threading Salon" },
+      { name: "klaviyo-site-ID", content: "UL5ZqH" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "SOI Threading Salon" },
       { property: "og:url", content: "https://www.soithreadingandsalon.com/" },
@@ -51,10 +52,6 @@ export const Route = createRootRoute({
       {
         rel: "stylesheet",
         href: appCss,
-      },
-      {
-        name: "klaviyo-site-ID",
-        content: "UL5ZqH",
       },
     ],
     scripts: [
